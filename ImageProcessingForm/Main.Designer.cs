@@ -55,7 +55,6 @@
             beforePic.Size = new Size(588, 561);
             beforePic.TabIndex = 0;
             beforePic.TabStop = false;
-            beforePic.MouseDown += beforePic_MouseDown;
             // 
             // ıconPictureBox2
             // 

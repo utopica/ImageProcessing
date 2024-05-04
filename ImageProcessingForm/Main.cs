@@ -21,11 +21,9 @@ namespace ImageProcessingForm
             defaultImage = new Bitmap("C:\\Data\\Programming\\ImageProcessing\\ImageProcessingForm\\bin\\Debug\\Images\\girl.png"); // Provide the path to your default image file
             beforePic.Image = defaultImage;
             beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
-            
 
-            beforePic.MouseDown += beforePic_MouseDown;
+            beforePic.MouseUp += beforePic_MouseUp;
 
-            // ComboBox'a seçenekleri ekleyelim
             comboBox1.Items.Add("Gri Dönüşüm");
             comboBox1.Items.Add("Binary Dönüşüm");
             comboBox1.Items.Add("Görüntü Döndürme");
@@ -62,7 +60,7 @@ namespace ImageProcessingForm
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Seçilen işlemi işleme fonksiyonuna yönlendir
+
             string selectedOperation = comboBox1.SelectedItem.ToString();
             switch (selectedOperation)
             {
@@ -117,106 +115,91 @@ namespace ImageProcessingForm
             }
         }
 
-        // Her bir işlemi işleyecek fonksiyonları tanımlayalım
 
         private void GriDonusum()
         {
-            // Gri dönüşüm işlemi burada gerçekleştirilecek
-            MessageBox.Show("Gri Dönüşüm işlemi seçildi.");
+
         }
 
         private void BinaryDonusum()
         {
-            // Binary dönüşüm işlemi burada gerçekleştirilecek
-            MessageBox.Show("Binary Dönüşüm işlemi seçildi.");
+
         }
 
         private void GoruntuDonme()
         {
-            // Görüntü döndürme işlemi burada gerçekleştirilecek
-            MessageBox.Show("Görüntü Döndürme işlemi seçildi.");
+
         }
 
         private void GoruntuKirma()
         {
-            // Görüntü kırpma işlemi burada gerçekleştirilecek
-            MessageBox.Show("Görüntü Kırpma işlemi seçildi.");
+
         }
 
         private void GoruntuYaklastirmaUzaklastirma()
         {
-            // Görüntü yaklaştırma/uzaklaştırma işlemi burada gerçekleştirilecek
-            MessageBox.Show("Görüntü Yaklaştırma/Uzaklaştırma işlemi seçildi.");
+
         }
 
         private void RenkUzayiDonusumleri()
         {
-            // Renk uzayı dönüşümleri işlemi burada gerçekleştirilecek
-            MessageBox.Show("Renk Uzayı Dönüşümleri işlemi seçildi.");
+
         }
 
         private void HistogramGenisletme()
         {
-            // Histogram genişletme işlemi burada gerçekleştirilecek
-            MessageBox.Show("Histogram Genişletme işlemi seçildi.");
+
         }
 
         private void AritmetikIslemler()
         {
-            // İki resim arasında aritmetik işlemler işlemi burada gerçekleştirilecek
-            MessageBox.Show("İki resim arasında aritmetik işlemler işlemi seçildi.");
+
         }
 
         private void ParlaklikArtirma()
         {
-            // Parlaklık artırma işlemi burada gerçekleştirilecek
-            MessageBox.Show("Parlaklık Artırma işlemi seçildi.");
+
         }
 
         private void KonvolusyonIslemi()
         {
-            // Konvolüsyon işlemi burada gerçekleştirilecek
-            MessageBox.Show("Konvolüsyon İşlemi işlemi seçildi.");
+
         }
 
         private void EsiklemeIslemleri()
         {
-            // Eşikleme işlemleri işlemi burada gerçekleştirilecek
-            MessageBox.Show("Eşikleme İşlemleri işlemi seçildi.");
+
         }
 
         private void KenarBulma()
         {
-            // Kenar bulma işlemi burada gerçekleştirilecek
-            MessageBox.Show("Kenar Bulma işlemi seçildi.");
+
         }
 
         private void GurultuEklemeTemizleme()
         {
-            // Gürültü ekleme/temizleme işlemi burada gerçekleştirilecek
-            MessageBox.Show("Gürültü Ekleme/Temizleme işlemi seçildi.");
+
         }
 
         private void FiltreUygulama()
         {
-            // Filtre uygulama işlemi burada gerçekleştirilecek
-            MessageBox.Show("Filtre Uygulama işlemi seçildi.");
         }
 
         private void MorfolojikIslemler()
         {
-            // Morfolojik işlemler işlemi burada gerçekleştirilecek
-            MessageBox.Show("Morfolojik İşlemler işlemi seçildi.");
+
         }
 
-        private void beforePic_MouseDown(object sender, MouseEventArgs e)
+
+        private void beforePic_MouseUp(object sender, MouseEventArgs e)
         {
-            // Kullanıcı PictureBox'a sol tıkladığında ve sol tıklama ile sürükleme yapılmadığında resim yükle
-            if (e.Button == MouseButtons.Left )
+
+            if (e.Button == MouseButtons.Left)
             {
                 ResimYukle();
-
             }
         }
+
+        
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            ıconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            beforePic = new FontAwesome.Sharp.IconPictureBox();
             ıconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             comboBox1 = new ComboBox();
             ıconButton1 = new FontAwesome.Sharp.IconButton();
@@ -37,26 +37,27 @@
             ıconButton3 = new FontAwesome.Sharp.IconButton();
             ıconButton4 = new FontAwesome.Sharp.IconButton();
             ıconButton5 = new FontAwesome.Sharp.IconButton();
-            ((System.ComponentModel.ISupportInitialize)ıconPictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ıconPictureBox2).BeginInit();
             SuspendLayout();
             // 
-            // ıconPictureBox1
+            // beforePic
             // 
-            ıconPictureBox1.BackColor = SystemColors.ActiveCaptionText;
-            ıconPictureBox1.BackgroundImage = (Image)resources.GetObject("ıconPictureBox1.BackgroundImage");
-            ıconPictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            ıconPictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            ıconPictureBox1.ForeColor = SystemColors.ControlText;
-            ıconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.None;
-            ıconPictureBox1.IconColor = SystemColors.ControlText;
-            ıconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconPictureBox1.IconSize = 561;
-            ıconPictureBox1.Location = new Point(55, 21);
-            ıconPictureBox1.Name = "ıconPictureBox1";
-            ıconPictureBox1.Size = new Size(588, 561);
-            ıconPictureBox1.TabIndex = 0;
-            ıconPictureBox1.TabStop = false;
+            beforePic.BackColor = SystemColors.ActiveCaptionText;
+            beforePic.BackgroundImage = (Image)resources.GetObject("beforePic.BackgroundImage");
+            beforePic.BackgroundImageLayout = ImageLayout.Stretch;
+            beforePic.BorderStyle = BorderStyle.FixedSingle;
+            beforePic.ForeColor = SystemColors.ControlText;
+            beforePic.IconChar = FontAwesome.Sharp.IconChar.None;
+            beforePic.IconColor = SystemColors.ControlText;
+            beforePic.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            beforePic.IconSize = 561;
+            beforePic.Location = new Point(55, 21);
+            beforePic.Name = "beforePic";
+            beforePic.Size = new Size(588, 561);
+            beforePic.TabIndex = 0;
+            beforePic.TabStop = false;
+            beforePic.MouseDown += beforePic_MouseDown;
             // 
             // ıconPictureBox2
             // 
@@ -80,6 +81,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(588, 28);
             comboBox1.TabIndex = 2;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // ıconButton1
             // 
@@ -155,17 +157,17 @@
             Controls.Add(ıconButton1);
             Controls.Add(comboBox1);
             Controls.Add(ıconPictureBox2);
-            Controls.Add(ıconPictureBox1);
+            Controls.Add(beforePic);
             Name = "Main";
             Text = "Main";
-            ((System.ComponentModel.ISupportInitialize)ıconPictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)beforePic).EndInit();
             ((System.ComponentModel.ISupportInitialize)ıconPictureBox2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private FontAwesome.Sharp.IconPictureBox ıconPictureBox1;
+        private FontAwesome.Sharp.IconPictureBox beforePic;
         private FontAwesome.Sharp.IconPictureBox ıconPictureBox2;
         private ComboBox comboBox1;
         private FontAwesome.Sharp.IconButton ıconButton1;

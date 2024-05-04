@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             beforePic = new FontAwesome.Sharp.IconPictureBox();
             ıconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             comboBox1 = new ComboBox();
@@ -44,7 +43,6 @@
             // beforePic
             // 
             beforePic.BackColor = SystemColors.ActiveCaptionText;
-            beforePic.BackgroundImage = (Image)resources.GetObject("beforePic.BackgroundImage");
             beforePic.BackgroundImageLayout = ImageLayout.Stretch;
             beforePic.BorderStyle = BorderStyle.FixedSingle;
             beforePic.ForeColor = SystemColors.ControlText;

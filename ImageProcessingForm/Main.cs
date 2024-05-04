@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,15 @@ namespace ImageProcessingForm
 {
     public partial class Main : Form
     {
+        private Bitmap defaultImage;
         public Main()
         {
             InitializeComponent();
+
+            defaultImage = new Bitmap("C:\\Data\\Programming\\ImageProcessing\\ImageProcessingForm\\bin\\Debug\\Images\\girl.png"); // Provide the path to your default image file
+            beforePic.Image = defaultImage;
+            beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
+            
 
             beforePic.MouseDown += beforePic_MouseDown;
 
@@ -45,9 +52,9 @@ namespace ImageProcessingForm
 
             // Sadece resim dosyalarını filtrele
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
-
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                beforePic.Image = null;
                 // Seçilen resmi PictureBox kontrolüne yükle
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }

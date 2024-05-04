@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace ImageProcessingForm
@@ -18,8 +20,14 @@ namespace ImageProcessingForm
         {
             InitializeComponent();
 
-            defaultImage = new Bitmap("C:\\Data\\Programming\\ImageProcessing\\ImageProcessingForm\\bin\\Debug\\Images\\girl.png"); // Provide the path to your default image file
+            string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+
+            string imagePath = Path.Combine(parentDirectory, "Images", "girl.png");
+
+            defaultImage = new Bitmap(imagePath); 
             beforePic.Image = defaultImage;
+            afterPic.Image = defaultImage;
+            afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
             beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
 
             beforePic.MouseUp += beforePic_MouseUp;
@@ -200,6 +208,46 @@ namespace ImageProcessingForm
             }
         }
 
-        
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ResimYukle();
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            beforePic.Image = null;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveImage();
+        }
+
+        private void SaveImage()
+        {
+            if (afterPic.Image != null)
+            {
+                using (SaveFileDialog saveDialog = new SaveFileDialog())
+                {
+                    saveDialog.Filter = "JPEG Image|*.jpg";
+                    saveDialog.Title = "Save Image";
+                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                    saveDialog.RestoreDirectory = true;
+
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string savePath = saveDialog.FileName;
+                        afterPic.Image.Save(savePath, ImageFormat.Jpeg);
+                        MessageBox.Show("Image saved successfully to: " + savePath);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("There is no image to save.");
+            }
+        }
     }
+
 }
+

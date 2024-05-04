@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             beforePic = new FontAwesome.Sharp.IconPictureBox();
-            ıconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
+            afterPic = new FontAwesome.Sharp.IconPictureBox();
             comboBox1 = new ComboBox();
-            ıconButton1 = new FontAwesome.Sharp.IconButton();
-            ıconButton2 = new FontAwesome.Sharp.IconButton();
-            ıconButton3 = new FontAwesome.Sharp.IconButton();
-            ıconButton4 = new FontAwesome.Sharp.IconButton();
-            ıconButton5 = new FontAwesome.Sharp.IconButton();
+            btnUndo = new FontAwesome.Sharp.IconButton();
+            btnStart = new FontAwesome.Sharp.IconButton();
+            btnDel = new FontAwesome.Sharp.IconButton();
+            btnSave = new FontAwesome.Sharp.IconButton();
+            btnAdd = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ıconPictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
             SuspendLayout();
             // 
             // beforePic
@@ -56,20 +56,20 @@
             beforePic.TabIndex = 0;
             beforePic.TabStop = false;
             // 
-            // ıconPictureBox2
+            // afterPic
             // 
-            ıconPictureBox2.BackColor = SystemColors.ActiveCaptionText;
-            ıconPictureBox2.BorderStyle = BorderStyle.FixedSingle;
-            ıconPictureBox2.ForeColor = SystemColors.ControlText;
-            ıconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.None;
-            ıconPictureBox2.IconColor = SystemColors.ControlText;
-            ıconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconPictureBox2.IconSize = 561;
-            ıconPictureBox2.Location = new Point(649, 21);
-            ıconPictureBox2.Name = "ıconPictureBox2";
-            ıconPictureBox2.Size = new Size(588, 561);
-            ıconPictureBox2.TabIndex = 1;
-            ıconPictureBox2.TabStop = false;
+            afterPic.BackColor = SystemColors.ActiveCaptionText;
+            afterPic.BorderStyle = BorderStyle.FixedSingle;
+            afterPic.ForeColor = SystemColors.ControlText;
+            afterPic.IconChar = FontAwesome.Sharp.IconChar.None;
+            afterPic.IconColor = SystemColors.ControlText;
+            afterPic.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            afterPic.IconSize = 561;
+            afterPic.Location = new Point(649, 21);
+            afterPic.Name = "afterPic";
+            afterPic.Size = new Size(588, 561);
+            afterPic.TabIndex = 1;
+            afterPic.TabStop = false;
             // 
             // comboBox1
             // 
@@ -80,66 +80,69 @@
             comboBox1.TabIndex = 2;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // ıconButton1
+            // btnUndo
             // 
-            ıconButton1.BackColor = Color.FromArgb(68, 195, 52);
-            ıconButton1.IconChar = FontAwesome.Sharp.IconChar.Backward;
-            ıconButton1.IconColor = Color.Black;
-            ıconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton1.IconSize = 72;
-            ıconButton1.Location = new Point(151, 662);
-            ıconButton1.Name = "ıconButton1";
-            ıconButton1.Size = new Size(173, 78);
-            ıconButton1.TabIndex = 3;
-            ıconButton1.UseVisualStyleBackColor = false;
+            btnUndo.BackColor = Color.FromArgb(68, 195, 52);
+            btnUndo.IconChar = FontAwesome.Sharp.IconChar.Backward;
+            btnUndo.IconColor = Color.Black;
+            btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnUndo.IconSize = 72;
+            btnUndo.Location = new Point(151, 662);
+            btnUndo.Name = "btnUndo";
+            btnUndo.Size = new Size(173, 78);
+            btnUndo.TabIndex = 3;
+            btnUndo.UseVisualStyleBackColor = false;
             // 
-            // ıconButton2
+            // btnStart
             // 
-            ıconButton2.BackColor = Color.FromArgb(68, 195, 52);
-            ıconButton2.IconChar = FontAwesome.Sharp.IconChar.Play;
-            ıconButton2.IconColor = Color.Black;
-            ıconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton2.Location = new Point(330, 662);
-            ıconButton2.Name = "ıconButton2";
-            ıconButton2.Size = new Size(173, 78);
-            ıconButton2.TabIndex = 4;
-            ıconButton2.UseVisualStyleBackColor = false;
+            btnStart.BackColor = Color.FromArgb(68, 195, 52);
+            btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
+            btnStart.IconColor = Color.Black;
+            btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnStart.Location = new Point(330, 662);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(173, 78);
+            btnStart.TabIndex = 4;
+            btnStart.UseVisualStyleBackColor = false;
             // 
-            // ıconButton3
+            // btnDel
             // 
-            ıconButton3.BackColor = Color.FromArgb(68, 195, 52);
-            ıconButton3.IconChar = FontAwesome.Sharp.IconChar.Trash;
-            ıconButton3.IconColor = Color.Black;
-            ıconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton3.Location = new Point(688, 662);
-            ıconButton3.Name = "ıconButton3";
-            ıconButton3.Size = new Size(173, 78);
-            ıconButton3.TabIndex = 5;
-            ıconButton3.UseVisualStyleBackColor = false;
+            btnDel.BackColor = Color.FromArgb(68, 195, 52);
+            btnDel.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            btnDel.IconColor = Color.Black;
+            btnDel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnDel.Location = new Point(688, 662);
+            btnDel.Name = "btnDel";
+            btnDel.Size = new Size(173, 78);
+            btnDel.TabIndex = 5;
+            btnDel.UseVisualStyleBackColor = false;
+            btnDel.Click += btnDel_Click;
             // 
-            // ıconButton4
+            // btnSave
             // 
-            ıconButton4.BackColor = Color.FromArgb(68, 195, 52);
-            ıconButton4.IconChar = FontAwesome.Sharp.IconChar.Save;
-            ıconButton4.IconColor = Color.Black;
-            ıconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton4.Location = new Point(509, 662);
-            ıconButton4.Name = "ıconButton4";
-            ıconButton4.Size = new Size(173, 78);
-            ıconButton4.TabIndex = 6;
-            ıconButton4.UseVisualStyleBackColor = false;
+            btnSave.BackColor = Color.FromArgb(68, 195, 52);
+            btnSave.IconChar = FontAwesome.Sharp.IconChar.Save;
+            btnSave.IconColor = Color.Black;
+            btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSave.Location = new Point(509, 662);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(173, 78);
+            btnSave.TabIndex = 6;
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
-            // ıconButton5
+            // btnAdd
             // 
-            ıconButton5.BackColor = Color.FromArgb(68, 195, 52);
-            ıconButton5.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            ıconButton5.IconColor = Color.Black;
-            ıconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton5.Location = new Point(867, 662);
-            ıconButton5.Name = "ıconButton5";
-            ıconButton5.Size = new Size(173, 78);
-            ıconButton5.TabIndex = 7;
-            ıconButton5.UseVisualStyleBackColor = false;
+            btnAdd.BackColor = Color.FromArgb(68, 195, 52);
+            btnAdd.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            btnAdd.IconColor = Color.Black;
+            btnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdd.Location = new Point(867, 662);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(173, 78);
+            btnAdd.TabIndex = 7;
+            btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // Main
             // 
@@ -147,30 +150,30 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1278, 786);
-            Controls.Add(ıconButton5);
-            Controls.Add(ıconButton4);
-            Controls.Add(ıconButton3);
-            Controls.Add(ıconButton2);
-            Controls.Add(ıconButton1);
+            Controls.Add(btnAdd);
+            Controls.Add(btnSave);
+            Controls.Add(btnDel);
+            Controls.Add(btnStart);
+            Controls.Add(btnUndo);
             Controls.Add(comboBox1);
-            Controls.Add(ıconPictureBox2);
+            Controls.Add(afterPic);
             Controls.Add(beforePic);
             Name = "Main";
             Text = "Main";
             ((System.ComponentModel.ISupportInitialize)beforePic).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ıconPictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)afterPic).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private FontAwesome.Sharp.IconPictureBox beforePic;
-        private FontAwesome.Sharp.IconPictureBox ıconPictureBox2;
+        private FontAwesome.Sharp.IconPictureBox afterPic;
         private ComboBox comboBox1;
-        private FontAwesome.Sharp.IconButton ıconButton1;
-        private FontAwesome.Sharp.IconButton ıconButton2;
-        private FontAwesome.Sharp.IconButton ıconButton3;
-        private FontAwesome.Sharp.IconButton ıconButton4;
-        private FontAwesome.Sharp.IconButton ıconButton5;
+        private FontAwesome.Sharp.IconButton btnUndo;
+        private FontAwesome.Sharp.IconButton btnStart;
+        private FontAwesome.Sharp.IconButton btnDel;
+        private FontAwesome.Sharp.IconButton btnSave;
+        private FontAwesome.Sharp.IconButton btnAdd;
     }
 }

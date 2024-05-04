@@ -22,7 +22,7 @@ namespace ImageProcessingForm
 
             string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
 
-            string imagePath = Path.Combine(parentDirectory, "Images", "girl.png");
+            string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
             defaultImage = new Bitmap(imagePath); 
             beforePic.Image = defaultImage;
@@ -126,8 +126,30 @@ namespace ImageProcessingForm
 
         private void GriDonusum()
         {
+            if (beforePic.Image != null)
+            {
+                Bitmap grayImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
 
+                // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
+                for (int y = 0; y < beforePic.Image.Height; y++)
+                {
+                    for (int x = 0; x < beforePic.Image.Width; x++)
+                    {
+                        Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
+                        int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
+                        Color grayColor = Color.FromArgb(grayValue, grayValue, grayValue);
+                        grayImage.SetPixel(x, y, grayColor);
+                    }
+                }
+
+                afterPic.Image = grayImage;
+            }
+            else
+            {
+                MessageBox.Show("There is no image to process.");
+            }
         }
+
 
         private void BinaryDonusum()
         {
@@ -211,11 +233,13 @@ namespace ImageProcessingForm
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ResimYukle();
+            afterPic.Image = null;
         }
 
         private void btnDel_Click(object sender, EventArgs e)
         {
             beforePic.Image = null;
+            afterPic.Image = null;
         }
 
         private void btnSave_Click(object sender, EventArgs e)

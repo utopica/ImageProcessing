@@ -136,7 +136,6 @@
             txtWidthStart.Name = "txtWidthStart";
             txtWidthStart.Size = new Size(138, 34);
             txtWidthStart.TabIndex = 10;
-            txtWidthStart.TextChanged += txtWidthStart_TextChanged;
             // 
             // txtHeightStart
             // 
@@ -145,7 +144,6 @@
             txtHeightStart.Name = "txtHeightStart";
             txtHeightStart.Size = new Size(138, 34);
             txtHeightStart.TabIndex = 11;
-            txtHeightStart.TextChanged += txtHeightStart_TextChanged;
             // 
             // txtWidthEnd
             // 
@@ -154,7 +152,6 @@
             txtWidthEnd.Name = "txtWidthEnd";
             txtWidthEnd.Size = new Size(138, 34);
             txtWidthEnd.TabIndex = 12;
-            txtWidthEnd.TextChanged += txtWidthEnd_TextChanged;
             // 
             // txtHeightEnd
             // 
@@ -163,7 +160,6 @@
             txtHeightEnd.Name = "txtHeightEnd";
             txtHeightEnd.Size = new Size(138, 34);
             txtHeightEnd.TabIndex = 13;
-            txtHeightEnd.TextChanged += txtHeightEnd_TextChanged;
             // 
             // label6
             // 

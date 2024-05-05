@@ -34,18 +34,11 @@ namespace ImageProcessingForm
         {
             beforePic.Image = image;
 
+            afterPic.SizeMode = PictureBoxSizeMode.Zoom;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
 
-            if (beforePic.Image != null)
-            {
-                lblWidth.Text = beforePic.Image.Width.ToString();
-                lblHeight.Text = beforePic.Image.Height.ToString();
-            }
-            else
-            {
-                lblWidth.Text = "0";
-                lblHeight.Text = "0";
-            }
+            lblWidth.Text = image.Width.ToString();
+            lblHeight.Text = image.Height.ToString();
 
 
 
@@ -75,7 +68,7 @@ namespace ImageProcessingForm
                 using (SaveFileDialog saveDialog = new SaveFileDialog())
                 {
                     saveDialog.Filter = "JPEG Image|*.jpg";
-                    saveDialog.Title = "Save Image";
+                    saveDialog.Title = "Kaydet";
                     saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
                     saveDialog.RestoreDirectory = true;
 
@@ -83,13 +76,13 @@ namespace ImageProcessingForm
                     {
                         string savePath = saveDialog.FileName;
                         afterPic.Image.Save(savePath, ImageFormat.Jpeg);
-                        MessageBox.Show("Image saved successfully to: " + savePath);
+                        MessageBox.Show("Resim şuraya kaydedildi :  " + savePath);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("There is no image to save.");
+                MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
             }
         }
 
@@ -108,26 +101,6 @@ namespace ImageProcessingForm
             }
         }
 
-        private void txtWidthStart_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtWidthEnd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtHeightStart_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtHeightEnd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCrop_Click(object sender, EventArgs e)
         {
             int startX = int.Parse(txtWidthStart.Text);
@@ -141,9 +114,9 @@ namespace ImageProcessingForm
         private void CropImage(int startX, int startY, int endX, int endY)
         {
             // Başlangıç ve bitiş değerlerini kontrol edin
-            if (startX < 0 || startY < 0 || endX >= beforePic.Image.Width || endY >= beforePic.Image.Height)
+            if (startX < 0 || startY < 0 || endX >= beforePic.Image.Width || endY >= beforePic.Image.Height || startX>endX || startY>endY)
             {
-                MessageBox.Show("Invalid crop parameters.");
+                MessageBox.Show("Geçersiz parametre girildi.");
                 return;
             }
 

@@ -71,7 +71,7 @@ namespace ImageProcessingForm
                 using (SaveFileDialog saveDialog = new SaveFileDialog())
                 {
                     saveDialog.Filter = "JPEG Image|*.jpg";
-                    saveDialog.Title = "Save Image";
+                    saveDialog.Title = "Kaydet";
                     saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
                     saveDialog.RestoreDirectory = true;
 
@@ -79,13 +79,13 @@ namespace ImageProcessingForm
                     {
                         string savePath = saveDialog.FileName;
                         afterPic.Image.Save(savePath, ImageFormat.Jpeg);
-                        MessageBox.Show("Image saved successfully to: " + savePath);
+                        MessageBox.Show("Resim şuraya kaydedildi :  " + savePath);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("There is no image to save.");
+                MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
             }
         }
 

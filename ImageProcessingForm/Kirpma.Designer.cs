@@ -298,6 +298,7 @@
             btnUndo.Size = new Size(80, 77);
             btnUndo.TabIndex = 23;
             btnUndo.UseVisualStyleBackColor = false;
+            btnUndo.Click += btnUndo_Click;
             // 
             // Kirpma
             // 

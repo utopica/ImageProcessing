@@ -17,6 +17,7 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         private Parlaklik parlaklikForm = null;
+        private Kirpma kirpmaForm = null;
         public Main()
         {
             InitializeComponent();
@@ -87,7 +88,7 @@ namespace ImageProcessingForm
                     GoruntuDonme();
                     break;
                 case "Görüntü Kırpma":
-                    GoruntuKirma();
+                    GoruntuKirpma();
                     break;
                 case "Görüntü Yaklaştırma/Uzaklaştırma":
                     GoruntuYaklastirmaUzaklastirma();
@@ -188,10 +189,28 @@ namespace ImageProcessingForm
 
         }
 
-        private void GoruntuKirma()
+        private void GoruntuKirpma()
         {
+            if (kirpmaForm == null)
+            {
+                kirpmaForm = new Kirpma();
+                kirpmaForm.FormClosed += KirpmaForm_FormClosed; 
+            }
 
+            kirpmaForm.Show();
+
+            this.Hide();
+
+            
         }
+
+        private void KirpmaForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            kirpmaForm = null; 
+            this.Show(); 
+        }
+
+        
 
         private void GoruntuYaklastirmaUzaklastirma()
         {

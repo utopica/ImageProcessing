@@ -12,6 +12,7 @@ namespace ImageProcessingForm
 {
     public partial class Home : Form
     {
+        private Main mainForm = null;
         public Home()
         {
             InitializeComponent();
@@ -26,11 +27,24 @@ namespace ImageProcessingForm
 
         private void ıconButton1_Click(object sender, EventArgs e)
         {
-            // Ana form daha önceden oluşturulmuşsa tekrar oluşturmadan sadece göster
-            Main mainForm = new Main();
-            mainForm.Show(); // Ana formu göster
+            if (mainForm == null)
+            {
+                mainForm = new Main();
+                mainForm.FormClosed += MainForm_FormClosed; 
+            }
 
-            this.Hide(); 
+            mainForm.Show();
+
+            
+            this.Hide();
+
+            
         }
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainForm = null; 
+            this.Show(); 
+        }
+       
     }
 }

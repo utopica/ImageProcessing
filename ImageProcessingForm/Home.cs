@@ -15,6 +15,8 @@ namespace ImageProcessingForm
         public Home()
         {
             InitializeComponent();
+
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -24,14 +26,11 @@ namespace ImageProcessingForm
 
         private void ıconButton1_Click(object sender, EventArgs e)
         {
-            // Ana formu oluştur
+            // Ana form daha önceden oluşturulmuşsa tekrar oluşturmadan sadece göster
             Main mainForm = new Main();
+            mainForm.Show(); // Ana formu göster
 
-            // Ana formu göster
-            mainForm.Show();
-
-            // Şu anki formu gizle
-            this.Hide();
+            this.Hide(); 
         }
     }
 }

@@ -16,9 +16,12 @@ namespace ImageProcessingForm
     public partial class Main : Form
     {
         private Bitmap defaultImage;
+        private Parlaklik parlaklikForm = null;
         public Main()
         {
             InitializeComponent();
+
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
 
@@ -50,6 +53,8 @@ namespace ImageProcessingForm
 
             // ComboBox'ın SelectedIndexChanged olayını dinleyelim
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+
+
         }
 
         private void ResimYukle()
@@ -153,6 +158,28 @@ namespace ImageProcessingForm
 
         private void BinaryDonusum()
         {
+            if (beforePic.Image != null)
+            {
+                Bitmap binaryImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
+
+                // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
+                for (int y = 0; y < beforePic.Image.Height; y++)
+                {
+                    for (int x = 0; x < beforePic.Image.Width; x++)
+                    {
+                        Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
+                        int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
+                        Color binaryColor = grayValue > 128 ? Color.White : Color.Black;
+                        binaryImage.SetPixel(x, y, binaryColor);
+                    }
+                }
+
+                afterPic.Image = binaryImage;
+            }
+            else
+            {
+                MessageBox.Show("There is no image to process.");
+            }
 
         }
 
@@ -188,7 +215,25 @@ namespace ImageProcessingForm
 
         private void ParlaklikArtirma()
         {
+            if (parlaklikForm == null)
+            {
+                parlaklikForm = new Parlaklik();
+                parlaklikForm.FormClosed += ParlaklikForm_FormClosed; // Form kapandığında null yapmak için olaya abone ol
+            }
 
+            parlaklikForm.Show();
+
+            // Ana formu gizle
+            this.Hide();
+
+            // Formu göster
+            
+        }
+
+        private void ParlaklikForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            parlaklikForm = null; // Form kapandığında null yap
+            this.Show(); // Ana formu göster
         }
 
         private void KonvolusyonIslemi()
@@ -271,6 +316,8 @@ namespace ImageProcessingForm
                 MessageBox.Show("There is no image to save.");
             }
         }
+
+        
     }
 
 }

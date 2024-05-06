@@ -19,6 +19,7 @@ namespace ImageProcessingForm
         private Parlaklik parlaklikForm = null;
         private Kirpma kirpmaForm = null;
         private Oran oranForm=null;
+        private Esikleme esiklemeForm = null;
         public Main()
         {
             InitializeComponent();
@@ -312,8 +313,26 @@ namespace ImageProcessingForm
 
         private void EsiklemeIslemleri()
         {
+            // Eğe esikleme formu daha önce oluşturulmadıysa, oluştur
+            if (esiklemeForm == null)
+            {
+                esiklemeForm = new Esikleme();
+                esiklemeForm.FormClosed += EsiklemeForm_FormClosed; 
+            }
 
+            
+            esiklemeForm.Show();
+
+           
+            this.Hide();
         }
+
+        private void EsiklemeForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            esiklemeForm = null; // Form kapandığında null yap
+            this.Show(); // Ana formu göster
+        }
+    
 
         private void KenarBulma()
         {

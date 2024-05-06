@@ -109,6 +109,7 @@
             btnSave.Size = new Size(173, 78);
             btnSave.TabIndex = 11;
             btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click_1;
             // 
             // btnDel
             // 
@@ -121,6 +122,7 @@
             btnDel.Size = new Size(173, 78);
             btnDel.TabIndex = 12;
             btnDel.UseVisualStyleBackColor = false;
+            btnDel.Click += btnDel_Click_1;
             // 
             // btnAdd
             // 
@@ -133,6 +135,7 @@
             btnAdd.Size = new Size(173, 78);
             btnAdd.TabIndex = 13;
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // yakınlastırmaUpDown
             // 

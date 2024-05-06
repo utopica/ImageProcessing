@@ -78,6 +78,8 @@ namespace ImageProcessingForm
                 afterPic.Image = null;
                 // Seçilen resmi PictureBox kontrolüne yükle
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
+
+                DisplayImage((Bitmap)beforePic.Image);
             }
         }
 

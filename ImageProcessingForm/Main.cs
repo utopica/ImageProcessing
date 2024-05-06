@@ -18,6 +18,7 @@ namespace ImageProcessingForm
         private Bitmap defaultImage;
         private Parlaklik parlaklikForm = null;
         private Kirpma kirpmaForm = null;
+        private Oran oranForm=null;
         public Main()
         {
             InitializeComponent();
@@ -210,17 +211,66 @@ namespace ImageProcessingForm
             this.Show(); 
         }
 
-        
+
 
         private void GoruntuYaklastirmaUzaklastirma()
         {
+            // Eğer oran formu daha önce oluşturulmadıysa, oluştur
+            if (oranForm == null)
+            {
+                oranForm = new Oran();
+                oranForm.FormClosed += OranForm_FormClosed; // Form kapandığında null yapmak için olaya abone ol
+            }
 
+            // Oran formunu göster
+            oranForm.Show();
+
+            // Ana formu gizle
+            this.Hide();
+        }
+
+        private void OranForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            oranForm = null; // Form kapandığında null yap
+            this.Show(); // Ana formu göster
         }
 
         private void RenkUzayiDonusumleri()
         {
+            if (beforePic.Image != null)
+            {
+                Bitmap ycbcrImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
 
+                for (int y = 0; y < beforePic.Image.Height; y++)
+                {
+                    for (int x = 0; x < beforePic.Image.Width; x++)
+                    {
+                        Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
+
+                        // RGB değerlerini al
+                        int R = originalColor.R;
+                        int G = originalColor.G;
+                        int B = originalColor.B;
+
+                        // YCbCr dönüşüm formülleri
+                        int Y = (int)(0.299 * R + 0.587 * G + 0.114 * B);
+                        int Cb = (int)(128 - 0.168736 * R - 0.331264 * G + 0.5 * B);
+                        int Cr = (int)(128 + 0.5 * R - 0.418688 * G - 0.081312 * B);
+
+                        // Yeni renk oluştur ve YCbCr resmine ekle
+                        Color ycbcrColor = Color.FromArgb(Y, Cb, Cr);
+                        ycbcrImage.SetPixel(x, y, ycbcrColor);
+                    }
+                }
+
+                afterPic.Image = ycbcrImage;
+            }
+            else
+            {
+                MessageBox.Show("There is no image to process.");
+            }
         }
+
 
         private void HistogramGenisletme()
         {

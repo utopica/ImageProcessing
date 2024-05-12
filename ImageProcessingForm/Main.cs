@@ -22,6 +22,7 @@ namespace ImageProcessingForm
         private Oran oranForm=null;
         private Esikleme esiklemeForm = null;
         private histogram histogramForm = null;
+        private Gurultu_Filtreleme gurultuForm = null;
 
         public Main()
         {
@@ -359,11 +360,23 @@ namespace ImageProcessingForm
 
         private void GurultuEklemeTemizleme()
         {
-
+            if (gurultuForm == null)
+            {
+                gurultuForm = new Gurultu_Filtreleme(defaultImage);
+                gurultuForm.FormClosed += GurultuForm_FormClosed;
+            }
+            gurultuForm.Show();
+            this.Hide();
+        }
+        private void GurultuForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            gurultuForm = null;
+            this.Show();
         }
 
         private void FiltreUygulama()
         {
+
         }
 
         private void MorfolojikIslemler()

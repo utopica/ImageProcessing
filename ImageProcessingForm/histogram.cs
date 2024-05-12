@@ -7,6 +7,8 @@ namespace ImageProcessingForm
 {
     public partial class histogram : Form
     {
+
+        private Bitmap originalImage;
         private Bitmap defaultImage;
         private Bitmap beforePicImage; // Bu değişken, orijinal görüntünün kopyasını tutacak.
         private string selectedChannel = "Gray"; // Varsayılan olarak Gri (Gray) kanalı seçili
@@ -16,6 +18,7 @@ namespace ImageProcessingForm
         {
             InitializeComponent();
 
+            originalImage = mainFormImage;
             // ComboBox'a seçenekler ekleyelim
             comboBox1.Items.Add("Histogram Germe");
             comboBox1.Items.Add("Histogram Genişletme");
@@ -182,7 +185,7 @@ namespace ImageProcessingForm
         {
             // Orijinal resmi sadece beforePic'te göster
             beforePic.Image = new Bitmap(beforePicImage);
-            afterPic.Image = null; // afterPic'teki işlenmiş görüntüyü temizle
+            afterPic.Image = originalImage;
         }
 
 

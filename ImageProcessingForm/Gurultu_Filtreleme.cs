@@ -14,11 +14,13 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         private Bitmap beforePicImage;
+        private Bitmap originalImage;
 
         public Gurultu_Filtreleme(Bitmap mainFormImage)
         {
             InitializeComponent();
 
+            originalImage = mainFormImage;
             this.StartPosition = FormStartPosition.CenterScreen;
 
             string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
@@ -251,7 +253,7 @@ namespace ImageProcessingForm
         {
             // Orijinal resmi sadece beforePic'te göster
             beforePic.Image = new Bitmap(beforePicImage);
-            afterPic.Image = null; // afterPic'teki işlenmiş görüntüyü temizle
+            afterPic.Image = originalImage;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

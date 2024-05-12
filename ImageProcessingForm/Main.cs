@@ -392,7 +392,65 @@ namespace ImageProcessingForm
 
         private void FiltreUygulama()
         {
+            Bitmap imageToProcess = beforePic.Image != null ? new Bitmap(beforePic.Image) : defaultImage;
 
+            // Buraya blurring işlemi uygulama kodunu ekleyin
+            Bitmap blurredImage = ApplyBlur(imageToProcess, 11);
+
+            // Sonuç görüntüsünü göster
+            afterPic.Image = blurredImage;
+        }
+
+        // Görüntüye blurring uygulayan fonksiyon
+        private Bitmap ApplyBlur(Bitmap image, int kernelSize)
+        {
+            Bitmap blurredImage = new Bitmap(image.Width, image.Height);
+
+            // Kernel boyutunu kontrol et
+            if (kernelSize % 2 == 0)
+                throw new ArgumentException("Kernel boyutu tek olmalıdır.");
+
+            int radius = kernelSize / 2;
+
+            // Her piksel için blurring uygula
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    // Pikselin etrafındaki diğer pikselleri topla
+                    int totalR = 0, totalG = 0, totalB = 0;
+                    int count = 0;
+
+                    for (int offsetY = -radius; offsetY <= radius; offsetY++)
+                    {
+                        for (int offsetX = -radius; offsetX <= radius; offsetX++)
+                        {
+                            int newX = x + offsetX;
+                            int newY = y + offsetY;
+
+                            // Kenar pikselleri kontrol et
+                            if (newX >= 0 && newX < image.Width && newY >= 0 && newY < image.Height)
+                            {
+                                Color pixel = image.GetPixel(newX, newY);
+                                totalR += pixel.R;
+                                totalG += pixel.G;
+                                totalB += pixel.B;
+                                count++;
+                            }
+                        }
+                    }
+
+                    // Ortalama rengi hesapla
+                    int avgR = totalR / count;
+                    int avgG = totalG / count;
+                    int avgB = totalB / count;
+
+                    // Blurred image'e atama yap
+                    blurredImage.SetPixel(x, y, Color.FromArgb(avgR, avgG, avgB));
+                }
+            }
+
+            return blurredImage;
         }
 
         private void MorfolojikIslemler()

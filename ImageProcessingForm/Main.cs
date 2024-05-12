@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace ImageProcessingForm
         private Kirpma kirpmaForm = null;
         private Oran oranForm=null;
         private Esikleme esiklemeForm = null;
+        private histogram histogramForm = null;
+
         public Main()
         {
             InitializeComponent();
@@ -275,8 +278,23 @@ namespace ImageProcessingForm
 
         private void HistogramGenisletme()
         {
+            // Eğer histogram formu daha önce oluşturulmadıysa, oluştur
+            if (histogramForm == null)
+            {
+                histogramForm = new histogram(defaultImage); // Varsayılan resmi geçirin
+                histogramForm.FormClosed += HistogramForm_FormClosed;
+            }
 
+            histogramForm.Show();
+            this.Hide();
         }
+
+        private void HistogramForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            histogramForm = null;
+            this.Show();
+        }
+
 
         private void AritmetikIslemler()
         {

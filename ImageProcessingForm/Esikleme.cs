@@ -255,5 +255,10 @@ namespace ImageProcessingForm
                 MessageBox.Show("Lütfen bir işlem seçin.");
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

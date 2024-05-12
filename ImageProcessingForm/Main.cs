@@ -19,6 +19,7 @@ namespace ImageProcessingForm
         private Bitmap defaultImage;
         private Parlaklik parlaklikForm = null;
         private Kirpma kirpmaForm = null;
+        private Aritmetik aritmetikForm = null;
         private Oran oranForm=null;
         private Esikleme esiklemeForm = null;
         private histogram histogramForm = null;
@@ -299,7 +300,22 @@ namespace ImageProcessingForm
 
         private void AritmetikIslemler()
         {
+            
+                if (aritmetikForm == null)
+                {
+                    aritmetikForm = new Aritmetik();
+                    aritmetikForm.FormClosed += AritmetikIslemlerForm_FormClosed;
+                }
 
+                aritmetikForm.Show();
+
+                this.Hide();
+            
+        }
+        private void AritmetikIslemlerForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            aritmetikForm = null;
+            this.Show();
         }
 
         private void ParlaklikArtirma()

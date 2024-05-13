@@ -395,7 +395,7 @@ namespace ImageProcessingForm
             Bitmap imageToProcess = beforePic.Image != null ? new Bitmap(beforePic.Image) : defaultImage;
 
             // Buraya blurring işlemi uygulama kodunu ekleyin
-            Bitmap blurredImage = ApplyBlur(imageToProcess, 11);
+            Bitmap blurredImage = ApplyBlur(imageToProcess, 7);
 
             // Sonuç görüntüsünü göster
             afterPic.Image = blurredImage;

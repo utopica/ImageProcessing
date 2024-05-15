@@ -31,7 +31,6 @@
             beforePic = new PictureBox();
             afterPic = new PictureBox();
             btnStart = new FontAwesome.Sharp.IconButton();
-            btnUndo = new FontAwesome.Sharp.IconButton();
             btnSave = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
             btnAdd = new FontAwesome.Sharp.IconButton();
@@ -69,25 +68,12 @@
             btnStart.IconChar = FontAwesome.Sharp.IconChar.Broom;
             btnStart.IconColor = Color.Black;
             btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnStart.Location = new Point(561, 634);
+            btnStart.Location = new Point(617, 633);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(91, 90);
             btnStart.TabIndex = 15;
             btnStart.UseVisualStyleBackColor = false;
             btnStart.Click += btnStart_Click;
-            // 
-            // btnUndo
-            // 
-            btnUndo.BackColor = Color.FromArgb(68, 195, 52);
-            btnUndo.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
-            btnUndo.IconColor = Color.Black;
-            btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnUndo.Location = new Point(682, 634);
-            btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(89, 90);
-            btnUndo.TabIndex = 16;
-            btnUndo.UseVisualStyleBackColor = false;
-            btnUndo.Click += btnUndo_Click;
             // 
             // btnSave
             // 
@@ -130,12 +116,12 @@
             // 
             // ıconButton1pepper
             // 
-            ıconButton1pepper.BackColor = Color.FromArgb(192, 255, 192);
+            ıconButton1pepper.BackColor = Color.FromArgb(68, 195, 52);
             ıconButton1pepper.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             ıconButton1pepper.IconChar = FontAwesome.Sharp.IconChar.None;
             ıconButton1pepper.IconColor = Color.Black;
             ıconButton1pepper.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton1pepper.Location = new Point(89, 730);
+            ıconButton1pepper.Location = new Point(79, 730);
             ıconButton1pepper.Name = "ıconButton1pepper";
             ıconButton1pepper.Size = new Size(130, 45);
             ıconButton1pepper.TabIndex = 20;
@@ -145,12 +131,12 @@
             // 
             // ıconButton2salt
             // 
-            ıconButton2salt.BackColor = Color.FromArgb(192, 255, 192);
+            ıconButton2salt.BackColor = Color.FromArgb(68, 195, 52);
             ıconButton2salt.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             ıconButton2salt.IconChar = FontAwesome.Sharp.IconChar.None;
             ıconButton2salt.IconColor = Color.Black;
             ıconButton2salt.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton2salt.Location = new Point(89, 675);
+            ıconButton2salt.Location = new Point(79, 675);
             ıconButton2salt.Name = "ıconButton2salt";
             ıconButton2salt.Size = new Size(130, 49);
             ıconButton2salt.TabIndex = 21;
@@ -163,7 +149,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             label1.ForeColor = SystemColors.ButtonFace;
-            label1.Location = new Point(320, 603);
+            label1.Location = new Point(348, 603);
             label1.Name = "label1";
             label1.Size = new Size(128, 38);
             label1.TabIndex = 22;
@@ -174,7 +160,7 @@
             radioButton1mean.AutoSize = true;
             radioButton1mean.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             radioButton1mean.ForeColor = SystemColors.ButtonFace;
-            radioButton1mean.Location = new Point(320, 668);
+            radioButton1mean.Location = new Point(348, 668);
             radioButton1mean.Name = "radioButton1mean";
             radioButton1mean.Size = new Size(112, 42);
             radioButton1mean.TabIndex = 23;
@@ -188,7 +174,7 @@
             radioButton1median.AutoSize = true;
             radioButton1median.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             radioButton1median.ForeColor = SystemColors.ButtonFace;
-            radioButton1median.Location = new Point(320, 723);
+            radioButton1median.Location = new Point(348, 723);
             radioButton1median.Name = "radioButton1median";
             radioButton1median.Size = new Size(137, 42);
             radioButton1median.TabIndex = 24;
@@ -199,7 +185,7 @@
             // 
             // ıconButton1saltpepper
             // 
-            ıconButton1saltpepper.BackColor = Color.FromArgb(192, 255, 192);
+            ıconButton1saltpepper.BackColor = Color.FromArgb(68, 195, 52);
             ıconButton1saltpepper.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             ıconButton1saltpepper.IconChar = FontAwesome.Sharp.IconChar.None;
             ıconButton1saltpepper.IconColor = Color.Black;
@@ -227,7 +213,6 @@
             Controls.Add(btnAdd);
             Controls.Add(btnDel);
             Controls.Add(btnSave);
-            Controls.Add(btnUndo);
             Controls.Add(btnStart);
             Controls.Add(afterPic);
             Controls.Add(beforePic);
@@ -245,7 +230,6 @@
         private PictureBox beforePic;
         private PictureBox afterPic;
         private FontAwesome.Sharp.IconButton btnStart;
-        private FontAwesome.Sharp.IconButton btnUndo;
         private FontAwesome.Sharp.IconButton btnSave;
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnAdd;

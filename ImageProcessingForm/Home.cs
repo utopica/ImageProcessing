@@ -44,6 +44,7 @@ namespace ImageProcessingForm
         {
             mainForm = null; 
             this.Show(); 
+            
         }
        
     }

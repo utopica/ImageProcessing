@@ -31,7 +31,6 @@
             beforePic = new FontAwesome.Sharp.IconPictureBox();
             afterPic = new FontAwesome.Sharp.IconPictureBox();
             comboBox1 = new ComboBox();
-            btnUndo = new FontAwesome.Sharp.IconButton();
             btnStart = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
             btnSave = new FontAwesome.Sharp.IconButton();
@@ -78,20 +77,6 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(588, 28);
             comboBox1.TabIndex = 2;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
-            // btnUndo
-            // 
-            btnUndo.BackColor = Color.FromArgb(68, 195, 52);
-            btnUndo.IconChar = FontAwesome.Sharp.IconChar.Backward;
-            btnUndo.IconColor = Color.Black;
-            btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnUndo.IconSize = 72;
-            btnUndo.Location = new Point(151, 662);
-            btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(173, 78);
-            btnUndo.TabIndex = 3;
-            btnUndo.UseVisualStyleBackColor = false;
             // 
             // btnStart
             // 
@@ -99,11 +84,12 @@
             btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
             btnStart.IconColor = Color.Black;
             btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnStart.Location = new Point(330, 662);
+            btnStart.Location = new Point(256, 662);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(173, 78);
             btnStart.TabIndex = 4;
             btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
             // 
             // btnDel
             // 
@@ -111,7 +97,7 @@
             btnDel.IconChar = FontAwesome.Sharp.IconChar.Trash;
             btnDel.IconColor = Color.Black;
             btnDel.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnDel.Location = new Point(688, 662);
+            btnDel.Location = new Point(637, 662);
             btnDel.Name = "btnDel";
             btnDel.Size = new Size(173, 78);
             btnDel.TabIndex = 5;
@@ -124,7 +110,7 @@
             btnSave.IconChar = FontAwesome.Sharp.IconChar.Save;
             btnSave.IconColor = Color.Black;
             btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnSave.Location = new Point(509, 662);
+            btnSave.Location = new Point(448, 662);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(173, 78);
             btnSave.TabIndex = 6;
@@ -137,7 +123,7 @@
             btnAdd.IconChar = FontAwesome.Sharp.IconChar.Plus;
             btnAdd.IconColor = Color.Black;
             btnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdd.Location = new Point(867, 662);
+            btnAdd.Location = new Point(829, 662);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(173, 78);
             btnAdd.TabIndex = 7;
@@ -154,7 +140,6 @@
             Controls.Add(btnSave);
             Controls.Add(btnDel);
             Controls.Add(btnStart);
-            Controls.Add(btnUndo);
             Controls.Add(comboBox1);
             Controls.Add(afterPic);
             Controls.Add(beforePic);
@@ -170,7 +155,6 @@
         private FontAwesome.Sharp.IconPictureBox beforePic;
         private FontAwesome.Sharp.IconPictureBox afterPic;
         private ComboBox comboBox1;
-        private FontAwesome.Sharp.IconButton btnUndo;
         private FontAwesome.Sharp.IconButton btnStart;
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnSave;

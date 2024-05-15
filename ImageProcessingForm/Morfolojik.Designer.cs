@@ -32,6 +32,9 @@
             afterPic = new FontAwesome.Sharp.IconPictureBox();
             comboBox1 = new ComboBox();
             label1 = new Label();
+            btnAdd = new FontAwesome.Sharp.IconButton();
+            btnSave = new FontAwesome.Sharp.IconButton();
+            btnDel = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
             SuspendLayout();
@@ -52,6 +55,7 @@
             beforePic.Size = new Size(588, 561);
             beforePic.TabIndex = 5;
             beforePic.TabStop = false;
+            beforePic.Click += beforePic_Click;
             // 
             // afterPic
             // 
@@ -71,28 +75,78 @@
             // 
             // comboBox1
             // 
+            comboBox1.Font = new Font("Segoe UI", 12F);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(160, 600);
+            comboBox1.Location = new Point(209, 603);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
+            comboBox1.Size = new Size(255, 36);
             comboBox1.TabIndex = 7;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(13, 603);
             label1.Name = "label1";
-            label1.Size = new Size(138, 20);
+            label1.Size = new Size(190, 28);
             label1.TabIndex = 8;
-            label1.Text = "Morfolojik İşlemler ";
+            label1.Text = "Morfolojik İşlemler : ";
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.FromArgb(68, 195, 52);
+            btnAdd.Font = new Font("Segoe UI", 7.8F);
+            btnAdd.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            btnAdd.IconColor = Color.Black;
+            btnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdd.IconSize = 32;
+            btnAdd.Location = new Point(1166, 589);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(48, 49);
+            btnAdd.TabIndex = 25;
+            btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnSave
+            // 
+            btnSave.BackColor = Color.FromArgb(68, 195, 52);
+            btnSave.Font = new Font("Segoe UI", 7.8F);
+            btnSave.IconChar = FontAwesome.Sharp.IconChar.Save;
+            btnSave.IconColor = Color.Black;
+            btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSave.IconSize = 32;
+            btnSave.Location = new Point(1166, 699);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(48, 49);
+            btnSave.TabIndex = 24;
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnDel
+            // 
+            btnDel.BackColor = Color.FromArgb(68, 195, 52);
+            btnDel.Font = new Font("Segoe UI", 7.8F);
+            btnDel.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            btnDel.IconColor = Color.Black;
+            btnDel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnDel.IconSize = 32;
+            btnDel.Location = new Point(1166, 644);
+            btnDel.Name = "btnDel";
+            btnDel.Size = new Size(48, 49);
+            btnDel.TabIndex = 23;
+            btnDel.UseVisualStyleBackColor = false;
+            btnDel.Click += btnDel_Click;
             // 
             // Morfolojik
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(1234, 708);
+            ClientSize = new Size(1226, 764);
+            Controls.Add(btnAdd);
+            Controls.Add(btnSave);
+            Controls.Add(btnDel);
             Controls.Add(label1);
             Controls.Add(comboBox1);
             Controls.Add(afterPic);
@@ -111,5 +165,8 @@
         private FontAwesome.Sharp.IconPictureBox afterPic;
         private ComboBox comboBox1;
         private Label label1;
+        private FontAwesome.Sharp.IconButton btnAdd;
+        private FontAwesome.Sharp.IconButton btnSave;
+        private FontAwesome.Sharp.IconButton btnDel;
     }
 }

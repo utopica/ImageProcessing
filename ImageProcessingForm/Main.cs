@@ -20,7 +20,7 @@ namespace ImageProcessingForm
         private Parlaklik parlaklikForm = null;
         private Kirpma kirpmaForm = null;
         private Aritmetik aritmetikForm = null;
-        private Oran oranForm=null;
+        private Oran oranForm = null;
         private Esikleme esiklemeForm = null;
         private histogram histogramForm = null;
         private Gurultu_Filtreleme gurultuForm = null;
@@ -37,7 +37,7 @@ namespace ImageProcessingForm
 
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
-            defaultImage = new Bitmap(imagePath); 
+            defaultImage = new Bitmap(imagePath);
             beforePic.Image = defaultImage;
             afterPic.Image = defaultImage;
             afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -61,9 +61,7 @@ namespace ImageProcessingForm
             comboBox1.Items.Add("Görüntüye Filtre Uygulanması (Blurring)");
             comboBox1.Items.Add("Morfolojik İşlemler (Genişleme, Aşınma, Açma, Kapama)");
 
-            // ComboBox'ın SelectedIndexChanged olayını dinleyelim
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-
+           
 
         }
 
@@ -81,62 +79,7 @@ namespace ImageProcessingForm
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            string selectedOperation = comboBox1.SelectedItem.ToString();
-            switch (selectedOperation)
-            {
-                case "Gri Dönüşüm":
-                    GriDonusum();
-                    break;
-                case "Binary Dönüşüm":
-                    BinaryDonusum();
-                    break;
-                case "Görüntü Döndürme":
-                    GoruntuDonme();
-                    break;
-                case "Görüntü Kırpma":
-                    GoruntuKirpma();
-                    break;
-                case "Görüntü Yaklaştırma/Uzaklaştırma":
-                    GoruntuYaklastirmaUzaklastirma();
-                    break;
-                case "Renk Uzayı Dönüşümleri":
-                    RenkUzayiDonusumleri();
-                    break;
-                case "Giriş görüntüsüne ait histogram ve orjinal görüntü histogramını germe/genişletme":
-                    HistogramGenisletme();
-                    break;
-                case "İki resim arasında aritmetik işlemler (ekleme, çarpma)":
-                    AritmetikIslemler();
-                    break;
-                case "Parlaklık artırma":
-                    ParlaklikArtirma();
-                    break;
-                case "Konvolüsyon İşlemi (gauss)":
-                    KonvolusyonIslemi();
-                    break;
-                case "Eşikleme işlemleri (Adaptif Eşikleme)":
-                    EsiklemeIslemleri();
-                    break;
-                case "Kenar Bulma Algoritmalarının Kullanımı (sobel)":
-                    KenarBulma();
-                    break;
-                case "Görüntüye Gürültü Ekleme (Salt&Pepper) ve filtrelerin kullanımı (mean, median) ile gürültü temizleme":
-                    GurultuEklemeTemizleme();
-                    break;
-                case "Görüntüye Filtre Uygulanması (Blurring)":
-                    FiltreUygulama();
-                    break;
-                case "Morfolojik İşlemler (Genişleme, Aşınma, Açma, Kapama)":
-                    MorfolojikIslemler();
-                    break;
-                default:
-                    MessageBox.Show("Geçersiz işlem seçimi.");
-                    break;
-            }
-        }
+        
 
 
         private void GriDonusum()
@@ -203,20 +146,20 @@ namespace ImageProcessingForm
             if (kirpmaForm == null)
             {
                 kirpmaForm = new Kirpma();
-                kirpmaForm.FormClosed += KirpmaForm_FormClosed; 
+                kirpmaForm.FormClosed += KirpmaForm_FormClosed;
             }
 
             kirpmaForm.Show();
 
             this.Hide();
 
-            
+
         }
 
         private void KirpmaForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            kirpmaForm = null; 
-            this.Show(); 
+            kirpmaForm = null;
+            this.Show();
         }
 
 
@@ -302,17 +245,17 @@ namespace ImageProcessingForm
 
         private void AritmetikIslemler()
         {
-            
-                if (aritmetikForm == null)
-                {
-                    aritmetikForm = new Aritmetik();
-                    aritmetikForm.FormClosed += AritmetikIslemlerForm_FormClosed;
-                }
 
-                aritmetikForm.Show();
+            if (aritmetikForm == null)
+            {
+                aritmetikForm = new Aritmetik();
+                aritmetikForm.FormClosed += AritmetikIslemlerForm_FormClosed;
+            }
 
-                this.Hide();
-            
+            aritmetikForm.Show();
+
+            this.Hide();
+
         }
         private void AritmetikIslemlerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -334,7 +277,7 @@ namespace ImageProcessingForm
             this.Hide();
 
             // Formu göster
-            
+
         }
 
         private void ParlaklikForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -354,13 +297,13 @@ namespace ImageProcessingForm
             if (esiklemeForm == null)
             {
                 esiklemeForm = new Esikleme();
-                esiklemeForm.FormClosed += EsiklemeForm_FormClosed; 
+                esiklemeForm.FormClosed += EsiklemeForm_FormClosed;
             }
 
-            
+
             esiklemeForm.Show();
 
-           
+
             this.Hide();
         }
 
@@ -369,7 +312,7 @@ namespace ImageProcessingForm
             esiklemeForm = null; // Form kapandığında null yap
             this.Show(); // Ana formu göster
         }
-    
+
 
         private void KenarBulma()
         {
@@ -540,7 +483,61 @@ namespace ImageProcessingForm
             }
         }
 
-
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            string selectedOperation = comboBox1.SelectedItem.ToString();
+            switch (selectedOperation)
+            {
+                case "Gri Dönüşüm":
+                    GriDonusum();
+                    break;
+                case "Binary Dönüşüm":
+                    BinaryDonusum();
+                    break;
+                case "Görüntü Döndürme":
+                    GoruntuDonme();
+                    break;
+                case "Görüntü Kırpma":
+                    GoruntuKirpma();
+                    break;
+                case "Görüntü Yaklaştırma/Uzaklaştırma":
+                    GoruntuYaklastirmaUzaklastirma();
+                    break;
+                case "Renk Uzayı Dönüşümleri":
+                    RenkUzayiDonusumleri();
+                    break;
+                case "Giriş görüntüsüne ait histogram ve orjinal görüntü histogramını germe/genişletme":
+                    HistogramGenisletme();
+                    break;
+                case "İki resim arasında aritmetik işlemler (ekleme, çarpma)":
+                    AritmetikIslemler();
+                    break;
+                case "Parlaklık artırma":
+                    ParlaklikArtirma();
+                    break;
+                case "Konvolüsyon İşlemi (gauss)":
+                    KonvolusyonIslemi();
+                    break;
+                case "Eşikleme işlemleri (Adaptif Eşikleme)":
+                    EsiklemeIslemleri();
+                    break;
+                case "Kenar Bulma Algoritmalarının Kullanımı (sobel)":
+                    KenarBulma();
+                    break;
+                case "Görüntüye Gürültü Ekleme (Salt&Pepper) ve filtrelerin kullanımı (mean, median) ile gürültü temizleme":
+                    GurultuEklemeTemizleme();
+                    break;
+                case "Görüntüye Filtre Uygulanması (Blurring)":
+                    FiltreUygulama();
+                    break;
+                case "Morfolojik İşlemler (Genişleme, Aşınma, Açma, Kapama)":
+                    MorfolojikIslemler();
+                    break;
+                default:
+                    MessageBox.Show("Geçersiz işlem seçimi.");
+                    break;
+            }
+        }
     }
 
 }

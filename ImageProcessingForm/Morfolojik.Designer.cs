@@ -79,7 +79,7 @@
             // 
             comboBox1.Font = new Font("Segoe UI", 12F);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(209, 603);
+            comboBox1.Location = new Point(558, 613);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(255, 36);
             comboBox1.TabIndex = 7;
@@ -89,7 +89,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(13, 603);
+            label1.Location = new Point(362, 613);
             label1.Name = "label1";
             label1.Size = new Size(190, 28);
             label1.TabIndex = 8;
@@ -148,11 +148,12 @@
             btnStart.IconColor = Color.FromArgb(68, 195, 52);
             btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnStart.IconSize = 72;
-            btnStart.Location = new Point(787, 626);
+            btnStart.Location = new Point(475, 670);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(77, 82);
             btnStart.TabIndex = 26;
             btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
             // 
             // btnUndo
             // 
@@ -166,7 +167,7 @@
             btnUndo.IconColor = Color.FromArgb(68, 195, 52);
             btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnUndo.IconSize = 82;
-            btnUndo.Location = new Point(882, 631);
+            btnUndo.Location = new Point(659, 675);
             btnUndo.Margin = new Padding(4, 3, 4, 3);
             btnUndo.Name = "btnUndo";
             btnUndo.Size = new Size(80, 77);

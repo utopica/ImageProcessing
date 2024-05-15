@@ -21,15 +21,16 @@ namespace ImageProcessingForm
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
             originalImage = new Bitmap(imagePath);
-            binaryImage = Binary(originalImage); // İlk başta binary işlemi yapılıyor
-            DisplayImageBefore(binaryImage); // binary işlemi yapılmış resmi beforePic'te göster
+            binaryImage = Binary(originalImage); 
+            DisplayImageBefore(originalImage); 
+            DisplayImageBinary(binaryImage); 
 
             comboBox1.Items.Add("Genişleme - Dilation");
             comboBox1.Items.Add("Aşınma - Erosion");
             comboBox1.Items.Add("Açma - Opening");
             comboBox1.Items.Add("Kapama - Closing");
 
-            // ComboBox'ın SelectedIndexChanged olayını dinleyelim
+          
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         }
 
@@ -162,6 +163,7 @@ namespace ImageProcessingForm
         {
             beforePic.Image = null;
             afterPic.Image = null;
+            binaryPic.Image = null;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -173,6 +175,12 @@ namespace ImageProcessingForm
         {
             beforePic.Image = image;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void DisplayImageBinary(Bitmap image)
+        {
+            binaryPic.Image = image;
+            binaryPic.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void DisplayImage(Bitmap image)
@@ -209,10 +217,12 @@ namespace ImageProcessingForm
             {
                 beforePic.Image = null;
                 afterPic.Image = null;
+                binaryPic.Image = null;
 
                 originalImage = new Bitmap(openFileDialog1.FileName);
                 binaryImage = Binary(originalImage); // Yeni resme binary işlemi uygula
-                DisplayImageBefore(binaryImage); // İşlem yapılmış resmi beforePic'te göster
+                DisplayImageBefore(originalImage); // İşlem yapılmış resmi beforePic'te göster
+                DisplayImageBinary(binaryImage); // Binary işlemi yapılmış resmi binaryPic'te göster
             }
         }
 

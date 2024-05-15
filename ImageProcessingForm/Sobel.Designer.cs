@@ -105,26 +105,29 @@
             // 
             // btnUndo
             // 
-            btnUndo.BackColor = Color.FromArgb(68, 195, 52);
+            btnUndo.BackColor = Color.Black;
+            btnUndo.FlatStyle = FlatStyle.Flat;
             btnUndo.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
-            btnUndo.IconColor = Color.Black;
+            btnUndo.IconColor = Color.FromArgb(68, 195, 52);
             btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnUndo.Location = new Point(784, 623);
+            btnUndo.Location = new Point(788, 629);
             btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(76, 78);
+            btnUndo.Size = new Size(54, 79);
             btnUndo.TabIndex = 23;
             btnUndo.UseVisualStyleBackColor = false;
             btnUndo.Click += btnUndo_Click;
             // 
             // btnStart
             // 
-            btnStart.BackColor = Color.FromArgb(68, 195, 52);
+            btnStart.BackColor = Color.Transparent;
+            btnStart.FlatStyle = FlatStyle.Flat;
             btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
-            btnStart.IconColor = Color.Black;
+            btnStart.IconColor = Color.FromArgb(68, 195, 52);
             btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnStart.Location = new Point(671, 623);
+            btnStart.IconSize = 55;
+            btnStart.Location = new Point(705, 630);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(86, 78);
+            btnStart.Size = new Size(60, 78);
             btnStart.TabIndex = 24;
             btnStart.UseVisualStyleBackColor = false;
             btnStart.Click += btnStart_Click;

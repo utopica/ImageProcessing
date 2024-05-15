@@ -36,6 +36,131 @@ namespace ImageProcessingForm
             beforePicImage = new Bitmap(defaultImage);
 
         }
+        private Bitmap ApplySobelFilter(Bitmap image, string direction, int threshold)
+        {
+            if (direction == "horizontal")
+            {
+                return ApplyHorizontalSobelFilter(image, threshold);
+            }
+            else if (direction == "vertical")
+            {
+                return ApplyVerticalSobelFilter(image, threshold);
+            }
+            else if (direction == "both")
+            {
+                return ApplyBothSobelFilter(image, threshold);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid direction");
+            }
+        }
+
+        private Bitmap ApplyHorizontalSobelFilter(Bitmap image, int threshold)
+        {
+            Bitmap result = new Bitmap(image.Width, image.Height);
+
+            for (int x = 1; x < image.Width - 1; x++)
+            {
+                for (int y = 1; y < image.Height - 1; y++)
+                {
+                    // Sobel operatörleri
+                    int pixelValue = (GetPixelValue(image, x - 1, y - 1) * -1) +
+                                     (GetPixelValue(image, x - 1, y) * -2) +
+                                     (GetPixelValue(image, x - 1, y + 1) * -1) +
+                                     (GetPixelValue(image, x + 1, y - 1)) +
+                                     (GetPixelValue(image, x + 1, y) * 2) +
+                                     (GetPixelValue(image, x + 1, y + 1));
+
+                    if (pixelValue < threshold)
+                    {
+                        pixelValue = 0;
+                    }
+                    else
+                    {
+                        pixelValue = 255;
+                    }
+
+                    result.SetPixel(x, y, Color.FromArgb(pixelValue, pixelValue, pixelValue));
+                }
+            }
+
+            return result;
+        }
+
+        private Bitmap ApplyVerticalSobelFilter(Bitmap image, int threshold)
+        {
+            Bitmap result = new Bitmap(image.Width, image.Height);
+
+            for (int x = 1; x < image.Width - 1; x++)
+            {
+                for (int y = 1; y < image.Height - 1; y++)
+                {
+                    // Sobel operatörleri
+                    int pixelValue = (GetPixelValue(image, x - 1, y - 1) * -1) +
+                                     (GetPixelValue(image, x, y - 1) * -2) +
+                                     (GetPixelValue(image, x + 1, y - 1) * -1) +
+                                     (GetPixelValue(image, x - 1, y + 1)) +
+                                     (GetPixelValue(image, x, y + 1) * 2) +
+                                     (GetPixelValue(image, x + 1, y + 1));
+
+                    if (pixelValue < threshold)
+                    {
+                        pixelValue = 0;
+                    }
+                    else
+                    {
+                        pixelValue = 255;
+                    }
+
+                    result.SetPixel(x, y, Color.FromArgb(pixelValue, pixelValue, pixelValue));
+                }
+            }
+
+            return result;
+        }
+
+        private Bitmap ApplyBothSobelFilter(Bitmap image, int threshold)
+        {
+            // İki yönde de filtre uygulanır ve sonuçlar toplanır
+            Bitmap horizontalResult = ApplyHorizontalSobelFilter(image, threshold);
+            Bitmap verticalResult = ApplyVerticalSobelFilter(image, threshold);
+
+            Bitmap result = new Bitmap(image.Width, image.Height);
+
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    int pixelValue = (int)Math.Sqrt(Math.Pow(horizontalResult.GetPixel(x, y).R, 2) + Math.Pow(verticalResult.GetPixel(x, y).R, 2));
+
+                    if (pixelValue < threshold)
+                    {
+                        pixelValue = 0;
+                    }
+                    else
+                    {
+                        pixelValue = 255;
+                    }
+
+                    result.SetPixel(x, y, Color.FromArgb(pixelValue, pixelValue, pixelValue));
+                }
+            }
+
+            return result;
+        }
+
+        private int GetPixelValue(Bitmap image, int x, int y)
+        {
+            if (x < 0 || x >= image.Width || y < 0 || y >= image.Height)
+            {
+                return 0;
+            }
+            else
+            {
+                return image.GetPixel(x, y).R;
+            }
+        }
 
         private void textBox1esik_TextChanged(object sender, EventArgs e)
         {
@@ -54,22 +179,58 @@ namespace ImageProcessingForm
 
         private void radioButton3both_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (radioButton3both.Checked)
+            {
+                radioButton1horizontal.Checked = false;
+                radioButton2vertical.Checked = false;
+            }
         }
 
         private void radioButton1horizontal_CheckedChanged(object sender, EventArgs e)
         {
+            if (radioButton1horizontal.Checked)
+            {
+                radioButton2vertical.Checked = false;
+                radioButton3both.Checked = false;
+            }
 
         }
 
         private void radioButton2vertical_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (radioButton2vertical.Checked)
+            {
+                radioButton1horizontal.Checked = false;
+                radioButton3both.Checked = false;
+            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            // Eşik değeri alınır
+            int threshold;
+            if (!int.TryParse(textBox1esik.Text, out threshold))
+            {
+                MessageBox.Show("Geçerli bir eşik değeri giriniz.");
+                return;
+            }
 
+            // Hangi radyo düğmesinin seçildiğini kontrol edin ve Sobel filtresini uygulayın
+            if (radioButton1horizontal.Checked)
+            {
+                // Horizontal Sobel filtresini uygulayın
+                afterPic.Image = ApplySobelFilter(beforePicImage, "horizontal", threshold);
+            }
+            else if (radioButton2vertical.Checked)
+            {
+                // Vertical Sobel filtresini uygulayın
+                afterPic.Image = ApplySobelFilter(beforePicImage, "vertical", threshold);
+            }
+            else if (radioButton3both.Checked)
+            {
+                // Both Sobel filtresini uygulayın
+                afterPic.Image = ApplySobelFilter(beforePicImage, "both", threshold);
+            }
         }
 
         private void btnUndo_Click(object sender, EventArgs e)

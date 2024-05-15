@@ -194,6 +194,15 @@
             btnStart.AutoSizeChanged += btnStart_Click;
             btnStart.Click += btnStart_Click;
             // 
+            // ıconDropDownButton1
+            // 
+            ıconDropDownButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            ıconDropDownButton1.IconColor = Color.Black;
+            ıconDropDownButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            ıconDropDownButton1.Name = "ıconDropDownButton1";
+            ıconDropDownButton1.Size = new Size(23, 23);
+            ıconDropDownButton1.Text = "ıconDropDownButton1";
+            // 
             // Esikleme
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -234,5 +243,6 @@
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnAdd;
         private FontAwesome.Sharp.IconButton btnStart;
+        private FontAwesome.Sharp.IconDropDownButton ıconDropDownButton1;
     }
 }

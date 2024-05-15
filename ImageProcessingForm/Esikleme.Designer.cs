@@ -30,15 +30,15 @@
         {
             beforePic = new FontAwesome.Sharp.IconPictureBox();
             afterPic = new FontAwesome.Sharp.IconPictureBox();
-            btnAdd = new FontAwesome.Sharp.IconButton();
-            btnDel = new FontAwesome.Sharp.IconButton();
-            btnSave = new FontAwesome.Sharp.IconButton();
             blokBoyutu = new Label();
             label1 = new Label();
             comboBox1 = new ComboBox();
             label2 = new Label();
             txtBlokBoyutu = new TextBox();
             txtSabitDeger = new TextBox();
+            btnSave = new FontAwesome.Sharp.IconButton();
+            btnDel = new FontAwesome.Sharp.IconButton();
+            btnAdd = new FontAwesome.Sharp.IconButton();
             btnStart = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
@@ -76,45 +76,6 @@
             afterPic.Size = new Size(588, 561);
             afterPic.TabIndex = 5;
             afterPic.TabStop = false;
-            // 
-            // btnAdd
-            // 
-            btnAdd.BackColor = Color.FromArgb(68, 195, 52);
-            btnAdd.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            btnAdd.IconColor = Color.Black;
-            btnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdd.Location = new Point(1069, 598);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(135, 78);
-            btnAdd.TabIndex = 16;
-            btnAdd.UseVisualStyleBackColor = false;
-            btnAdd.Click += btnAdd_Click;
-            // 
-            // btnDel
-            // 
-            btnDel.BackColor = Color.FromArgb(68, 195, 52);
-            btnDel.IconChar = FontAwesome.Sharp.IconChar.Trash;
-            btnDel.IconColor = Color.Black;
-            btnDel.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnDel.Location = new Point(934, 598);
-            btnDel.Name = "btnDel";
-            btnDel.Size = new Size(129, 78);
-            btnDel.TabIndex = 15;
-            btnDel.UseVisualStyleBackColor = false;
-            btnDel.Click += btnDel_Click_1;
-            // 
-            // btnSave
-            // 
-            btnSave.BackColor = Color.FromArgb(68, 195, 52);
-            btnSave.IconChar = FontAwesome.Sharp.IconChar.Save;
-            btnSave.IconColor = Color.Black;
-            btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnSave.Location = new Point(789, 598);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(139, 78);
-            btnSave.TabIndex = 14;
-            btnSave.UseVisualStyleBackColor = false;
-            btnSave.Click += btnSave_Click_1;
             // 
             // blokBoyutu
             // 
@@ -177,6 +138,48 @@
             txtSabitDeger.TabIndex = 22;
             txtSabitDeger.TextChanged += txtSabitDeger_TextChanged;
             // 
+            // btnSave
+            // 
+            btnSave.BackColor = Color.FromArgb(68, 195, 52);
+            btnSave.IconChar = FontAwesome.Sharp.IconChar.Save;
+            btnSave.IconColor = Color.Black;
+            btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSave.Location = new Point(789, 598);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(139, 78);
+            btnSave.TabIndex = 14;
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.AutoSizeChanged += btnSave_Click_1;
+            btnSave.Click += btnSave_Click_1;
+            // 
+            // btnDel
+            // 
+            btnDel.BackColor = Color.FromArgb(68, 195, 52);
+            btnDel.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            btnDel.IconColor = Color.Black;
+            btnDel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnDel.Location = new Point(934, 598);
+            btnDel.Name = "btnDel";
+            btnDel.Size = new Size(129, 78);
+            btnDel.TabIndex = 15;
+            btnDel.UseVisualStyleBackColor = false;
+            btnDel.AutoSizeChanged += btnDel_Click_1;
+            btnDel.Click += btnDel_Click_1;
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.FromArgb(68, 195, 52);
+            btnAdd.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            btnAdd.IconColor = Color.Black;
+            btnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdd.Location = new Point(1069, 598);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(135, 78);
+            btnAdd.TabIndex = 16;
+            btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.AutoSizeChanged += btnAdd_Click;
+            btnAdd.Click += btnAdd_Click;
+            // 
             // btnStart
             // 
             btnStart.BackColor = Color.FromArgb(68, 195, 52);
@@ -188,6 +191,7 @@
             btnStart.Size = new Size(127, 78);
             btnStart.TabIndex = 23;
             btnStart.UseVisualStyleBackColor = false;
+            btnStart.AutoSizeChanged += btnStart_Click;
             btnStart.Click += btnStart_Click;
             // 
             // Esikleme
@@ -220,15 +224,15 @@
 
         private FontAwesome.Sharp.IconPictureBox beforePic;
         private FontAwesome.Sharp.IconPictureBox afterPic;
-        private FontAwesome.Sharp.IconButton btnAdd;
-        private FontAwesome.Sharp.IconButton btnDel;
-        private FontAwesome.Sharp.IconButton btnSave;
         private Label blokBoyutu;
         private Label label1;
         private ComboBox comboBox1;
         private Label label2;
         private TextBox txtBlokBoyutu;
         private TextBox txtSabitDeger;
+        private FontAwesome.Sharp.IconButton btnSave;
+        private FontAwesome.Sharp.IconButton btnDel;
+        private FontAwesome.Sharp.IconButton btnAdd;
         private FontAwesome.Sharp.IconButton btnStart;
     }
 }

@@ -26,6 +26,7 @@ namespace ImageProcessingForm
         private Gurultu_Filtreleme gurultuForm = null;
         private Morfolojik morfolojikForm = null;
         private Sobel sobelForm = null;
+        private RenkUzayı renkUzayıForm = null;
 
         public Main()
         {
@@ -187,41 +188,25 @@ namespace ImageProcessingForm
         }
 
         private void RenkUzayiDonusumleri()
-        {
-            if (beforePic.Image != null)
+        { // Eğe esikleme formu daha önce oluşturulmadıysa, oluştur
+            if (renkUzayıForm == null)
             {
-                Bitmap ycbcrImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
-
-                for (int y = 0; y < beforePic.Image.Height; y++)
-                {
-                    for (int x = 0; x < beforePic.Image.Width; x++)
-                    {
-                        Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
-
-                        // RGB değerlerini al
-                        int R = originalColor.R;
-                        int G = originalColor.G;
-                        int B = originalColor.B;
-
-                        // YCbCr dönüşüm formülleri
-                        int Y = (int)(0.299 * R + 0.587 * G + 0.114 * B);
-                        int Cb = (int)(128 - 0.168736 * R - 0.331264 * G + 0.5 * B);
-                        int Cr = (int)(128 + 0.5 * R - 0.418688 * G - 0.081312 * B);
-
-                        // Yeni renk oluştur ve YCbCr resmine ekle
-                        Color ycbcrColor = Color.FromArgb(Y, Cb, Cr);
-                        ycbcrImage.SetPixel(x, y, ycbcrColor);
-                    }
-                }
-
-                afterPic.Image = ycbcrImage;
+                renkUzayıForm = new RenkUzayı();
+                renkUzayıForm.FormClosed += RenkUzayıForm_FormClosed;
             }
-            else
-            {
-                MessageBox.Show("There is no image to process.");
-            }
+
+
+            renkUzayıForm.Show();
+
+
+            this.Hide();
         }
 
+        private void RenkUzayıForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            renkUzayıForm = null; // Form kapandığında null yap
+            this.Show(); // Ana formu göster
+        }
 
         private void HistogramGenisletme()
         {

@@ -37,8 +37,10 @@
             btnDel = new FontAwesome.Sharp.IconButton();
             btnStart = new FontAwesome.Sharp.IconButton();
             btnUndo = new FontAwesome.Sharp.IconButton();
+            binaryPic = new FontAwesome.Sharp.IconPictureBox();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)binaryPic).BeginInit();
             SuspendLayout();
             // 
             // beforePic
@@ -51,7 +53,7 @@
             beforePic.IconColor = SystemColors.Control;
             beforePic.IconFont = FontAwesome.Sharp.IconFont.Auto;
             beforePic.IconSize = 561;
-            beforePic.Location = new Point(13, 12);
+            beforePic.Location = new Point(1, -3);
             beforePic.Margin = new Padding(4, 3, 4, 3);
             beforePic.Name = "beforePic";
             beforePic.Size = new Size(588, 561);
@@ -68,7 +70,7 @@
             afterPic.IconColor = SystemColors.Control;
             afterPic.IconFont = FontAwesome.Sharp.IconFont.Auto;
             afterPic.IconSize = 561;
-            afterPic.Location = new Point(620, 12);
+            afterPic.Location = new Point(1193, -3);
             afterPic.Margin = new Padding(4, 3, 4, 3);
             afterPic.Name = "afterPic";
             afterPic.Size = new Size(588, 561);
@@ -79,7 +81,7 @@
             // 
             comboBox1.Font = new Font("Segoe UI", 12F);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(558, 613);
+            comboBox1.Location = new Point(268, 602);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(255, 36);
             comboBox1.TabIndex = 7;
@@ -89,7 +91,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(362, 613);
+            label1.Location = new Point(36, 605);
             label1.Name = "label1";
             label1.Size = new Size(190, 28);
             label1.TabIndex = 8;
@@ -103,7 +105,7 @@
             btnAdd.IconColor = Color.Black;
             btnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAdd.IconSize = 32;
-            btnAdd.Location = new Point(1166, 589);
+            btnAdd.Location = new Point(1684, 573);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(48, 49);
             btnAdd.TabIndex = 25;
@@ -118,7 +120,7 @@
             btnSave.IconColor = Color.Black;
             btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSave.IconSize = 32;
-            btnSave.Location = new Point(1166, 699);
+            btnSave.Location = new Point(1684, 703);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(48, 49);
             btnSave.TabIndex = 24;
@@ -133,7 +135,7 @@
             btnDel.IconColor = Color.Black;
             btnDel.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnDel.IconSize = 32;
-            btnDel.Location = new Point(1166, 644);
+            btnDel.Location = new Point(1684, 642);
             btnDel.Name = "btnDel";
             btnDel.Size = new Size(48, 49);
             btnDel.TabIndex = 23;
@@ -148,12 +150,11 @@
             btnStart.IconColor = Color.FromArgb(68, 195, 52);
             btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnStart.IconSize = 72;
-            btnStart.Location = new Point(475, 670);
+            btnStart.Location = new Point(798, 625);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(77, 82);
             btnStart.TabIndex = 26;
             btnStart.UseVisualStyleBackColor = false;
-            btnStart.Click += btnStart_Click;
             // 
             // btnUndo
             // 
@@ -167,19 +168,37 @@
             btnUndo.IconColor = Color.FromArgb(68, 195, 52);
             btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnUndo.IconSize = 82;
-            btnUndo.Location = new Point(659, 675);
+            btnUndo.Location = new Point(909, 630);
             btnUndo.Margin = new Padding(4, 3, 4, 3);
             btnUndo.Name = "btnUndo";
             btnUndo.Size = new Size(80, 77);
             btnUndo.TabIndex = 27;
             btnUndo.UseVisualStyleBackColor = false;
             // 
+            // binaryPic
+            // 
+            binaryPic.BackColor = SystemColors.ActiveCaptionText;
+            binaryPic.BackgroundImageLayout = ImageLayout.Stretch;
+            binaryPic.BorderStyle = BorderStyle.FixedSingle;
+            binaryPic.ForeColor = SystemColors.Control;
+            binaryPic.IconChar = FontAwesome.Sharp.IconChar.None;
+            binaryPic.IconColor = SystemColors.Control;
+            binaryPic.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            binaryPic.IconSize = 561;
+            binaryPic.Location = new Point(597, -3);
+            binaryPic.Margin = new Padding(4, 3, 4, 3);
+            binaryPic.Name = "binaryPic";
+            binaryPic.Size = new Size(588, 561);
+            binaryPic.TabIndex = 28;
+            binaryPic.TabStop = false;
+            // 
             // Morfolojik
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(1226, 764);
+            ClientSize = new Size(1744, 764);
+            Controls.Add(binaryPic);
             Controls.Add(btnUndo);
             Controls.Add(btnStart);
             Controls.Add(btnAdd);
@@ -193,6 +212,7 @@
             Text = "Morfolojik";
             ((System.ComponentModel.ISupportInitialize)beforePic).EndInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).EndInit();
+            ((System.ComponentModel.ISupportInitialize)binaryPic).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -208,5 +228,6 @@
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnStart;
         private FontAwesome.Sharp.IconButton btnUndo;
+        private FontAwesome.Sharp.IconPictureBox binaryPic;
     }
 }

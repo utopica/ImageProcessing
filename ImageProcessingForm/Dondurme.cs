@@ -13,7 +13,7 @@ namespace ImageProcessingForm
     public partial class Dondurme : Form
     {
         private Bitmap defaultImage;
-        private Bitmap beforePicImage;
+        
         //private Bitmap originalImage;
         public Dondurme()
         {
@@ -31,8 +31,6 @@ namespace ImageProcessingForm
             afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
             beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            // orijinal görüntüyü bir kopyaya atıyoruz
-            //beforePicImage = new Bitmap(defaultImage);
         }
 
         private void beforePic_Click(object sender, EventArgs e)
@@ -119,7 +117,7 @@ namespace ImageProcessingForm
                 beforePic.Image = selectedImage;
 
                 // Yeni resmi orijinal resim olarak ayarla
-                beforePicImage = new Bitmap(selectedImage);
+                defaultImage = new Bitmap(selectedImage);
 
                 // İşlenmiş görüntüyü temizleyin
                 afterPic.Image = null;

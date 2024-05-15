@@ -33,6 +33,8 @@ namespace ImageProcessingForm
             comboBox1.Items.Add("GAUSS");
         }
 
+
+
         private void ResimYukle()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();

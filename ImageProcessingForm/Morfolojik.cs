@@ -178,7 +178,8 @@ namespace ImageProcessingForm
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.Filter = "Resim Dosyaları|.jpg;.jpeg;.png;.gif;.bmp|Tüm Dosyalar|.*";
+            openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
+
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

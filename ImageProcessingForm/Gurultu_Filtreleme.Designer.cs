@@ -130,12 +130,12 @@
             // 
             // ıconButton1pepper
             // 
-            ıconButton1pepper.BackColor = Color.FromArgb(192, 255, 192);
+            ıconButton1pepper.BackColor = Color.FromArgb(68, 195, 52);
             ıconButton1pepper.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             ıconButton1pepper.IconChar = FontAwesome.Sharp.IconChar.None;
             ıconButton1pepper.IconColor = Color.Black;
             ıconButton1pepper.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton1pepper.Location = new Point(89, 730);
+            ıconButton1pepper.Location = new Point(79, 730);
             ıconButton1pepper.Name = "ıconButton1pepper";
             ıconButton1pepper.Size = new Size(130, 45);
             ıconButton1pepper.TabIndex = 20;
@@ -145,12 +145,12 @@
             // 
             // ıconButton2salt
             // 
-            ıconButton2salt.BackColor = Color.FromArgb(192, 255, 192);
+            ıconButton2salt.BackColor = Color.FromArgb(68, 195, 52);
             ıconButton2salt.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             ıconButton2salt.IconChar = FontAwesome.Sharp.IconChar.None;
             ıconButton2salt.IconColor = Color.Black;
             ıconButton2salt.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton2salt.Location = new Point(89, 675);
+            ıconButton2salt.Location = new Point(79, 675);
             ıconButton2salt.Name = "ıconButton2salt";
             ıconButton2salt.Size = new Size(130, 49);
             ıconButton2salt.TabIndex = 21;
@@ -199,7 +199,7 @@
             // 
             // ıconButton1saltpepper
             // 
-            ıconButton1saltpepper.BackColor = Color.FromArgb(192, 255, 192);
+            ıconButton1saltpepper.BackColor = Color.FromArgb(68, 195, 52);
             ıconButton1saltpepper.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             ıconButton1saltpepper.IconChar = FontAwesome.Sharp.IconChar.None;
             ıconButton1saltpepper.IconColor = Color.Black;

@@ -36,7 +36,6 @@
             btnSave = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
             btnStart = new FontAwesome.Sharp.IconButton();
-            btnUndo = new FontAwesome.Sharp.IconButton();
             binaryPic = new FontAwesome.Sharp.IconPictureBox();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
@@ -81,7 +80,7 @@
             // 
             comboBox1.Font = new Font("Segoe UI", 12F);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(268, 602);
+            comboBox1.Location = new Point(732, 641);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(255, 36);
             comboBox1.TabIndex = 7;
@@ -91,7 +90,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(36, 605);
+            label1.Location = new Point(527, 644);
             label1.Name = "label1";
             label1.Size = new Size(190, 28);
             label1.TabIndex = 8;
@@ -104,10 +103,10 @@
             btnAdd.IconChar = FontAwesome.Sharp.IconChar.Plus;
             btnAdd.IconColor = Color.Black;
             btnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdd.IconSize = 32;
-            btnAdd.Location = new Point(1684, 573);
+            btnAdd.IconSize = 52;
+            btnAdd.Location = new Point(1241, 613);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(48, 49);
+            btnAdd.Size = new Size(132, 96);
             btnAdd.TabIndex = 25;
             btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
@@ -119,10 +118,10 @@
             btnSave.IconChar = FontAwesome.Sharp.IconChar.Save;
             btnSave.IconColor = Color.Black;
             btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnSave.IconSize = 32;
-            btnSave.Location = new Point(1684, 703);
+            btnSave.IconSize = 52;
+            btnSave.Location = new Point(1541, 613);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(48, 49);
+            btnSave.Size = new Size(132, 96);
             btnSave.TabIndex = 24;
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
@@ -134,10 +133,10 @@
             btnDel.IconChar = FontAwesome.Sharp.IconChar.Trash;
             btnDel.IconColor = Color.Black;
             btnDel.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnDel.IconSize = 32;
-            btnDel.Location = new Point(1684, 642);
+            btnDel.IconSize = 52;
+            btnDel.Location = new Point(1391, 613);
             btnDel.Name = "btnDel";
-            btnDel.Size = new Size(48, 49);
+            btnDel.Size = new Size(132, 96);
             btnDel.TabIndex = 23;
             btnDel.UseVisualStyleBackColor = false;
             btnDel.Click += btnDel_Click;
@@ -150,30 +149,12 @@
             btnStart.IconColor = Color.FromArgb(68, 195, 52);
             btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnStart.IconSize = 72;
-            btnStart.Location = new Point(798, 625);
+            btnStart.Location = new Point(1029, 620);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(77, 82);
             btnStart.TabIndex = 26;
             btnStart.UseVisualStyleBackColor = false;
-            // 
-            // btnUndo
-            // 
-            btnUndo.BackColor = SystemColors.ActiveCaptionText;
-            btnUndo.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
-            btnUndo.FlatAppearance.BorderSize = 0;
-            btnUndo.FlatStyle = FlatStyle.Flat;
-            btnUndo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnUndo.ForeColor = SystemColors.ActiveCaptionText;
-            btnUndo.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
-            btnUndo.IconColor = Color.FromArgb(68, 195, 52);
-            btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnUndo.IconSize = 82;
-            btnUndo.Location = new Point(909, 630);
-            btnUndo.Margin = new Padding(4, 3, 4, 3);
-            btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(80, 77);
-            btnUndo.TabIndex = 27;
-            btnUndo.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
             // 
             // binaryPic
             // 
@@ -199,7 +180,6 @@
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1744, 764);
             Controls.Add(binaryPic);
-            Controls.Add(btnUndo);
             Controls.Add(btnStart);
             Controls.Add(btnAdd);
             Controls.Add(btnSave);
@@ -227,7 +207,6 @@
         private FontAwesome.Sharp.IconButton btnSave;
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnStart;
-        private FontAwesome.Sharp.IconButton btnUndo;
         private FontAwesome.Sharp.IconPictureBox binaryPic;
     }
 }

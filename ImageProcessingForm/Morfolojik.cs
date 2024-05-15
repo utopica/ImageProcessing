@@ -21,48 +21,16 @@ namespace ImageProcessingForm
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
             originalImage = new Bitmap(imagePath);
-            binaryImage = Binary(originalImage); 
-            DisplayImageBefore(originalImage); 
-            DisplayImageBinary(binaryImage); 
+            binaryImage = Binary(originalImage);
+            DisplayImageBefore(originalImage);
+            DisplayImageBinary(binaryImage);
 
             comboBox1.Items.Add("Genişleme - Dilation");
             comboBox1.Items.Add("Aşınma - Erosion");
             comboBox1.Items.Add("Açma - Opening");
             comboBox1.Items.Add("Kapama - Closing");
 
-          
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-        }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedOperation = comboBox1.SelectedItem.ToString();
-            Bitmap processedImage = null;
-
-            switch (selectedOperation)
-            {
-                case "Genişleme - Dilation":
-                    processedImage = Dilation(binaryImage);
-                    break;
-                case "Aşınma - Erosion":
-                    processedImage = Erosion(binaryImage);
-                    break;
-                case "Açma - Opening":
-                    processedImage = Opening(binaryImage);
-                    break;
-                case "Kapama - Closing":
-                    processedImage = Closing(binaryImage);
-                    break;
-                default:
-                    MessageBox.Show("Geçersiz işlem seçimi.");
-                    break;
-            }
-
-            if (processedImage != null)
-            {
-                afterImage = processedImage; // Son işlem sonrası oluşan resmi sakla
-                DisplayImage(afterImage); // İşlenmiş resmi göster
-            }
         }
 
         private Bitmap Dilation(Bitmap image)
@@ -248,6 +216,37 @@ namespace ImageProcessingForm
             else
             {
                 MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
+            }
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            string selectedOperation = comboBox1.SelectedItem.ToString();
+            Bitmap processedImage = null;
+
+            switch (selectedOperation)
+            {
+                case "Genişleme - Dilation":
+                    processedImage = Dilation(binaryImage);
+                    break;
+                case "Aşınma - Erosion":
+                    processedImage = Erosion(binaryImage);
+                    break;
+                case "Açma - Opening":
+                    processedImage = Opening(binaryImage);
+                    break;
+                case "Kapama - Closing":
+                    processedImage = Closing(binaryImage);
+                    break;
+                default:
+                    MessageBox.Show("Geçersiz işlem seçimi.");
+                    break;
+            }
+
+            if (processedImage != null)
+            {
+                afterImage = processedImage; // Son işlem sonrası oluşan resmi sakla
+                DisplayImage(afterImage); // İşlenmiş resmi göster
             }
         }
     }

@@ -78,7 +78,6 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(588, 28);
             comboBox1.TabIndex = 2;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // btnUndo
             // 
@@ -104,6 +103,7 @@
             btnStart.Size = new Size(173, 78);
             btnStart.TabIndex = 4;
             btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
             // 
             // btnDel
             // 

@@ -458,7 +458,7 @@ namespace ImageProcessingForm
         {
             if (morfolojikForm == null)
             {
-                morfolojikForm = new Morfolojik(defaultImage);
+                morfolojikForm = new Morfolojik();
                 morfolojikForm.FormClosed += MorfolojikForm_FormClosed;
             }
             morfolojikForm.Show();

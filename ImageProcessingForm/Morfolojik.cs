@@ -10,7 +10,7 @@ namespace ImageProcessingForm
     {
         private Bitmap originalImage;
 
-        public Morfolojik(Bitmap mainFormImage)
+        public Morfolojik( )
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;

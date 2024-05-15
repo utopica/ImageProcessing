@@ -24,6 +24,7 @@ namespace ImageProcessingForm
         private Esikleme esiklemeForm = null;
         private histogram histogramForm = null;
         private Gurultu_Filtreleme gurultuForm = null;
+        private Morfolojik morfolojikForm = null;
 
         public Main()
         {
@@ -455,8 +456,22 @@ namespace ImageProcessingForm
 
         private void MorfolojikIslemler()
         {
-
+            if (morfolojikForm == null)
+            {
+                morfolojikForm = new Morfolojik(defaultImage);
+                morfolojikForm.FormClosed += MorfolojikForm_FormClosed;
+            }
+            morfolojikForm.Show();
+            this.Hide();
         }
+
+        private void MorfolojikForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            morfolojikForm = null;
+            this.Show();
+        }
+
+
 
 
         private void beforePic_MouseUp(object sender, MouseEventArgs e)

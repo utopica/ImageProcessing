@@ -102,6 +102,21 @@
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
+            // btnStart
+            // 
+            btnStart.BackColor = SystemColors.ActiveCaptionText;
+            btnStart.FlatStyle = FlatStyle.Flat;
+            btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
+            btnStart.IconColor = Color.FromArgb(68, 195, 52);
+            btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnStart.IconSize = 55;
+            btnStart.Location = new Point(705, 630);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(60, 78);
+            btnStart.TabIndex = 24;
+            btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
+            // 
             // label1
             // 
             label1.AutoSize = true;

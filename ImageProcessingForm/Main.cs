@@ -25,6 +25,7 @@ namespace ImageProcessingForm
         private histogram histogramForm = null;
         private Gurultu_Filtreleme gurultuForm = null;
         private Morfolojik morfolojikForm = null;
+        private Sobel sobelForm = null;
 
         public Main()
         {
@@ -372,7 +373,21 @@ namespace ImageProcessingForm
 
         private void KenarBulma()
         {
+            // Eğer histogram formu daha önce oluşturulmadıysa, oluştur
+            if (sobelForm == null)
+            {
+                sobelForm = new Sobel(defaultImage); // Varsayılan resmi geçirin
+                sobelForm.FormClosed += SobelForm_FormClosed;
+            }
 
+            sobelForm.Show();
+            this.Hide();
+        }
+
+        private void SobelForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            histogramForm = null;
+            this.Show();
         }
 
         private void GurultuEklemeTemizleme()

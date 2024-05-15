@@ -33,8 +33,6 @@
             btnAdd = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
             btnSave = new FontAwesome.Sharp.IconButton();
-            btnUndo = new FontAwesome.Sharp.IconButton();
-            btnStart = new FontAwesome.Sharp.IconButton();
             label1 = new Label();
             label2 = new Label();
             radioButton1horizontal = new RadioButton();
@@ -42,6 +40,7 @@
             radioButton3both = new RadioButton();
             label3 = new Label();
             textBox1esik = new TextBox();
+            btnStart = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
             SuspendLayout();
@@ -102,35 +101,6 @@
             btnSave.TabIndex = 22;
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
-            // 
-            // btnUndo
-            // 
-            btnUndo.BackColor = Color.Black;
-            btnUndo.FlatStyle = FlatStyle.Flat;
-            btnUndo.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
-            btnUndo.IconColor = Color.FromArgb(68, 195, 52);
-            btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnUndo.Location = new Point(788, 629);
-            btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(54, 79);
-            btnUndo.TabIndex = 23;
-            btnUndo.UseVisualStyleBackColor = false;
-            btnUndo.Click += btnUndo_Click;
-            // 
-            // btnStart
-            // 
-            btnStart.BackColor = Color.Transparent;
-            btnStart.FlatStyle = FlatStyle.Flat;
-            btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
-            btnStart.IconColor = Color.FromArgb(68, 195, 52);
-            btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnStart.IconSize = 55;
-            btnStart.Location = new Point(705, 630);
-            btnStart.Name = "btnStart";
-            btnStart.Size = new Size(60, 78);
-            btnStart.TabIndex = 24;
-            btnStart.UseVisualStyleBackColor = false;
-            btnStart.Click += btnStart_Click;
             // 
             // label1
             // 
@@ -215,6 +185,21 @@
             textBox1esik.TabIndex = 31;
             textBox1esik.TextChanged += textBox1esik_TextChanged;
             // 
+            // btnStart
+            // 
+            btnStart.BackColor = Color.FromArgb(68, 195, 52);
+            btnStart.ForeColor = Color.FromArgb(68, 195, 52);
+            btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
+            btnStart.IconColor = Color.Black;
+            btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnStart.IconSize = 55;
+            btnStart.Location = new Point(708, 619);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(95, 89);
+            btnStart.TabIndex = 24;
+            btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
+            // 
             // Sobel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -229,7 +214,6 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnStart);
-            Controls.Add(btnUndo);
             Controls.Add(btnSave);
             Controls.Add(btnDel);
             Controls.Add(btnAdd);
@@ -250,8 +234,6 @@
         private FontAwesome.Sharp.IconButton btnAdd;
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnSave;
-        private FontAwesome.Sharp.IconButton btnUndo;
-        private FontAwesome.Sharp.IconButton btnStart;
         private Label label1;
         private Label label2;
         private RadioButton radioButton1horizontal;
@@ -259,5 +241,6 @@
         private RadioButton radioButton3both;
         private Label label3;
         private TextBox textBox1esik;
+        private FontAwesome.Sharp.IconButton btnStart;
     }
 }

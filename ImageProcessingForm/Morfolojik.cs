@@ -10,7 +10,7 @@ namespace ImageProcessingForm
     {
         private Bitmap originalImage;
 
-        public Morfolojik( )
+        public Morfolojik()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -26,37 +26,9 @@ namespace ImageProcessingForm
             comboBox1.Items.Add("Açma - Opening");
             comboBox1.Items.Add("Kapama - Closing");
 
-            // ComboBox'ın SelectedIndexChanged olayını dinleyelim
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedOperation = comboBox1.SelectedItem.ToString();
-            Bitmap processedImage = null;
-
-            switch (selectedOperation)
-            {
-                case "Genişleme - Dilation":
-                    processedImage = Dilation(originalImage);
-                    break;
-                case "Aşınma - Erosion":
-                    processedImage = Erosion(originalImage);
-                    break;
-                case "Açma - Opening":
-                    processedImage = Opening(originalImage);
-                    break;
-                case "Kapama - Closing":
-                    processedImage = Closing(originalImage);
-                    break;
-                default:
-                    MessageBox.Show("Geçersiz işlem seçimi.");
-                    break;
-            }
-
-            if (processedImage != null)
-                DisplayImage(processedImage);
-        }
 
         private Bitmap Dilation(Bitmap image)
         {
@@ -245,6 +217,35 @@ namespace ImageProcessingForm
                 return null;
             }
 
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+
+            string selectedOperation = comboBox1.SelectedItem.ToString();
+            Bitmap processedImage = null;
+
+            switch (selectedOperation)
+            {
+                case "Genişleme - Dilation":
+                    processedImage = Dilation(originalImage);
+                    break;
+                case "Aşınma - Erosion":
+                    processedImage = Erosion(originalImage);
+                    break;
+                case "Açma - Opening":
+                    processedImage = Opening(originalImage);
+                    break;
+                case "Kapama - Closing":
+                    processedImage = Closing(originalImage);
+                    break;
+                default:
+                    MessageBox.Show("Geçersiz işlem seçimi.");
+                    break;
+            }
+
+            if (processedImage != null)
+                DisplayImage(processedImage);
         }
     }
 }

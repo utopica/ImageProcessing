@@ -20,7 +20,7 @@ namespace ImageProcessingForm
         private Parlaklik parlaklikForm = null;
         private Kirpma kirpmaForm = null;
         private Aritmetik aritmetikForm = null;
-        private Oran oranForm=null;
+        private Oran oranForm = null;
         private Esikleme esiklemeForm = null;
         private histogram histogramForm = null;
         private Gurultu_Filtreleme gurultuForm = null;
@@ -37,7 +37,7 @@ namespace ImageProcessingForm
 
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
-            defaultImage = new Bitmap(imagePath); 
+            defaultImage = new Bitmap(imagePath);
             beforePic.Image = defaultImage;
             afterPic.Image = defaultImage;
             afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -203,20 +203,20 @@ namespace ImageProcessingForm
             if (kirpmaForm == null)
             {
                 kirpmaForm = new Kirpma();
-                kirpmaForm.FormClosed += KirpmaForm_FormClosed; 
+                kirpmaForm.FormClosed += KirpmaForm_FormClosed;
             }
 
             kirpmaForm.Show();
 
             this.Hide();
 
-            
+
         }
 
         private void KirpmaForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            kirpmaForm = null; 
-            this.Show(); 
+            kirpmaForm = null;
+            this.Show();
         }
 
 
@@ -302,17 +302,17 @@ namespace ImageProcessingForm
 
         private void AritmetikIslemler()
         {
-            
-                if (aritmetikForm == null)
-                {
-                    aritmetikForm = new Aritmetik();
-                    aritmetikForm.FormClosed += AritmetikIslemlerForm_FormClosed;
-                }
 
-                aritmetikForm.Show();
+            if (aritmetikForm == null)
+            {
+                aritmetikForm = new Aritmetik();
+                aritmetikForm.FormClosed += AritmetikIslemlerForm_FormClosed;
+            }
 
-                this.Hide();
-            
+            aritmetikForm.Show();
+
+            this.Hide();
+
         }
         private void AritmetikIslemlerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -334,7 +334,7 @@ namespace ImageProcessingForm
             this.Hide();
 
             // Formu göster
-            
+
         }
 
         private void ParlaklikForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -354,13 +354,13 @@ namespace ImageProcessingForm
             if (esiklemeForm == null)
             {
                 esiklemeForm = new Esikleme();
-                esiklemeForm.FormClosed += EsiklemeForm_FormClosed; 
+                esiklemeForm.FormClosed += EsiklemeForm_FormClosed;
             }
 
-            
+
             esiklemeForm.Show();
 
-           
+
             this.Hide();
         }
 
@@ -369,7 +369,7 @@ namespace ImageProcessingForm
             esiklemeForm = null; // Form kapandığında null yap
             this.Show(); // Ana formu göster
         }
-    
+
 
         private void KenarBulma()
         {
@@ -539,7 +539,6 @@ namespace ImageProcessingForm
                 MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
             }
         }
-
 
     }
 

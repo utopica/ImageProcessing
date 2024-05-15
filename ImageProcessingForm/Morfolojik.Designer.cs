@@ -35,6 +35,8 @@
             btnAdd = new FontAwesome.Sharp.IconButton();
             btnSave = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
+            btnStart = new FontAwesome.Sharp.IconButton();
+            btnUndo = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
             SuspendLayout();
@@ -138,12 +140,47 @@
             btnDel.UseVisualStyleBackColor = false;
             btnDel.Click += btnDel_Click;
             // 
+            // btnStart
+            // 
+            btnStart.BackColor = SystemColors.ActiveCaptionText;
+            btnStart.FlatStyle = FlatStyle.Flat;
+            btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
+            btnStart.IconColor = Color.FromArgb(68, 195, 52);
+            btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnStart.IconSize = 72;
+            btnStart.Location = new Point(787, 626);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(77, 82);
+            btnStart.TabIndex = 26;
+            btnStart.UseVisualStyleBackColor = false;
+            // 
+            // btnUndo
+            // 
+            btnUndo.BackColor = SystemColors.ActiveCaptionText;
+            btnUndo.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
+            btnUndo.FlatAppearance.BorderSize = 0;
+            btnUndo.FlatStyle = FlatStyle.Flat;
+            btnUndo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnUndo.ForeColor = SystemColors.ActiveCaptionText;
+            btnUndo.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
+            btnUndo.IconColor = Color.FromArgb(68, 195, 52);
+            btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnUndo.IconSize = 82;
+            btnUndo.Location = new Point(882, 631);
+            btnUndo.Margin = new Padding(4, 3, 4, 3);
+            btnUndo.Name = "btnUndo";
+            btnUndo.Size = new Size(80, 77);
+            btnUndo.TabIndex = 27;
+            btnUndo.UseVisualStyleBackColor = false;
+            // 
             // Morfolojik
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1226, 764);
+            Controls.Add(btnUndo);
+            Controls.Add(btnStart);
             Controls.Add(btnAdd);
             Controls.Add(btnSave);
             Controls.Add(btnDel);
@@ -168,5 +205,7 @@
         private FontAwesome.Sharp.IconButton btnAdd;
         private FontAwesome.Sharp.IconButton btnSave;
         private FontAwesome.Sharp.IconButton btnDel;
+        private FontAwesome.Sharp.IconButton btnStart;
+        private FontAwesome.Sharp.IconButton btnUndo;
     }
 }

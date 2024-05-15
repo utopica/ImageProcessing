@@ -60,6 +60,8 @@ namespace ImageProcessingForm
 
         private Bitmap Dilation(Bitmap image)
         {
+            Binary(image);
+
             Bitmap result = new Bitmap(image.Width, image.Height);
 
             for (int x = 0; x < image.Width; x++)
@@ -176,7 +178,7 @@ namespace ImageProcessingForm
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
+            openFileDialog1.Filter = "Resim Dosyaları|.jpg;.jpeg;.png;.gif;.bmp|Tüm Dosyalar|.*";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -211,6 +213,37 @@ namespace ImageProcessingForm
             {
                 MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
             }
+        }
+
+        private Bitmap Binary(Bitmap binaryImage)
+        {
+            if (beforePic.Image != null)
+            {
+                binaryImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
+
+                // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
+                for (int y = 0; y < beforePic.Image.Height; y++)
+                {
+                    for (int x = 0; x < beforePic.Image.Width; x++)
+                    {
+                        Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
+                        int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
+                        Color binaryColor = grayValue > 128 ? Color.White : Color.Black;
+                        binaryImage.SetPixel(x, y, binaryColor);
+                    }
+                }
+
+                afterPic.Image = binaryImage;
+
+                return binaryImage;
+            }
+            else
+            {
+                MessageBox.Show("İşlem yapılacak fotoğraf yok.");
+
+                return null;
+            }
+
         }
     }
 }

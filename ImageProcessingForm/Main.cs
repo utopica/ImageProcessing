@@ -329,7 +329,7 @@ namespace ImageProcessingForm
 
         private void SobelForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            histogramForm = null;
+            sobelForm = null;
             this.Show();
         }
 

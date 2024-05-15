@@ -16,7 +16,7 @@ namespace ImageProcessingForm
         
         private Bitmap resim1;
         private Bitmap resim2;
-        //private PictureBox seciliPictureBox;
+        
         public Aritmetik()
         {
             InitializeComponent();
@@ -88,15 +88,15 @@ namespace ImageProcessingForm
 
 
 
-       /* private void PictureBox1_Click(object sender, EventArgs e)
+       private void PictureBox1_Click(object sender, EventArgs e)
         {
-            seciliPictureBox = pictureBox1;
+            
         }
 
         private void PictureBox2_Click(object sender, EventArgs e)
         {
-            seciliPictureBox = pictureBox2;
-        }*/
+            
+        }
 
         private bool resimYuklendi = false; // Varsayılan olarak resim yükleme işlemi henüz gerçekleşmedi
 

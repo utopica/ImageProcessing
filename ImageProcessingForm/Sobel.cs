@@ -13,27 +13,21 @@ namespace ImageProcessingForm
     public partial class Sobel : Form
     {
         private Bitmap defaultImage;
-        private Bitmap beforePicImage;
-        private Bitmap originalImage;
+        
+ 
 
         public Sobel(Bitmap mainFormImage)
         {
             InitializeComponent();
 
-            originalImage = mainFormImage;
             this.StartPosition = FormStartPosition.CenterScreen;
-
-            string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-
-            string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
-
-            defaultImage = new Bitmap(imagePath);
+            defaultImage = mainFormImage;
             beforePic.Image = defaultImage;
-            afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
-            beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
+            afterPic.Image = null;
+            afterPic.SizeMode = PictureBoxSizeMode.Zoom;
+            beforePic.SizeMode = PictureBoxSizeMode.Zoom;
 
-            // orijinal görüntüyü bir kopyaya atıyoruz
-            beforePicImage = new Bitmap(defaultImage);
+            
 
         }
         private Bitmap ApplySobelFilter(Bitmap image, string direction, int threshold)
@@ -219,27 +213,21 @@ namespace ImageProcessingForm
             if (radioButton1horizontal.Checked)
             {
                 // Horizontal Sobel filtresini uygulayın
-                afterPic.Image = ApplySobelFilter(beforePicImage, "horizontal", threshold);
+                afterPic.Image = ApplySobelFilter(defaultImage, "horizontal", threshold);
             }
             else if (radioButton2vertical.Checked)
             {
                 // Vertical Sobel filtresini uygulayın
-                afterPic.Image = ApplySobelFilter(beforePicImage, "vertical", threshold);
+                afterPic.Image = ApplySobelFilter(defaultImage, "vertical", threshold);
             }
             else if (radioButton3both.Checked)
             {
                 // Both Sobel filtresini uygulayın
-                afterPic.Image = ApplySobelFilter(beforePicImage, "both", threshold);
+                afterPic.Image = ApplySobelFilter(defaultImage, "both", threshold);
             }
         }
 
-        private void btnUndo_Click(object sender, EventArgs e)
-        {
-
-            // Orijinal resmi sadece beforePic'te göster
-            beforePic.Image = new Bitmap(beforePicImage);
-            afterPic.Image = originalImage;
-        }
+        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -257,7 +245,7 @@ namespace ImageProcessingForm
                 beforePic.Image = selectedImage;
 
                 // Yeni resmi orijinal resim olarak ayarla
-                beforePicImage = new Bitmap(selectedImage);
+                defaultImage = new Bitmap(selectedImage);
 
                 // İşlenmiş görüntüyü temizleyin
                 afterPic.Image = null;

@@ -18,6 +18,7 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         private Parlaklik parlaklikForm = null;
+        private Dondurme dondurmeForm = null;
         private Kirpma kirpmaForm = null;
         private Aritmetik aritmetikForm = null;
         private Oran oranForm = null;
@@ -139,8 +140,25 @@ namespace ImageProcessingForm
 
         private void GoruntuDonme()
         {
+            if (dondurmeForm == null || dondurmeForm.IsDisposed)
+            {
+                dondurmeForm = new Dondurme(); // Yeni bir form oluşturun
+                dondurmeForm.FormClosed += DondurmaForm_FormClosed;
+            }
+
+            dondurmeForm.Show();
+
+            this.Hide();
 
         }
+        
+
+        private void DondurmaForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            dondurmeForm = null;
+            this.Show();
+        }
+
 
         private void GoruntuKirpma()
         {
@@ -314,7 +332,7 @@ namespace ImageProcessingForm
 
         private void SobelForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            histogramForm = null;
+            sobelForm = null;
             this.Show();
         }
 
@@ -339,7 +357,7 @@ namespace ImageProcessingForm
             Bitmap imageToProcess = beforePic.Image != null ? new Bitmap(beforePic.Image) : defaultImage;
 
             // Buraya blurring işlemi uygulama kodunu ekleyin
-            Bitmap blurredImage = ApplyBlur(imageToProcess, 7);
+            Bitmap blurredImage = ApplyBlur(imageToProcess, 11);
 
             // Sonuç görüntüsünü göster
             afterPic.Image = blurredImage;

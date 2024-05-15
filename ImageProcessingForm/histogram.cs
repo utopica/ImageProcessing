@@ -8,9 +8,7 @@ namespace ImageProcessingForm
     public partial class histogram : Form
     {
 
-        private Bitmap originalImage;
         private Bitmap defaultImage;
-        private Bitmap beforePicImage; // Bu değişken, orijinal görüntünün kopyasını tutacak.
         private string selectedChannel = "Gray"; // Varsayılan olarak Gri (Gray) kanalı seçili
         private string selectedOperationComboBox;
 
@@ -18,24 +16,18 @@ namespace ImageProcessingForm
         {
             InitializeComponent();
 
-            originalImage = mainFormImage;
-            // ComboBox'a seçenekler ekleyelim
+            defaultImage = mainFormImage;
+
             comboBox1.Items.Add("Histogram Germe");
             comboBox1.Items.Add("Histogram Genişletme");
 
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-
-            string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
-
-            defaultImage = new Bitmap(imagePath);
             beforePic.Image = defaultImage;
-            afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
-            beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
+            afterPic.SizeMode = PictureBoxSizeMode.Zoom;
+            beforePic.SizeMode = PictureBoxSizeMode.Zoom;
 
-            // orijinal görüntüyü bir kopyaya atıyoruz
-            beforePicImage = new Bitmap(defaultImage);
+           
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -181,12 +173,7 @@ namespace ImageProcessingForm
             UpdateImageProcessing(selectedOperation, selectedImageProcessingChannel);
         }
 
-        private void btnUndo_Click(object sender, EventArgs e)
-        {
-            // Orijinal resmi sadece beforePic'te göster
-            beforePic.Image = new Bitmap(beforePicImage);
-            afterPic.Image = originalImage;
-        }
+
 
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -220,10 +207,8 @@ namespace ImageProcessingForm
                 Bitmap selectedImage = new Bitmap(imagePath);
 
                 // Seçilen resmi beforePic'te göster
+                defaultImage = selectedImage;
                 beforePic.Image = selectedImage;
-
-                // Yeni resmi orijinal resim olarak ayarla
-                beforePicImage = new Bitmap(selectedImage);
 
                 // İşlenmiş görüntüyü temizleyin
                 afterPic.Image = null;
@@ -258,10 +243,10 @@ namespace ImageProcessingForm
             switch (selectedOperation)
             {
                 case "Histogram Germe":
-                    processedImage = HistogramStretching(beforePicImage, selectedChannel);
+                    processedImage = HistogramStretching(defaultImage, selectedChannel);
                     break;
                 case "Histogram Genişletme":
-                    processedImage = HistogramExpansion(beforePicImage, selectedChannel);
+                    processedImage = HistogramExpansion(defaultImage, selectedChannel);
                     break;
                 default:
                     MessageBox.Show("Geçersiz işlem seçimi.");

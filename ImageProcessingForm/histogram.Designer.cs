@@ -41,7 +41,6 @@
             btnSave = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
             btnAdd = new FontAwesome.Sharp.IconButton();
-            btnUndo = new FontAwesome.Sharp.IconButton();
             btnStart = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
@@ -202,26 +201,13 @@
             btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
-            // btnUndo
-            // 
-            btnUndo.BackColor = Color.FromArgb(68, 195, 52);
-            btnUndo.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
-            btnUndo.IconColor = Color.Black;
-            btnUndo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnUndo.Location = new Point(821, 624);
-            btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(86, 76);
-            btnUndo.TabIndex = 13;
-            btnUndo.UseVisualStyleBackColor = false;
-            btnUndo.Click += btnUndo_Click;
-            // 
             // btnStart
             // 
             btnStart.BackColor = Color.FromArgb(68, 195, 52);
             btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
             btnStart.IconColor = Color.Black;
             btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnStart.Location = new Point(717, 624);
+            btnStart.Location = new Point(817, 624);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(86, 76);
             btnStart.TabIndex = 14;
@@ -235,7 +221,6 @@
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1281, 765);
             Controls.Add(btnStart);
-            Controls.Add(btnUndo);
             Controls.Add(btnAdd);
             Controls.Add(btnDel);
             Controls.Add(btnSave);
@@ -272,7 +257,6 @@
         private FontAwesome.Sharp.IconButton btnSave;
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnAdd;
-        private FontAwesome.Sharp.IconButton btnUndo;
         private FontAwesome.Sharp.IconButton btnStart;
     }
 }

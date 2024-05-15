@@ -9,8 +9,10 @@ namespace ImageProcessingForm
     public partial class Morfolojik : Form
     {
         private Bitmap originalImage;
+        private Bitmap binaryImage;
+        private Bitmap afterImage; // Son işlem sonrası oluşan resmi saklamak için değişken
 
-        public Morfolojik( )
+        public Morfolojik()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -19,7 +21,8 @@ namespace ImageProcessingForm
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
             originalImage = new Bitmap(imagePath);
-            DisplayImage(originalImage);
+            binaryImage = Binary(originalImage); // İlk başta binary işlemi yapılıyor
+            DisplayImageBefore(binaryImage); // binary işlemi yapılmış resmi beforePic'te göster
 
             comboBox1.Items.Add("Genişleme - Dilation");
             comboBox1.Items.Add("Aşınma - Erosion");
@@ -38,16 +41,16 @@ namespace ImageProcessingForm
             switch (selectedOperation)
             {
                 case "Genişleme - Dilation":
-                    processedImage = Dilation(originalImage);
+                    processedImage = Dilation(binaryImage);
                     break;
                 case "Aşınma - Erosion":
-                    processedImage = Erosion(originalImage);
+                    processedImage = Erosion(binaryImage);
                     break;
                 case "Açma - Opening":
-                    processedImage = Opening(originalImage);
+                    processedImage = Opening(binaryImage);
                     break;
                 case "Kapama - Closing":
-                    processedImage = Closing(originalImage);
+                    processedImage = Closing(binaryImage);
                     break;
                 default:
                     MessageBox.Show("Geçersiz işlem seçimi.");
@@ -55,13 +58,14 @@ namespace ImageProcessingForm
             }
 
             if (processedImage != null)
-                DisplayImage(processedImage);
+            {
+                afterImage = processedImage; // Son işlem sonrası oluşan resmi sakla
+                DisplayImage(afterImage); // İşlenmiş resmi göster
+            }
         }
 
         private Bitmap Dilation(Bitmap image)
         {
-            Binary(image);
-
             Bitmap result = new Bitmap(image.Width, image.Height);
 
             for (int x = 0; x < image.Width; x++)
@@ -147,13 +151,11 @@ namespace ImageProcessingForm
         private void beforePic_Click(object sender, EventArgs e)
         {
             DownloadImage();
-            afterPic.Image = null;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             DownloadImage();
-            afterPic.Image = null;
         }
 
         private void btnDel_Click(object sender, EventArgs e)
@@ -167,27 +169,50 @@ namespace ImageProcessingForm
             SaveImage();
         }
 
-        private void DisplayImage(Bitmap image)
+        private void DisplayImageBefore(Bitmap image)
         {
             beforePic.Image = image;
-            afterPic.SizeMode = PictureBoxSizeMode.Zoom;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void DisplayImage(Bitmap image)
+        {
+            afterPic.Image = image;
+            afterPic.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private Bitmap Binary(Bitmap originalImage)
+        {
+            Bitmap binaryImage = new Bitmap(originalImage.Width, originalImage.Height);
+
+            // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
+            for (int y = 0; y < originalImage.Height; y++)
+            {
+                for (int x = 0; x < originalImage.Width; x++)
+                {
+                    Color originalColor = originalImage.GetPixel(x, y);
+                    int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
+                    Color binaryColor = grayValue > 128 ? Color.White : Color.Black;
+                    binaryImage.SetPixel(x, y, binaryColor);
+                }
+            }
+
+            return binaryImage;
         }
 
         private void DownloadImage()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
-
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 beforePic.Image = null;
                 afterPic.Image = null;
 
-                beforePic.Image = new Bitmap(openFileDialog1.FileName);
-                DisplayImage((Bitmap)beforePic.Image);
+                originalImage = new Bitmap(openFileDialog1.FileName);
+                binaryImage = Binary(originalImage); // Yeni resme binary işlemi uygula
+                DisplayImageBefore(binaryImage); // İşlem yapılmış resmi beforePic'te göster
             }
         }
 
@@ -214,37 +239,6 @@ namespace ImageProcessingForm
             {
                 MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
             }
-        }
-
-        private Bitmap Binary(Bitmap binaryImage)
-        {
-            if (beforePic.Image != null)
-            {
-                binaryImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
-
-                // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
-                for (int y = 0; y < beforePic.Image.Height; y++)
-                {
-                    for (int x = 0; x < beforePic.Image.Width; x++)
-                    {
-                        Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
-                        int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
-                        Color binaryColor = grayValue > 128 ? Color.White : Color.Black;
-                        binaryImage.SetPixel(x, y, binaryColor);
-                    }
-                }
-
-                afterPic.Image = binaryImage;
-
-                return binaryImage;
-            }
-            else
-            {
-                MessageBox.Show("İşlem yapılacak fotoğraf yok.");
-
-                return null;
-            }
-
         }
     }
 }

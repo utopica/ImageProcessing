@@ -13,7 +13,7 @@ namespace ImageProcessingForm
     public partial class Gurultu_Filtreleme : Form
     {
         private Bitmap defaultImage;
-        private Bitmap beforePicImage;
+
 
         public Gurultu_Filtreleme(Bitmap mainFormImage)
         {
@@ -27,8 +27,7 @@ namespace ImageProcessingForm
             afterPic.SizeMode = PictureBoxSizeMode.Zoom;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
 
-            // orijinal görüntüyü bir kopyaya atıyoruz
-            beforePicImage = new Bitmap(defaultImage);
+           
         }
 
         private void beforePic_Click(object sender, EventArgs e)
@@ -261,7 +260,7 @@ namespace ImageProcessingForm
                 beforePic.Image = selectedImage;
 
                 // Yeni resmi orijinal resim olarak ayarla
-                beforePicImage = new Bitmap(selectedImage);
+                defaultImage = new Bitmap(selectedImage);
 
                 // İşlenmiş görüntüyü temizleyin
                 afterPic.Image = null;

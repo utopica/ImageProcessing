@@ -23,7 +23,7 @@ namespace ImageProcessingForm
         private Aritmetik aritmetikForm = null;
         private Oran oranForm = null;
         private Esikleme esiklemeForm = null;
-        private histogram histogramForm = null;
+        private Histogram histogramForm = null;
         private Gurultu_Filtreleme gurultuForm = null;
         private Morfolojik morfolojikForm = null;
         private Sobel sobelForm = null;
@@ -232,7 +232,7 @@ namespace ImageProcessingForm
             // Eğer histogram formu daha önce oluşturulmadıysa, oluştur
             if (histogramForm == null)
             {
-                histogramForm = new histogram(defaultImage); // Varsayılan resmi geçirin
+                histogramForm = new Histogram(defaultImage); // Varsayılan resmi geçirin
                 histogramForm.FormClosed += HistogramForm_FormClosed;
             }
 

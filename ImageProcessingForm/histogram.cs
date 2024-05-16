@@ -1,264 +1,169 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace ImageProcessingForm
 {
-    public partial class histogram : Form
+    public partial class Histogram : Form
     {
-
         private Bitmap defaultImage;
-        private string selectedChannel = "Gray"; // Varsayılan olarak Gri (Gray) kanalı seçili
-        private string selectedOperationComboBox;
 
-        public histogram(Bitmap mainFormImage)
+        public Histogram(Bitmap mainFormImage)
         {
             InitializeComponent();
 
             defaultImage = mainFormImage;
-
-            comboBox1.Items.Add("Histogram Germe");
-            comboBox1.Items.Add("Histogram Genişletme");
-
             this.StartPosition = FormStartPosition.CenterScreen;
 
             beforePic.Image = defaultImage;
             afterPic.SizeMode = PictureBoxSizeMode.Zoom;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
-
-           
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // ComboBox'tan seçilen işlemi al
-            string selectedOperation = comboBox1.SelectedItem.ToString();
-
-            // Seçilen işlemi ve kanalı saklayalım
-            selectedOperationComboBox = selectedOperation;
-
-            // Eğer bir işlem seçilmediyse işlemi başlatmadan önce bir uyarı gösterelim
-            if (selectedOperation == null)
-            {
-                MessageBox.Show("Lütfen bir işlem seçin.");
-                return;
-            }
-        }
-
-        private Bitmap HistogramStretching(Bitmap image, string channel)
-        {
-            Bitmap processedImage = new Bitmap(image.Width, image.Height);
-            double minGray = 255;
-            double maxGray = 0;
-
-            // Min ve max gri ton değerlerini bul
-            for (int i = 0; i < image.Width; i++)
-            {
-                for (int j = 0; j < image.Height; j++)
-                {
-                    Color originalColor = image.GetPixel(i, j);
-                    int grayValue = (int)(originalColor.R * 0.299 + originalColor.G * 0.587 + originalColor.B * 0.114);
-                    minGray = Math.Min(minGray, grayValue);
-                    maxGray = Math.Max(maxGray, grayValue);
-                }
-            }
-
-            // Kontrast germe işlemini uygula
-            for (int i = 0; i < image.Width; i++)
-            {
-                for (int j = 0; j < image.Height; j++)
-                {
-                    Color originalColor = image.GetPixel(i, j);
-                    Color processedColor;
-
-                    switch (channel)
-                    {
-                        case "Gray":
-                            int grayValue = (int)(originalColor.R * 0.299 + originalColor.G * 0.587 + originalColor.B * 0.114);
-                            int stretchedValue = (int)(((grayValue - minGray) / (maxGray - minGray)) * 255);
-                            stretchedValue = Math.Max(0, Math.Min(255, stretchedValue)); // Sınırları kontrol et
-                            processedColor = Color.FromArgb(stretchedValue, stretchedValue, stretchedValue);
-                            break;
-                        default:
-                            int channelValue = (int)(originalColor.R * 0.299 + originalColor.G * 0.587 + originalColor.B * 0.114);
-                            int stretchedChannelValue = (int)(((channelValue - minGray) / (maxGray - minGray)) * 255);
-                            stretchedChannelValue = Math.Max(0, Math.Min(255, stretchedChannelValue)); // Sınırları kontrol et
-                            switch (channel)
-                            {
-                                case "Red":
-                                    processedColor = Color.FromArgb(stretchedChannelValue, originalColor.G, originalColor.B);
-                                    break;
-                                case "Green":
-                                    processedColor = Color.FromArgb(originalColor.R, stretchedChannelValue, originalColor.B);
-                                    break;
-                                case "Blue":
-                                    processedColor = Color.FromArgb(originalColor.R, originalColor.G, stretchedChannelValue);
-                                    break;
-                                default:
-                                    processedColor = originalColor;
-                                    break;
-                            }
-                            break;
-                    }
-
-                    processedImage.SetPixel(i, j, processedColor);
-                }
-            }
-
-            return processedImage;
-        }
-
-
-        private Bitmap HistogramExpansion(Bitmap image, string channel)
-        {
-            Bitmap processedImage = new Bitmap(image.Width, image.Height);
-
-            for (int i = 0; i < image.Width; i++)
-            {
-                for (int j = 0; j < image.Height; j++)
-                {
-                    Color originalColor = image.GetPixel(i, j);
-                    Color processedColor = Color.Black; // Başlangıçta siyah renk
-
-                    switch (channel)
-                    {
-                        case "Gray":
-                            int grayValue = (int)(originalColor.R * 0.299 + originalColor.G * 0.587 + originalColor.B * 0.114);
-                            processedColor = Color.FromArgb(grayValue, grayValue, grayValue);
-                            break;
-                        case "Red":
-                            processedColor = Color.FromArgb(originalColor.R, processedColor.G, processedColor.B);
-                            break;
-                        case "Green":
-                            processedColor = Color.FromArgb(processedColor.R, originalColor.G, processedColor.B);
-                            break;
-                        case "Blue":
-                            processedColor = Color.FromArgb(processedColor.R, processedColor.G, originalColor.B);
-                            break;
-                        default:
-                            processedColor = originalColor;
-                            break;
-                    }
-
-                    processedImage.SetPixel(i, j, processedColor);
-                }
-            }
-
-            return processedImage;
-        }
-
-
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-            // Renk kanalı seçilmediyse varsayılan olarak Gri (Gray) kanalını kullan
-            if (selectedChannel == null)
-            {
-                MessageBox.Show("Lütfen bir renk kanalı seçin.");
-                return;
-            }
-
-            // ComboBox'tan seçilen işlemi al
-            if (comboBox1.SelectedItem == null)
-            {
-                MessageBox.Show("Önce bir işlem seçin.");
-                return;
-            }
-
-            // Seçilen işlemi ve kanalı saklayalım
-            string selectedOperation = comboBox1.SelectedItem.ToString();
-            string selectedImageProcessingChannel = selectedChannel;
-
-            // Sonucu göstermek için UpdateImageProcessing metodunu çağıralım
-            UpdateImageProcessing(selectedOperation, selectedImageProcessingChannel);
-        }
-
-
-
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            // "Save" butonuna basıldığında burada resmi kaydedebilirsiniz
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                afterPic.Image.Save(saveFileDialog1.FileName);
-            }
-        }
-
-        private void btnDel_Click(object sender, EventArgs e)
-        {
-            // "Delete" butonuna basıldığında burada resmi temizleyebilirsiniz
-            afterPic.Image = null;
-            beforePic.Image = null;
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
+            LoadImage();
+            afterPic.Image = null;
+        }
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveImage();
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            beforePic.Image = null;
+            afterPic.Image = null;
+        }
+
+        private void SaveImage()
+        {
+            if (afterPic.Image != null)
             {
-                // Kullanıcı tarafından seçilen resmi yükle
-                string imagePath = openFileDialog.FileName;
-                Bitmap selectedImage = new Bitmap(imagePath);
+                using (SaveFileDialog saveDialog = new SaveFileDialog())
+                {
+                    saveDialog.Filter = "JPEG Image|*.jpg";
+                    saveDialog.Title = "Kaydet";
+                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                    saveDialog.RestoreDirectory = true;
 
-                // Seçilen resmi beforePic'te göster
-                defaultImage = selectedImage;
-                beforePic.Image = selectedImage;
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string savePath = saveDialog.FileName;
+                        afterPic.Image.Save(savePath, ImageFormat.Jpeg);
+                        MessageBox.Show("Resim şuraya kaydedildi :  " + savePath);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
+            }
+        }
 
-                // İşlenmiş görüntüyü temizleyin
+        private void LoadImage()
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Sadece resim dosyalarını filtrele
+            openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                beforePic.Image = null;
                 afterPic.Image = null;
+                // Seçilen resmi PictureBox kontrolüne yükle
+                beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
 
-        private void radioButton1gray_CheckedChanged(object sender, EventArgs e)
+        private void radioGerme_CheckedChanged(object sender, EventArgs e)
         {
-            selectedChannel = "Gray";
-        }
-
-        private void radioButton2blue_CheckedChanged(object sender, EventArgs e)
-        {
-            selectedChannel = "Blue";
-        }
-
-        private void radioButton1red_CheckedChanged(object sender, EventArgs e)
-        {
-            selectedChannel = "Red";
-        }
-
-        private void radioButton1green_CheckedChanged(object sender, EventArgs e)
-        {
-            selectedChannel = "Green";
-        }
-
-        private void UpdateImageProcessing(string selectedOperation, string selectedChannel)
-        {
-            Bitmap processedImage = null;
-
-            // Seçilen işleme göre görüntüyü işleyin
-            switch (selectedOperation)
+            if (beforePic.Image != null)
             {
-                case "Histogram Germe":
-                    processedImage = HistogramStretching(defaultImage, selectedChannel);
-                    break;
-                case "Histogram Genişletme":
-                    processedImage = HistogramExpansion(defaultImage, selectedChannel);
-                    break;
-                default:
-                    MessageBox.Show("Geçersiz işlem seçimi.");
-                    break;
-            }
+                Bitmap originalImage = new Bitmap(beforePic.Image);
 
-            // İşlenmiş görüntüyü afterPic'te göster
-            if (processedImage != null)
+                // Histogram germe işlevini uygula
+                Bitmap stretchedImage = StretchHistogram(originalImage);
+
+                // Gerilmiş görüntüyü göster
+                afterPic.Image = stretchedImage;
+            }
+            else
             {
-                afterPic.Image = processedImage;
+                MessageBox.Show("Lütfen önce bir resim ekleyin.");
             }
         }
 
+        private void radioGenisletme_CheckedChanged(object sender, EventArgs e)
+        {
+            if (beforePic.Image != null)
+            {
+                Bitmap originalImage = new Bitmap(beforePic.Image);
+
+                // Histogram genişletme işlevini uygula
+                Bitmap expandedImage = ExpandHistogram(originalImage);
+
+                // Genişletilmiş görüntüyü göster
+                afterPic.Image = expandedImage;
+            }
+            else
+            {
+                MessageBox.Show("Lütfen önce bir resim ekleyin.");
+            }
+        }
+
+        private Bitmap StretchHistogram(Bitmap originalImage)
+        {
+            Bitmap stretchedImage = new Bitmap(originalImage.Width, originalImage.Height);
+
+            for (int y = 0; y < originalImage.Height; y++)
+            {
+                for (int x = 0; x < originalImage.Width; x++)
+                {
+                    Color pixelColor = originalImage.GetPixel(x, y);
+
+                    // Histogram germe işlemleri burada gerçekleştirilir
+
+                    int r = pixelColor.R * 2; // Örnek bir germe işlemi (örnektir, ihtiyacınıza göre değiştirin)
+                    int g = pixelColor.G * 2;
+                    int b = pixelColor.B * 2;
+
+                    r = Math.Min(r, 255); // Renk değerlerini 0-255 aralığında tutar
+                    g = Math.Min(g, 255);
+                    b = Math.Min(b, 255);
+
+                    Color newPixelColor = Color.FromArgb(r, g, b);
+                    stretchedImage.SetPixel(x, y, newPixelColor);
+                }
+            }
+
+            return stretchedImage;
+        }
+
+        private Bitmap ExpandHistogram(Bitmap originalImage)
+        {
+            Bitmap expandedImage = new Bitmap(originalImage.Width, originalImage.Height);
+
+            for (int y = 0; y < originalImage.Height; y++)
+            {
+                for (int x = 0; x < originalImage.Width; x++)
+                {
+                    Color pixelColor = originalImage.GetPixel(x, y);
+
+                    // Histogram genişletme işlemleri burada gerçekleştirilir
+
+                    int r = pixelColor.R / 2; // Örnek bir genişletme işlemi (örnektir, ihtiyacınıza göre değiştirin)
+                    int g = pixelColor.G / 2;
+                    int b = pixelColor.B / 2;
+
+                    Color newPixelColor = Color.FromArgb(r, g, b);
+                    expandedImage.SetPixel(x, y, newPixelColor);
+                }
+            }
+
+            return expandedImage;
+        }
     }
 }

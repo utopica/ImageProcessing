@@ -28,6 +28,7 @@ namespace ImageProcessingForm
         private Morfolojik morfolojikForm = null;
         private Sobel sobelForm = null;
         private RenkUzayı renkUzayıForm = null;
+        private Konvolusyon konvolusyonForm = null;
 
         public Main()
         {
@@ -291,7 +292,20 @@ namespace ImageProcessingForm
 
         private void KonvolusyonIslemi()
         {
+            if (konvolusyonForm == null)
+            {
+                konvolusyonForm = new Konvolusyon(defaultImage);
+                konvolusyonForm.FormClosed += KonvolusyonForm_FormClosed;
+            }
 
+            konvolusyonForm.Show();
+            this.Hide();
+
+        }
+        private void KonvolusyonForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            konvolusyonForm = null; // Form kapandığında null yap
+            this.Show(); // Ana formu göster
         }
 
         private void EsiklemeIslemleri()

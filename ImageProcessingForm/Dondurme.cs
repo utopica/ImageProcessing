@@ -28,8 +28,8 @@ namespace ImageProcessingForm
 
             defaultImage = new Bitmap(imagePath);
             beforePic.Image = defaultImage;
-            afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
-            beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
+            afterPic.SizeMode = PictureBoxSizeMode.Zoom;
+            beforePic.SizeMode = PictureBoxSizeMode.Zoom;
 
         }
 

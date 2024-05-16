@@ -34,8 +34,8 @@ namespace ImageProcessingForm
             pictureBox2.Image = defaultImage;
 
             // PictureBox'ların boyutlandırılması
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             
         }
 

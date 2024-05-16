@@ -14,23 +14,18 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         private Bitmap beforePicImage;
-        private Bitmap originalImage;
 
         public Gurultu_Filtreleme(Bitmap mainFormImage)
         {
             InitializeComponent();
 
-            originalImage = mainFormImage;
+            defaultImage = mainFormImage;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-
-            string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
-
-            defaultImage = new Bitmap(imagePath);
+           
             beforePic.Image = defaultImage;
-            afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
-            beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
+            afterPic.SizeMode = PictureBoxSizeMode.Zoom;
+            beforePic.SizeMode = PictureBoxSizeMode.Zoom;
 
             // orijinal görüntüyü bir kopyaya atıyoruz
             beforePicImage = new Bitmap(defaultImage);
@@ -249,12 +244,7 @@ namespace ImageProcessingForm
             }
         }
 
-        private void btnUndo_Click(object sender, EventArgs e)
-        {
-            // Orijinal resmi sadece beforePic'te göster
-            beforePic.Image = new Bitmap(beforePicImage);
-            afterPic.Image = originalImage;
-        }
+      
 
         private void btnAdd_Click(object sender, EventArgs e)
         {

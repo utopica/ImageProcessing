@@ -13,8 +13,7 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         private Bitmap processedImage;
-        private int threshold = 128; // Varsayılan eşik değeri
-        private int blockSize = 3; // Varsayılan blok boyutu
+
 
         public Esikleme()
         {
@@ -28,10 +27,13 @@ namespace ImageProcessingForm
             beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
             beforePic.MouseUp += beforePic_MouseUp;
 
-            comboBox1.Items.Add("MEAN");
-            comboBox1.Items.Add("MEDIAN");
-            comboBox1.Items.Add("GAUSS");
+            // afterPic'in zoom yapmamasını sağla
+            afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            numericUpDown1.Minimum = 0;
+            numericUpDown1.Maximum = 255; // Eşik değeri için minimum ve maksimum değerleri ayarla
         }
+
 
         private void ResimYukle()
         {
@@ -98,167 +100,47 @@ namespace ImageProcessingForm
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedOperation = comboBox1.SelectedItem.ToString();
-            switch (selectedOperation)
-            {
-                case "MEAN":
-                    Mean();
-                    break;
-                case "MEDIAN":
-                    Median();
-                    break;
-                case "GAUSS":
-                    Gauss();
-                    break;
-            }
-        }
-
-        private void Mean()
-        {
-            if (beforePic.Image != null)
-            {
-                processedImage = new Bitmap(beforePic.Image);
-
-                // Her pikselin değerini eşik değeri ile karşılaştır ve sonucu hesapla
-                for (int i = 0; i < processedImage.Width; i++)
-                {
-                    for (int j = 0; j < processedImage.Height; j++)
-                    {
-                        Color pixelColor = processedImage.GetPixel(i, j);
-                        int grayValue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                        processedImage.SetPixel(i, j, grayValue < threshold ? Color.Black : Color.White);
-                    }
-                }
-
-                afterPic.Image = processedImage;
-            }
-        }
-
-        private void Median()
-        {
-            if (beforePic.Image != null)
-            {
-                Bitmap inputImage = new Bitmap(beforePic.Image);
-                processedImage = new Bitmap(inputImage.Width, inputImage.Height);
-
-                // Her piksel için blok boyutu içindeki piksel değerlerini bir listeye topla
-                for (int x = 0; x < inputImage.Width; x++)
-                {
-                    for (int y = 0; y < inputImage.Height; y++)
-                    {
-                        List<int> pixelValues = new List<int>();
-
-                        // Blok boyutu içindeki piksel değerlerini listeye ekle
-                        for (int i = x - blockSize / 2; i <= x + blockSize / 2; i++)
-                        {
-                            for (int j = y - blockSize / 2; j <= y + blockSize / 2; j++)
-                            {
-                                if (i >= 0 && i < inputImage.Width && j >= 0 && j < inputImage.Height)
-                                {
-                                    Color pixelColor = inputImage.GetPixel(i, j);
-                                    int grayValue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                                    pixelValues.Add(grayValue);
-                                }
-                            }
-                        }
-
-                        // Piksel değerlerini sırala ve ortadaki değeri al
-                        pixelValues.Sort();
-                        int medianValue = pixelValues[pixelValues.Count / 2];
-                        processedImage.SetPixel(x, y, medianValue < threshold ? Color.Black : Color.White);
-                    }
-                }
-
-                afterPic.Image = processedImage;
-            }
-        }
-
-        private void Gauss()
-        {
-            if (beforePic.Image != null)
-            {
-                Bitmap inputImage = new Bitmap(beforePic.Image);
-                processedImage = new Bitmap(inputImage.Width, inputImage.Height);
-
-                // Her piksel için Gauss filtresi uygula
-                for (int x = 0; x < inputImage.Width; x++)
-                {
-                    for (int y = 0; y < inputImage.Height; y++)
-                    {
-                        double sum = 0;
-                        double weightSum = 0;
-
-                        // Blok boyutu içindeki piksel değerlerini ve Gauss ağırlıklarını hesapla
-                        for (int i = x - blockSize / 2; i <= x + blockSize / 2; i++)
-                        {
-                            for (int j = y - blockSize / 2; j <= y + blockSize / 2; j++)
-                            {
-                                if (i >= 0 && i < inputImage.Width && j >= 0 && j < inputImage.Height)
-                                {
-                                    Color pixelColor = inputImage.GetPixel(i, j);
-                                    int grayValue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                                    double weight = Math.Exp(-(Math.Pow(i - x, 2) + Math.Pow(j - y, 2)) / (2 * Math.Pow(blockSize / 2, 2)));
-                                    sum += grayValue * weight;
-                                    weightSum += weight;
-                                }
-                            }
-                        }
-
-                        // Ağırlıklı ortalama piksel değerini al
-                        int gaussValue = (int)(sum / weightSum);
-                        processedImage.SetPixel(x, y, gaussValue < threshold ? Color.Black : Color.White);
-                    }
-                }
-
-                afterPic.Image = processedImage;
-            }
-        }
-
-        private void txtBlokBoyutu_TextChanged(object sender, EventArgs e)
-        {
-            if (!int.TryParse(txtBlokBoyutu.Text, out blockSize))
-            {
-                MessageBox.Show("Lütfen geçerli bir blok boyutu girin.");
-            }
-        }
-
-        private void txtSabitDeger_TextChanged(object sender, EventArgs e)
-        {
-            if (!int.TryParse(txtSabitDeger.Text, out threshold))
-            {
-                MessageBox.Show("Lütfen geçerli bir eşik değeri girin.");
-            }
-        }
-
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem != null)
+            if (beforePic.Image == null)
             {
-                string selectedOperation = comboBox1.SelectedItem.ToString();
-                switch (selectedOperation)
+                MessageBox.Show("Lütfen bir resim yükleyin.");
+                return;
+            }
+
+            int thresholdValue = Convert.ToInt32(numericUpDown1.Value);
+            processedImage = AdaptiveThreshold((Bitmap)beforePic.Image, thresholdValue);
+            afterPic.Image = processedImage;
+        }
+
+
+        private Bitmap AdaptiveThreshold(Bitmap image, int thresholdValue)
+        {
+            Bitmap result = new Bitmap(image.Width, image.Height);
+
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
                 {
-                    case "MEAN":
-                        Mean();
-                        break;
-                    case "MEDIAN":
-                        Median();
-                        break;
-                    case "GAUSS":
-                        Gauss();
-                        break;
+                    Color pixelColor = image.GetPixel(x, y);
+                    int grayScale = (int)(pixelColor.R * 0.3 + pixelColor.G * 0.59 + pixelColor.B * 0.11);
+
+                    if (grayScale > thresholdValue)
+                    {
+                        result.SetPixel(x, y, Color.White);
+                    }
+                    else
+                    {
+                        result.SetPixel(x, y, Color.Black);
+                    }
                 }
             }
-            else
-            {
-                MessageBox.Show("Lütfen bir işlem seçin.");
-            }
+
+            return result;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+       
 
-        }
+       
     }
 }

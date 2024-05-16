@@ -36,7 +36,6 @@
             btnAdd = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
             BtnSave = new FontAwesome.Sharp.IconButton();
-            ıconButton4 = new FontAwesome.Sharp.IconButton();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -147,18 +146,6 @@
             BtnSave.UseVisualStyleBackColor = false;
             BtnSave.Click += BtnSave_Click;
             // 
-            // ıconButton4
-            // 
-            ıconButton4.BackColor = Color.FromArgb(68, 195, 52);
-            ıconButton4.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            ıconButton4.IconColor = Color.Black;
-            ıconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ıconButton4.Location = new Point(1069, 543);
-            ıconButton4.Name = "ıconButton4";
-            ıconButton4.Size = new Size(69, 72);
-            ıconButton4.TabIndex = 26;
-            ıconButton4.UseVisualStyleBackColor = false;
-            // 
             // pictureBox1
             // 
             pictureBox1.Location = new Point(12, 149);
@@ -175,7 +162,6 @@
             BackColor = Color.Black;
             ClientSize = new Size(1365, 754);
             Controls.Add(pictureBox1);
-            Controls.Add(ıconButton4);
             Controls.Add(BtnSave);
             Controls.Add(btnDel);
             Controls.Add(btnAdd);
@@ -201,7 +187,6 @@
         private FontAwesome.Sharp.IconButton btnAdd;
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton BtnSave;
-        private FontAwesome.Sharp.IconButton ıconButton4;
         private PictureBox pictureBox1;
     }
 }

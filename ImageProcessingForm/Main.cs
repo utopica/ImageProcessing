@@ -252,7 +252,7 @@ namespace ImageProcessingForm
 
             if (aritmetikForm == null)
             {
-                aritmetikForm = new Aritmetik();
+                aritmetikForm = new Aritmetik(defaultImage);
                 aritmetikForm.FormClosed += AritmetikIslemlerForm_FormClosed;
             }
 

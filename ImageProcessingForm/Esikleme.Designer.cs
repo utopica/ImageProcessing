@@ -31,17 +31,15 @@
             beforePic = new FontAwesome.Sharp.IconPictureBox();
             afterPic = new FontAwesome.Sharp.IconPictureBox();
             blokBoyutu = new Label();
-            label1 = new Label();
-            comboBox1 = new ComboBox();
-            label2 = new Label();
-            txtBlokBoyutu = new TextBox();
-            txtSabitDeger = new TextBox();
             btnSave = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
             btnAdd = new FontAwesome.Sharp.IconButton();
             btnStart = new FontAwesome.Sharp.IconButton();
+            numericUpDown1 = new NumericUpDown();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // beforePic
@@ -79,64 +77,10 @@
             // 
             // blokBoyutu
             // 
-            blokBoyutu.AutoSize = true;
-            blokBoyutu.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            blokBoyutu.ForeColor = SystemColors.ButtonHighlight;
-            blokBoyutu.Location = new Point(47, 585);
+            blokBoyutu.Location = new Point(0, 0);
             blokBoyutu.Name = "blokBoyutu";
-            blokBoyutu.Size = new Size(133, 28);
-            blokBoyutu.TabIndex = 17;
-            blokBoyutu.Text = "Blok Boyutu:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(47, 620);
-            label1.Name = "label1";
-            label1.Size = new Size(129, 28);
-            label1.TabIndex = 18;
-            label1.Text = "Sabit Değer:";
-            label1.Click += label1_Click;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(191, 665);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 19;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(42, 661);
-            label2.Name = "label2";
-            label2.Size = new Size(138, 28);
-            label2.TabIndex = 20;
-            label2.Text = "Algoritmalar:";
-            // 
-            // txtBlokBoyutu
-            // 
-            txtBlokBoyutu.Font = new Font("Segoe UI", 12F);
-            txtBlokBoyutu.Location = new Point(191, 585);
-            txtBlokBoyutu.Name = "txtBlokBoyutu";
-            txtBlokBoyutu.Size = new Size(151, 34);
-            txtBlokBoyutu.TabIndex = 21;
-            txtBlokBoyutu.TextChanged += txtBlokBoyutu_TextChanged;
-            // 
-            // txtSabitDeger
-            // 
-            txtSabitDeger.Font = new Font("Segoe UI", 12F);
-            txtSabitDeger.Location = new Point(191, 625);
-            txtSabitDeger.Name = "txtSabitDeger";
-            txtSabitDeger.Size = new Size(151, 34);
-            txtSabitDeger.TabIndex = 22;
-            txtSabitDeger.TextChanged += txtSabitDeger_TextChanged;
+            blokBoyutu.Size = new Size(100, 23);
+            blokBoyutu.TabIndex = 27;
             // 
             // btnSave
             // 
@@ -194,18 +138,34 @@
             btnStart.AutoSizeChanged += btnStart_Click;
             btnStart.Click += btnStart_Click;
             // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(192, 599);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(150, 27);
+            numericUpDown1.TabIndex = 28;
+          
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(58, 598);
+            label1.Name = "label1";
+            label1.Size = new Size(128, 28);
+            label1.TabIndex = 29;
+            label1.Text = "EŞİK DEĞER :";
+            // 
             // Esikleme
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1222, 705);
-            Controls.Add(btnStart);
-            Controls.Add(txtSabitDeger);
-            Controls.Add(txtBlokBoyutu);
-            Controls.Add(label2);
-            Controls.Add(comboBox1);
             Controls.Add(label1);
+            Controls.Add(numericUpDown1);
+            Controls.Add(btnStart);
             Controls.Add(blokBoyutu);
             Controls.Add(btnAdd);
             Controls.Add(btnDel);
@@ -216,6 +176,7 @@
             Text = "Esikleme";
             ((System.ComponentModel.ISupportInitialize)beforePic).EndInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -225,14 +186,11 @@
         private FontAwesome.Sharp.IconPictureBox beforePic;
         private FontAwesome.Sharp.IconPictureBox afterPic;
         private Label blokBoyutu;
-        private Label label1;
-        private ComboBox comboBox1;
-        private Label label2;
-        private TextBox txtBlokBoyutu;
-        private TextBox txtSabitDeger;
         private FontAwesome.Sharp.IconButton btnSave;
         private FontAwesome.Sharp.IconButton btnDel;
         private FontAwesome.Sharp.IconButton btnAdd;
         private FontAwesome.Sharp.IconButton btnStart;
+        private NumericUpDown numericUpDown1;
+        private Label label1;
     }
 }

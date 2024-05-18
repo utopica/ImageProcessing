@@ -61,8 +61,8 @@ namespace ImageProcessingForm
                 case "LAB":
                     convertedImage = ConvertToLAB(defaultImage);
                     break;
-                case "YbCr":
-                    convertedImage = ConvertToYbCr(defaultImage);
+                case "YCbCr":
+                    convertedImage = ConvertToYCbCr(defaultImage);
                     break;
                 case "CMY":
                     convertedImage = ConvertToCMY(defaultImage);

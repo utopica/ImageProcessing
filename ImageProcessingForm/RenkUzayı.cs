@@ -28,7 +28,7 @@ namespace ImageProcessingForm
             comboBox1.Items.Add("NTSC");
             comboBox1.Items.Add("HSV");
             comboBox1.Items.Add("LAB");
-            comboBox1.Items.Add("YbCr");
+            comboBox1.Items.Add("YCbCr");
             comboBox1.Items.Add("CMY");
             comboBox1.Items.Add("CIE");
             comboBox1.Items.Add("CMYK");
@@ -207,7 +207,7 @@ namespace ImageProcessingForm
             return result;
         }
 
-        private Bitmap ConvertToYbCr(Bitmap image)
+        private Bitmap ConvertToYCbCr(Bitmap image)
         {
             if (image != null)
             {

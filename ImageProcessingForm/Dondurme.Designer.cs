@@ -57,7 +57,6 @@
             beforePic.Size = new Size(588, 561);
             beforePic.TabIndex = 5;
             beforePic.TabStop = false;
-            beforePic.Click += beforePic_Click;
             // 
             // afterPic
             // 
@@ -74,7 +73,6 @@
             afterPic.Size = new Size(588, 561);
             afterPic.TabIndex = 6;
             afterPic.TabStop = false;
-            afterPic.Click += afterPic_Click;
             // 
             // btnDel
             // 
@@ -142,7 +140,6 @@
             txtAngle.Name = "txtAngle";
             txtAngle.Size = new Size(193, 27);
             txtAngle.TabIndex = 29;
-            txtAngle.TextChanged += txtAngle_TextChanged;
             // 
             // label1
             // 

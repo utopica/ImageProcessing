@@ -150,7 +150,7 @@ namespace ImageProcessingForm
                     float s = cmax == 0 ? 0 : delta / cmax;
                     float v = cmax;
 
-                    //h'yi pozitif bir değere normalize eder.HSV değerlerini 8 - bit aralığına dönüştürür: hh, ss, vv.gibi şeyler
+                    //h'yi pozitif bir değere normalize eder.HSV değerlerini 8 - bit aralığına dönüştürür: hh, ss, vv.gibi yerler
 
                     h = (h < 0) ? 360 + h : h;
 

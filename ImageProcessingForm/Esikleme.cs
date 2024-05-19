@@ -111,11 +111,11 @@ namespace ImageProcessingForm
             processedImage = AdaptiveThreshold((Bitmap)beforePic.Image, thresholdValue);
             afterPic.Image = processedImage;
         }
-
+        //cv2.ADAPTIVE_THRESH_MEAN_C işlevine daha yakındır. cv2.ADAPTIVE_THRESH_MEAN_C, pikselin eşik değerini, pikselin konumu etrafındaki pencere içindeki piksellerin gri tonlama değerlerinin ortalamasına göre belirler.
         private Bitmap AdaptiveThreshold(Bitmap image, int thresholdValue)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
-            int windowSize = 15; //  her piksel için değerlendirilecek yerel pencerenin boyutunu belirleriz.boyutundaki pencere içerisindeki piksel değerlerinin ortalamasını alırız.
+            int windowSize = 15; // Yerel eşikleme için pencere boyutu
             int halfWindow = windowSize / 2;
 
             for (int x = 0; x < image.Width; x++)
@@ -143,7 +143,7 @@ namespace ImageProcessingForm
                         }
                     }
 
-                    //Pencere içerisindeki her pikselin gri tonlama değerini toplar ve piksel sayısına böleriz 
+                    // Yerel eşik değerini hesapla
                     int localThreshold = sum / count;
 
                     // Pikseli ikili değerlere dönüştür
@@ -163,5 +163,11 @@ namespace ImageProcessingForm
 
             return result;
         }
+
+
+
+
+
+
     }
 }

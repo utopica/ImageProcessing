@@ -29,15 +29,11 @@ namespace ImageProcessingForm
 
             txtWidthStart.Text = "0";
             txtHeightStart.Text = "0";
-            txtWidthEnd.Text = originalImage.Size.Width.ToString();
-            txtHeightEnd.Text = originalImage.Size.Height.ToString();
 
-            prevStartX = 0;
-            prevStartY = 0;
-            prevEndX = originalImage.Size.Width;
-            prevEndY = originalImage.Size.Height;
+           
         }
 
+ 
         private void DisplayImage(Bitmap image)
         {
             beforePic.Image = image;
@@ -47,11 +43,15 @@ namespace ImageProcessingForm
 
             lblWidth.Text = image.Width.ToString();
             lblHeight.Text = image.Height.ToString();
+            txtWidthEnd.Text = image.Width.ToString();
+            txtHeightEnd.Text = image.Height.ToString();
+            prevEndX = image.Size.Width;
+            prevEndY = image.Size.Height;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ResimYukle();
+            LoadImage();
             afterPic.Image = null;
         }
 
@@ -66,17 +66,15 @@ namespace ImageProcessingForm
             SaveImage();
         }
 
-        private void ResimYukle()
+        private void LoadImage()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Sadece resim dosyalarını filtrele
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 beforePic.Image = null;
                 afterPic.Image = null;
-                // Seçilen resmi PictureBox kontrolüne yükle
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
 
                 DisplayImage((Bitmap)beforePic.Image);
@@ -100,19 +98,16 @@ namespace ImageProcessingForm
 
         private void CropImage(int startX, int startY, int endX, int endY)
         {
-            // Başlangıç ve bitiş değerlerini kontrol edin
             if (startX < 0 || startY < 0 || endX >= beforePic.Image.Width || endY >= beforePic.Image.Height || startX > endX || startY > endY)
             {
                 MessageBox.Show("Geçersiz parametre girildi.");
                 return;
             }
 
-            // Yeni kırpılmış resmi oluşturun
             int width = endX - startX + 1;
             int height = endY - startY + 1;
             croppedImage = new Bitmap(width, height);
 
-            // Yeni resmi oluşturulan aralıkta kırpın
             for (int y = startY; y <= endY; y++)
             {
                 for (int x = startX; x <= endX; x++)
@@ -122,11 +117,10 @@ namespace ImageProcessingForm
                 }
             }
 
-            // Kırpılmış resmi afterPic PictureBox'ına yükleyin
             afterPic.Image = croppedImage;
         }
 
-        
+
         private void SaveImage()
         {
             if (afterPic.Image != null)
@@ -166,5 +160,7 @@ namespace ImageProcessingForm
             txtWidthEnd.Text = endX.ToString();
             txtHeightEnd.Text = endY.ToString();
         }
+
+        
     }
 }

@@ -14,8 +14,8 @@ namespace ImageProcessingForm
     public partial class Parlaklik : Form
     {
         private Bitmap defaultImage;
-        private int currentBrightness = 0; // Güncel parlaklık değeri
-        private int previousBrightness = 0; // Önceki parlaklık değeri
+        private int currentBrightness = 0; 
+        private int previousBrightness = 0; 
 
         public Parlaklik()
         {
@@ -93,21 +93,20 @@ namespace ImageProcessingForm
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Sadece resim dosyalarını filtrele
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 beforePic.Image = null;
                 afterPic.Image = null;
-                // Seçilen resmi PictureBox kontrolüne yükle
+
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            previousBrightness = currentBrightness; // Önceki parlaklık değerini güncelle
-            currentBrightness = (int)numericUpDown1.Value; // Yeni parlaklık değerini al
+            previousBrightness = currentBrightness; 
+            currentBrightness = (int)numericUpDown1.Value; 
 
             ApplyBrightness(currentBrightness);
         }
@@ -116,7 +115,6 @@ namespace ImageProcessingForm
         {
             numericUpDown1.Value = previousBrightness;
 
-            // Geri alınan parlaklık değerini uygula
             ApplyBrightness(previousBrightness);
 
 
@@ -126,30 +124,24 @@ namespace ImageProcessingForm
         {
             if (beforePic.Image != null)
             {
-                // Yeni bir bitmap oluştur
                 Bitmap brightenedImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
 
-                // Her pikseli dolaşarak parlaklığı değiştir
                 for (int y = 0; y < beforePic.Image.Height; y++)
                 {
                     for (int x = 0; x < beforePic.Image.Width; x++)
                     {
                         Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
 
-                        // Her renk bileşenine parlaklık artışını ekle
                         int newRed = Math.Min(originalColor.R + changeAmount, 255);
                         int newGreen = Math.Min(originalColor.G + changeAmount, 255);
                         int newBlue = Math.Min(originalColor.B + changeAmount, 255);
 
-                        // Yeni renk bileşenleriyle bir renk oluştur
                         Color newColor = Color.FromArgb(newRed, newGreen, newBlue);
 
-                        // Yeni pikseli ayarla
                         brightenedImage.SetPixel(x, y, newColor);
                     }
                 }
 
-                // Parlaklaştırılmış resmi göster
                 afterPic.Image = brightenedImage;
             }
         }

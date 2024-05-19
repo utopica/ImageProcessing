@@ -126,19 +126,24 @@ namespace ImageProcessingForm
             for (int x = 0; x < image.Width; x++)
             {
                 for (int y = 0; y < image.Height; y++)
-                {    //Her piksel için, yatay ve dikey Sobel filtrelerinin sonuçlarının kareleri toplanır ve karekökü alınır. Bu işlem, kenarların hem yatay hem de dikey bileşenlerini birleştirir ve genel kenar gücünü hesaplar.
-                    int pixelValue = (int)Math.Sqrt(Math.Pow(horizontalResult.GetPixel(x, y).R, 2) + Math.Pow(verticalResult.GetPixel(x, y).R, 2));
+                {
+                    int Gx = horizontalResult.GetPixel(x, y).R;
+                    int Gy = verticalResult.GetPixel(x, y).R;
 
-                    if (pixelValue < threshold)
+                    // Gradient büyüklüğünü hesapla
+                    int G = (int)Math.Sqrt(Gx * Gx + Gy * Gy);
+
+                    // Eşik değerine göre ikili (binary) görüntü oluştur
+                    if (G < threshold)
                     {
-                        pixelValue = 0;
+                        G = 0;
                     }
                     else
                     {
-                        pixelValue = 255;
+                        G = 255;
                     }
 
-                    result.SetPixel(x, y, Color.FromArgb(pixelValue, pixelValue, pixelValue));
+                    result.SetPixel(x, y, Color.FromArgb(G, G, G));
                 }
             }
 

@@ -1,8 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,17 +22,19 @@ namespace ImageProcessingForm
             this.StartPosition = FormStartPosition.CenterScreen;
 
 
-
             string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
 
+
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
+
 
             defaultImage = new Bitmap(imagePath);
             beforePic.Image = defaultImage;
             afterPic.SizeMode = PictureBoxSizeMode.Zoom;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
         }
-        
+
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (beforePic.Image != null)
@@ -51,6 +55,7 @@ namespace ImageProcessingForm
                 MessageBox.Show("Lütfen bir resim yükleyin.");
             }
         }
+
 
         private Bitmap RotateImageWithNearestNeighbor(Bitmap image, int angle)
         {

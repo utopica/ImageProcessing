@@ -33,15 +33,15 @@ namespace ImageProcessingForm
         }
         private Bitmap ApplySobelFilter(Bitmap image, string direction, int threshold)
         {
-            if (direction == "horizontal")//Yatay yönde Sobel filtresi uygular.
+            if (direction == "horizontal") //yatay
             {
                 return ApplyHorizontalSobelFilter(image, threshold);
             }
-            else if (direction == "vertical")// Dikey yönde Sobel filtresi uygular.
+            else if (direction == "vertical") //dikey
             {
                 return ApplyVerticalSobelFilter(image, threshold);
             }
-            else if (direction == "both")//Hem yatay hem de dikey yönde Sobel filtresi uygular.
+            else if (direction == "both")
             {
                 return ApplyBothSobelFilter(image, threshold);
             }

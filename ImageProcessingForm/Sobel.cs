@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -114,7 +115,7 @@ namespace ImageProcessingForm
 
             return result;
         }
-
+        //birer kerede bir pikseli işleyerek görüntü üzerinde hareket ederler ve her bir noktanın yaklaşık gradient (eğim) büyüklüğünü hesaplarlar.
         private Bitmap ApplyBothSobelFilter(Bitmap image, int threshold)
         {
             // İki yönde de filtre uygulanır ve sonuçlar toplanır

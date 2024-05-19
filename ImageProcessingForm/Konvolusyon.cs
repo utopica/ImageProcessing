@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,11 @@ namespace ImageProcessingForm
 {
     public partial class Konvolusyon : Form
     {
+        /*Gauss filtresi uyguladığınız
+        imgeyi sizin belirleyeceğiniz maske boyutunda bir matris ile tarar ve her
+        bir matrisde ağırlıklı ortalamayı hesaplar 
+        yumuşak bir blulaştırma sağlar
+        */
         private Bitmap defaultImage;
         public Konvolusyon(Bitmap mainFormImage)
         {
@@ -27,7 +33,7 @@ namespace ImageProcessingForm
         {
             if (defaultImage != null)
             {
-                // Kullanıcıdan sigma değerini alma
+                // Kullanıcıdan sigma ve kernelsize değeri alıyor
                 if (double.TryParse(textBox2.Text, out double sigma) && int.TryParse(textBox1.Text, out int kernelSize))
                 {
                     if (kernelSize % 2 == 0)
@@ -120,7 +126,7 @@ namespace ImageProcessingForm
                 }
             }
 
-            // Normalize the kernel
+            // kerneli normalize ediyoruz
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
@@ -153,24 +159,20 @@ namespace ImageProcessingForm
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Kullanıcı tarafından seçilen resmi yükle
                 string imagePath = openFileDialog.FileName;
                 Bitmap selectedImage = new Bitmap(imagePath);
 
-                // Seçilen resmi beforePic'te göster
                 beforePic.Image = selectedImage;
 
-                // Yeni resmi orijinal resim olarak ayarla
                 defaultImage = new Bitmap(selectedImage);
 
-                // İşlenmiş görüntüyü temizleyin
                 afterPic.Image = null;
             }
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            // "Save" butonuna basıldığında burada resmi kaydedebilirsiniz
+            // save e basıldığında resmi kaydeder
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -181,7 +183,7 @@ namespace ImageProcessingForm
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            // "Delete" butonuna basıldığında burada resmi temizleyebilirsiniz
+           
             afterPic.Image = null;
             beforePic.Image = null;
         }

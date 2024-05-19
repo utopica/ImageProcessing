@@ -42,7 +42,7 @@ namespace ImageProcessingForm
 
         private void ıconButton2salt_Click(object sender, EventArgs e)
         {
-            Bitmap imageToProcess = beforePic.Image != null ? (Bitmap)beforePic.Image : defaultImage;
+            Bitmap imageToProcess = beforePic.Image != null ? (Bitmap)beforePic.Image : defaultImage;   //seçilen görüntü varsa onu yoksa varsayılan görüntüyü alır
 
             if (imageToProcess != null)
             {
@@ -56,15 +56,13 @@ namespace ImageProcessingForm
         }
         private Bitmap AddSaltNoise(Bitmap image)
         {
-            Random rand = new Random();
+            Random rand = new Random();   //rastgele sayı üretir, rastgele pikselleri seçmek için
             Bitmap saltImage = (Bitmap)image.Clone();
-            int noisePercentage = 5; // Tuz gürültüsünün yüzde oranı
+            int noisePercentage = 5;             // Tuz gürültüsünün yüzde oranı
 
-            // Gürültü miktarı hesaplanır
-            int noise = (image.Width * image.Height * noisePercentage) / 100;
+            int noise = (image.Width * image.Height * noisePercentage) / 100;      // Gürültü miktarı hesaplanır
 
-            // Rasgele pikselleri seçip beyaz renk (255, 255, 255) yapar
-            for (int i = 0; i < noise; i++)
+            for (int i = 0; i < noise; i++)         // Rasgele pikselleri seçip beyaz renk (255, 255, 255) yapar
             {
                 int x = rand.Next(0, image.Width);
                 int y = rand.Next(0, image.Height);
@@ -92,13 +90,13 @@ namespace ImageProcessingForm
         {
             Random rand = new Random();
             Bitmap pepperImage = (Bitmap)image.Clone();
-            int noisePercentage = 5; // Biber gürültüsünün yüzde oranı
+            int noisePercentage = 5;       // Biber gürültüsünün yüzde oranı
 
-            // Gürültü miktarı hesaplanır
-            int noise = (image.Width * image.Height * noisePercentage) / 100;
+           
+            int noise = (image.Width * image.Height * noisePercentage) / 100;    // Gürültü miktarı hesaplanır
 
-            // Rasgele pikselleri seçip siyah renk (0, 0, 0) yapar
-            for (int i = 0; i < noise; i++)
+            
+            for (int i = 0; i < noise; i++)               // Rasgele pikselleri seçip siyah renk (0, 0, 0) yapar
             {
                 int x = rand.Next(0, image.Width);
                 int y = rand.Next(0, image.Height);
@@ -125,12 +123,12 @@ namespace ImageProcessingForm
                 }
             }
         }
-        // Mean filtresi uygulama fonksiyonu
-        private Bitmap ApplyMeanFilter(Bitmap image)
+
+        private Bitmap ApplyMeanFilter(Bitmap image)         
         {
             Bitmap filteredImage = new Bitmap(image.Width, image.Height);
 
-            for (int y = 1; y < image.Height - 1; y++)
+            for (int y = 1; y < image.Height - 1; y++)             //tüm pikselleri dolaşır
             {
                 for (int x = 1; x < image.Width - 1; x++)
                 {
@@ -140,18 +138,20 @@ namespace ImageProcessingForm
                     {
                         for (int i = -1; i <= 1; i++)
                         {
-                            Color pixelColor = image.GetPixel(x + i, y + j);
+                            Color pixelColor = image.GetPixel(x + i, y + j);     //piksel rengi alınır
+
+                            //RGB bileşenleri toplanır
                             totalR += pixelColor.R;
                             totalG += pixelColor.G;
                             totalB += pixelColor.B;
                         }
                     }
-
+                    //ortalama değerler hesaplanır, 3x3 matris olduğundan 9'a bölünüyor
                     int avgR = totalR / 9;
                     int avgG = totalG / 9;
                     int avgB = totalB / 9;
 
-                    Color newColor = Color.FromArgb(avgR, avgG, avgB);
+                    Color newColor = Color.FromArgb(avgR, avgG, avgB);   //görüntüye uygulanır
                     filteredImage.SetPixel(x, y, newColor);
                 }
             }
@@ -177,16 +177,15 @@ namespace ImageProcessingForm
             }
         }
 
-        // Median filtresi uygulama fonksiyonu
         private Bitmap ApplyMedianFilter(Bitmap image)
         {
             Bitmap filteredImage = new Bitmap(image.Width, image.Height);
 
-            for (int y = 1; y < image.Height - 1; y++)
+            for (int y = 1; y < image.Height - 1; y++)            //tüm pikselleir dolaşır
             {
                 for (int x = 1; x < image.Width - 1; x++)
                 {
-                    List<int> redValues = new List<int>();
+                    List<int> redValues = new List<int>();              //RGB değerleri için listeler oluşturuldu
                     List<int> greenValues = new List<int>();
                     List<int> blueValues = new List<int>();
 
@@ -194,22 +193,22 @@ namespace ImageProcessingForm
                     {
                         for (int i = -1; i <= 1; i++)
                         {
-                            Color pixelColor = image.GetPixel(x + i, y + j);
-                            redValues.Add(pixelColor.R);
+                            Color pixelColor = image.GetPixel(x + i, y + j);         //piksel rengini alır
+                            redValues.Add(pixelColor.R);            //bileşenler listelere eklenir
                             greenValues.Add(pixelColor.G);
                             blueValues.Add(pixelColor.B);
                         }
                     }
 
-                    redValues.Sort();
+                    redValues.Sort();             //listelerdeki değerler sıralanır
                     greenValues.Sort();
                     blueValues.Sort();
 
-                    int medianR = redValues[4];
+                    int medianR = redValues[4];            //ortanca değerler hesaplanır , 3x3 lük matris olduğunda 4.indis alınır
                     int medianG = greenValues[4];
                     int medianB = blueValues[4];
 
-                    Color newColor = Color.FromArgb(medianR, medianG, medianB);
+                    Color newColor = Color.FromArgb(medianR, medianG, medianB);        //yeni renk oluşturulup görüntüye uygulanır
                     filteredImage.SetPixel(x, y, newColor);
                 }
             }
@@ -252,17 +251,13 @@ namespace ImageProcessingForm
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Kullanıcı tarafından seçilen resmi yükle
                 string imagePath = openFileDialog.FileName;
                 Bitmap selectedImage = new Bitmap(imagePath);
 
-                // Seçilen resmi beforePic'te göster
                 beforePic.Image = selectedImage;
 
-                // Yeni resmi orijinal resim olarak ayarla
                 defaultImage = new Bitmap(selectedImage);
 
-                // İşlenmiş görüntüyü temizleyin
                 afterPic.Image = null;
             }
 
@@ -270,7 +265,6 @@ namespace ImageProcessingForm
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            // "Delete" butonuna basıldığında burada resmi temizleyebilirsiniz
             afterPic.Image = null;
             beforePic.Image = null;
 
@@ -279,7 +273,6 @@ namespace ImageProcessingForm
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // "Save" butonuna basıldığında burada resmi kaydedebilirsiniz
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -296,7 +289,7 @@ namespace ImageProcessingForm
             if (imageToProcess != null)
             {
                 Bitmap saltImage = AddSaltNoise(imageToProcess);
-                Bitmap saltPepperImage = AddPepperNoise(saltImage); // Salt gürültüsü eklenmiş görüntüye biber gürültüsü ekler
+                Bitmap saltPepperImage = AddPepperNoise(saltImage);       // Salt gürültüsü eklenmiş görüntüye biber gürültüsü ekler
                 afterPic.Image = saltPepperImage;
             }
             else

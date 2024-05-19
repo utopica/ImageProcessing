@@ -9,6 +9,7 @@ namespace ImageProcessingForm
     public partial class RenkUzayı : Form
     {
         private Bitmap defaultImage;
+
         public RenkUzayı()
         {
             InitializeComponent();
@@ -16,7 +17,6 @@ namespace ImageProcessingForm
             this.StartPosition = FormStartPosition.CenterScreen;
 
             string parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
             defaultImage = new Bitmap(imagePath);
@@ -28,7 +28,11 @@ namespace ImageProcessingForm
             comboBox1.Items.Add("NTSC");
             comboBox1.Items.Add("HSV");
             comboBox1.Items.Add("LAB");
-            comboBox1.Items.Add("YbCr");
+            comboBox1.Items.Add("YCbCr");
+            comboBox1.Items.Add("CMY");
+            comboBox1.Items.Add("CIE");
+            comboBox1.Items.Add("CMYK");
+        
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         }
 
@@ -57,8 +61,17 @@ namespace ImageProcessingForm
                 case "LAB":
                     convertedImage = ConvertToLAB(defaultImage);
                     break;
-                case "YbCr":
-                    convertedImage = ConvertToYbCr(defaultImage);
+                case "YCbCr":
+                    convertedImage = ConvertToYCbCr(defaultImage);
+                    break;
+                case "CMY":
+                    convertedImage = ConvertToCMY(defaultImage);
+                    break;
+                case "CIE":
+                    convertedImage = ConvertToCIE(defaultImage);
+                    break;
+                case "CMYK":
+                    convertedImage = ConvertToCMYK(defaultImage);
                     break;
                 default:
                     MessageBox.Show("Geçersiz renk uzayı seçimi.");
@@ -81,7 +94,7 @@ namespace ImageProcessingForm
                 for (int x = 0; x < image.Width; x++)
                 {
                     Color pixelColor = image.GetPixel(x, y);
-
+                    //x y eksenlerindeki piksel değerlerini alır ve r g b ye atar
                     int r = pixelColor.R;
                     int g = pixelColor.G;
                     int b = pixelColor.B;
@@ -105,8 +118,6 @@ namespace ImageProcessingForm
             return result;
         }
 
-
-
         private Bitmap ConvertToHSV(Bitmap image)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
@@ -121,23 +132,27 @@ namespace ImageProcessingForm
                     float g = pixelColor.G / 255.0f;
                     float b = pixelColor.B / 255.0f;
 
-                    float cmax = Math.Max(r, Math.Max(g, b));
+                    float cmax = Math.Max(r, Math.Max(g, b));//rgb bileşenin en büyük ve en küçük değerini bularak deltaya atar
                     float cmin = Math.Min(r, Math.Min(g, b));
                     float delta = cmax - cmin;
 
-                    float h = 0;
+                    float h = 0; //h 0sa delta  0 
                     if (delta != 0)
                     {
-                        if (cmax == r)
+                        if (cmax == r) //h değeri kırmızıya göre hesaplanır
                             h = 60 * (((g - b) / delta) % 6);
-                        else if (cmax == g)
+                        else if (cmax == g)//yeşile göre hesaplanır
                             h = 60 * (((b - r) / delta) + 2);
-                        else
+                        else//maviye göre hesaplanır
                             h = 60 * (((r - g) / delta) + 4);
                     }
-
+                    //s (doygunluk): En büyük bileşen sıfırsa, doygunluk sıfırdır. Aksi takdirde, delta'nın cmax'a oranıdır.
+                    //v(parlaklık): cmax'ın değeridir.
                     float s = cmax == 0 ? 0 : delta / cmax;
                     float v = cmax;
+
+                    //h'yi pozitif bir değere normalize eder.
+                    //HSV değerlerini 8 - bit aralığına dönüştürür: hh, ss, vv.
 
                     h = (h < 0) ? 360 + h : h;
 
@@ -195,7 +210,8 @@ namespace ImageProcessingForm
 
             return result;
         }
-        private Bitmap ConvertToYbCr(Bitmap image)
+
+        private Bitmap ConvertToYCbCr(Bitmap image)
         {
             if (image != null)
             {
@@ -237,10 +253,116 @@ namespace ImageProcessingForm
             }
         }
 
+        private Bitmap ConvertToCMY(Bitmap image)
+        {
+            Bitmap result = new Bitmap(image.Width, image.Height);
 
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
 
+                    // RGB değerlerini al
+                    int R = pixelColor.R;
+                    int G = pixelColor.G;
+                    int B = pixelColor.B;
 
+                    // CMY dönüşüm formülleri
+                    int C = 255 - R;
+                    int M = 255 - G;
+                    int Y = 255 - B;
 
+                    // Yeni renk oluştur ve CMY resmine ekle
+                    Color cmyColor = Color.FromArgb(C, M, Y);
+                    result.SetPixel(x, y, cmyColor);
+                }
+            }
+
+            return result;
+        }
+
+        private Bitmap ConvertToCMYK(Bitmap image)
+        {
+            Bitmap result = new Bitmap(image.Width, image.Height);
+
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+
+                    // RGB değerlerini al
+                    double R = pixelColor.R / 255.0;
+                    double G = pixelColor.G / 255.0;
+                    double B = pixelColor.B / 255.0;
+
+                    // CMYK dönüşüm formülleri
+                    double K = 1 - Math.Max(R, Math.Max(G, B));
+                    double C = (1 - R - K) / (1 - K);
+                    double M = (1 - G - K) / (1 - K);
+                    double Y = (1 - B - K) / (1 - K);
+
+                    // Sınırları kontrol et
+                    C = Math.Min(1, Math.Max(0, C));
+                    M = Math.Min(1, Math.Max(0, M));
+                    Y = Math.Min(1, Math.Max(0, Y));
+                    K = Math.Min(1, Math.Max(0, K));
+
+                    // Yeni renk oluştur ve CMYK resmine ekle
+                    int cVal = (int)(C * 255);
+                    int mVal = (int)(M * 255);
+                    int yVal = (int)(Y * 255);
+                    int kVal = (int)(K * 255);
+
+                    Color cmykColor = Color.FromArgb(cVal, mVal, yVal, kVal);
+                    result.SetPixel(x, y, cmykColor);
+                }
+            }
+
+            return result;
+        }
+
+        private Bitmap ConvertToCIE(Bitmap image)
+        {
+            Bitmap result = new Bitmap(image.Width, image.Height);
+
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+
+                    // RGB değerlerini al
+                    double R = pixelColor.R / 255.0;
+                    double G = pixelColor.G / 255.0;
+                    double B = pixelColor.B / 255.0;
+
+                    // CIE XYZ dönüşüm formülleri
+                    double X = R * 0.4124 + G * 0.3576 + B * 0.1805;
+                    double Y = R * 0.2126 + G * 0.7152 + B * 0.0722;
+                    double Z = R * 0.0193 + G * 0.1192 + B * 0.9505;
+
+                    // Normalize et ve sınırları kontrol et
+                    X = Math.Min(1, Math.Max(0, X));
+                    Y = Math.Min(1, Math.Max(0, Y));
+                    Z = Math.Min(1, Math.Max(0, Z));
+
+                    // Yeni renk oluştur ve CIE resmine ekle
+                    int xVal = (int)(X * 255);
+                    int yVal = (int)(Y * 255);
+                    int zVal = (int)(Z * 255);
+
+                    Color cieColor = Color.FromArgb(xVal, yVal, zVal);
+                    result.SetPixel(x, y, cieColor);
+                }
+            }
+
+            return result;
+        }
+
+       
+     
         private void DownloadImage()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -265,13 +387,13 @@ namespace ImageProcessingForm
         {
             beforePic.Image = null;
             afterPic.Image = null;
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveImage();
         }
+
         private void SaveImage()
         {
             if (afterPic.Image != null)
@@ -287,7 +409,7 @@ namespace ImageProcessingForm
                     {
                         string savePath = saveDialog.FileName;
                         afterPic.Image.Save(savePath, ImageFormat.Jpeg);
-                        MessageBox.Show("Resim şuraya kaydedildi :  " + savePath);
+                        MessageBox.Show("Resim şuraya kaydedildi: " + savePath);
                     }
                 }
             }
@@ -296,9 +418,5 @@ namespace ImageProcessingForm
                 MessageBox.Show("Kaydedilecek resim bulunmamaktadır.");
             }
         }
-
-        
-
-
     }
 }

@@ -65,7 +65,7 @@ namespace ImageProcessingForm
 
         private Bitmap RotateImageWithNearestNeighbor(Bitmap image, int angle)
         {
-            double radianAngle = angle * Math.PI / 180.0;
+            double radianAngle = angle * Math.PI / 180.0; //formül
             int width = image.Width;
             int height = image.Height;
             Bitmap rotatedImage = new Bitmap(width, height);
@@ -82,7 +82,7 @@ namespace ImageProcessingForm
                     int newX = (int)(((double)(x - centerX)) * Math.Cos(radianAngle) - ((double)(y - centerY)) * Math.Sin(radianAngle)) + centerX;
                     int newY = (int)(((double)(x - centerX)) * Math.Sin(radianAngle) + ((double)(y - centerY)) * Math.Cos(radianAngle)) + centerY;
 
-                    if (newX >= 0 && newX < width && newY >= 0 && newY < height)
+                    if (newX >= 0 && newX < width && newY >= 0 && newY < height)// newx ve newy nin 0 dan ve resmin boyutundan büyük olmamasını sağlama
                     {
                         Color nearestColor = image.GetPixel(newX, newY);
                         rotatedImage.SetPixel(x, y, nearestColor);

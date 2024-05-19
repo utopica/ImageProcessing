@@ -58,8 +58,8 @@ namespace ImageProcessingForm
 
 
         private Bitmap ApplyGaussianFilter(Bitmap image, double sigma=1.0, int kernelSize=3)
-        {   // dışardan da sigma ve kernelsize alabilir ama girilmezse varsayılan olarak tanımlanmıştır
-            Bitmap result = new Bitmap(image.Width, image.Height);//defaultImagenin yükseklik genişlik değerleri
+        {   
+            Bitmap result = new Bitmap(image.Width, image.Height);  
             double[,] kernel = GenerateGaussianKernel(sigma, kernelSize);
             //kernel oluşturma fonksiyonu
 
@@ -80,22 +80,21 @@ namespace ImageProcessingForm
                         for (int j = 0; j < kernelWidth; j++)
                         {
                             int pixelX = Math.Min(Math.Max(x + j - kernelOffset, 0), image.Width - 1);
-                            //math.max X koordinatının 0'dan küçük olmamasını sağlar. Yani, görüntünün sol kenarının dışına çıkmasını engeller
-                            //math.min görüntünün sağ kenarının dışına çıkmasını engeller
+
+                            //math.max görüntünün sol kenarının dışına , math.min görüntünün sağ kenarının dışına çıkmasını engeller
+                            
                             int pixelY = Math.Min(Math.Max(y + i - kernelOffset, 0), image.Height - 1);
-                            //math.max Y koordinatının 0'dan küçük olmamasını sağlar. Yani, görüntünün üst kenarının dışına çıkmasını engeller
-                            Color pixel = image.GetPixel(pixelX, pixelY);//belirtilen koodinatlardaki pixelin rengini color nesnesi olarak alıyor
+
+                            //math.max Y görüntünün üst kenarının dışına çıkmasını engeller
+
+                            Color pixel = image.GetPixel(pixelX, pixelY);
                             double coefficient = kernel[i, j]; //kernelin belirtilen koordinatlarındaki katsayısı coefficiente eşitliyor
                             newValueR += pixel.R * coefficient; 
                             newValueG += pixel.G * coefficient;
                             newValueB += pixel.B * coefficient;
                         }
                     }
-                    /*rgb nin new value ları ilk önce sıfırdan düşükse 0 a eşitliyor
-                     daha sonra 255 ten büyükse 255 e eşitliyor katsayıyla çarpılmış piksellerle
-                     yeni bir color nesnesi oluşturuyor result.setpixel kısmında belirtilen 
-                     koordinatlara yeni renk değerlerini yerleştiriyor
-                     */
+                    
                     int intValueR = Math.Min(Math.Max((int)newValueR, 0), 255);
                     int intValueG = Math.Min(Math.Max((int)newValueG, 0), 255);
                     int intValueB = Math.Min(Math.Max((int)newValueB, 0), 255);
@@ -117,10 +116,11 @@ namespace ImageProcessingForm
 
             for (int i = -kernelOffset; i <= kernelOffset; i++)
             {
-                for (int j = -kernelOffset; j <= kernelOffset; j++)//kernelin içini geziyor
+                for (int j = -kernelOffset; j <= kernelOffset; j++)
                 {
-                    double exponent = -(i * i + j * j) / (2 * sigma * sigma); // kernelin bulunduğu konuma göre  formülün üstel kısmını yapıyor
-                    kernel[i + kernelOffset, j + kernelOffset] = coefficient * Math.Exp(exponent);// üstel kısmı yapıyor
+                    double exponent = -(i * i + j * j) / (2 * sigma * sigma);   //  formülün üstel kısmı
+                    kernel[i + kernelOffset, j + kernelOffset] = coefficient * Math.Exp(exponent);
+                    
                     //cofficient ile üstel kısmı çarpıp kernelin belirli pikseline yerleştiriyor
                     sum += kernel[i + kernelOffset, j + kernelOffset];
                 }

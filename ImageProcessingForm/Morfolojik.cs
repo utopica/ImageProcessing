@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
 
 namespace ImageProcessingForm
@@ -32,6 +33,11 @@ namespace ImageProcessingForm
 
 
         }
+
+        //Dilation işlemi, bir görüntüdeki parlak bölgeleri genişletmek için kullanılır.
+        //Bu işlem, genellikle beyaz renkli nesneleri büyütmek veya görüntüdeki küçük delikleri doldurmak için kullanılır.
+        //  boş bit Bitmap oluşturur. Her piksel için(x, y) koordinatları üzerinden dolaşır 3*3 komşuluk bölgesini tarar en parlak rengi bulur result bitmapine yazar
+        //Sonuç olarak, daha parlak pikseller çevresindeki daha karanlık pikselleri "genişleterek" doldurur.
 
         private Bitmap Dilation(Bitmap image)
         {
@@ -66,6 +72,9 @@ namespace ImageProcessingForm
 
             return result;
         }
+        //Erosion işlemi, bir görüntüdeki parlak bölgeleri küçültmek için kullanılır. Bu işlem, genellikle beyaz renkli nesneleri küçültmek veya ince detayları kaldırmak için kullanılır.
+        // dilationdaki gibi komşu matrisleri tarayarak Bu komşuluk bölgesinde  (en karanlık) rengi bulur.bunu bitmape yazar.daha karanlık pikseller çevresindeki daha parlak pikselleri aşındırarak kaldırır.
+
 
         private Bitmap Erosion(Bitmap image)
         {

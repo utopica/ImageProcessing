@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace ImageProcessingForm
@@ -14,6 +13,7 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         private Bitmap processedImage;
+
 
         public Esikleme()
         {
@@ -33,6 +33,7 @@ namespace ImageProcessingForm
             numericUpDown1.Minimum = 0;
             numericUpDown1.Maximum = 255; // Eşik değeri için minimum ve maksimum değerleri ayarla
         }
+
 
         private void ResimYukle()
         {
@@ -112,45 +113,19 @@ namespace ImageProcessingForm
             afterPic.Image = processedImage;
         }
 
+
         private Bitmap AdaptiveThreshold(Bitmap image, int thresholdValue)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
-            int windowSize = 15; //  her piksel için değerlendirilecek yerel pencerenin boyutunu belirleriz.boyutundaki pencere içerisindeki piksel değerlerinin ortalamasını alırız.
-            int halfWindow = windowSize / 2;
 
             for (int x = 0; x < image.Width; x++)
             {
                 for (int y = 0; y < image.Height; y++)
                 {
-                    // Yerel pencere sınırlarını belirle
-                    int minX = Math.Max(0, x - halfWindow);
-                    int maxX = Math.Min(image.Width - 1, x + halfWindow);
-                    int minY = Math.Max(0, y - halfWindow);
-                    int maxY = Math.Min(image.Height - 1, y + halfWindow);
+                    Color pixelColor = image.GetPixel(x, y);
+                    int grayScale = (int)(pixelColor.R * 0.3 + pixelColor.G * 0.59 + pixelColor.B * 0.11);
 
-                    int sum = 0;
-                    int count = 0;
-
-                    // Yerel pencere içindeki pikselleri topla
-                    for (int i = minX; i <= maxX; i++)
-                    {
-                        for (int j = minY; j <= maxY; j++)
-                        {
-                            Color pixelColor = image.GetPixel(i, j);
-                            int grayScale = (int)(pixelColor.R * 0.3 + pixelColor.G * 0.59 + pixelColor.B * 0.11);
-                            sum += grayScale;
-                            count++;
-                        }
-                    }
-
-                    //Pencere içerisindeki her pikselin gri tonlama değerini toplar ve piksel sayısına böleriz 
-                    int localThreshold = sum / count;
-
-                    // Pikseli ikili değerlere dönüştür
-                    Color currentPixelColor = image.GetPixel(x, y);
-                    int currentGrayScale = (int)(currentPixelColor.R * 0.3 + currentPixelColor.G * 0.59 + currentPixelColor.B * 0.11);
-
-                    if (currentGrayScale > localThreshold - thresholdValue)
+                    if (grayScale > thresholdValue)
                     {
                         result.SetPixel(x, y, Color.White);
                     }
@@ -163,5 +138,9 @@ namespace ImageProcessingForm
 
             return result;
         }
+
+
+
+
     }
 }

@@ -14,7 +14,7 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         
-        //private Bitmap originalImage;
+      
         public Dondurme()
         {
             InitializeComponent();

@@ -19,12 +19,7 @@ namespace ImageProcessingForm
             afterPic.SizeMode = PictureBoxSizeMode.Zoom;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
         }
-        private void beforePic_Click(object sender, EventArgs e)
-        {
-        }
-        private void afterPic_Click(object sender, EventArgs e)
-        {
-        }
+      
         private void btnStart_Click(object sender, EventArgs e)
         {
             int blurSize;
@@ -99,9 +94,7 @@ namespace ImageProcessingForm
                 beforePic.Image = new Bitmap(openFileDialog1.FileName); // seçilen dosyayı pictureboxa yükler
             }
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
+       
         private void FiltreUygulama(int blurSize)
         {
             Bitmap imageToProcess = beforePic.Image != null ? new Bitmap(beforePic.Image) : defaultImage; // beforePic'te resim varsa onu yoksa varsayılan resmi uygular

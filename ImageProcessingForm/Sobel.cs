@@ -33,15 +33,15 @@ namespace ImageProcessingForm
         }
         private Bitmap ApplySobelFilter(Bitmap image, string direction, int threshold)
         {
-            if (direction == "horizontal") //yatay
+            if (direction == "horizontal")//Yatay yönde Sobel filtresi uygular.
             {
                 return ApplyHorizontalSobelFilter(image, threshold);
             }
-            else if (direction == "vertical") //dikey
+            else if (direction == "vertical")// Dikey yönde Sobel filtresi uygular.
             {
                 return ApplyVerticalSobelFilter(image, threshold);
             }
-            else if (direction == "both")
+            else if (direction == "both")//Hem yatay hem de dikey yönde Sobel filtresi uygular.
             {
                 return ApplyBothSobelFilter(image, threshold);
             }
@@ -55,7 +55,8 @@ namespace ImageProcessingForm
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
 
-            for (int x = 1; x < image.Width - 1; x++)//Bu döngü, görüntünün genişliği boyunca piksel işlemeye yarar. x değişkeni sütunları temsil eder ve kenar pikselleri hariç tutulur (1den başlayıp image.Width - 1e kadar gider), çünkü kenar piksellerin komşuları eksiktir ve hesaplama yapılamaz.
+            for (int x = 1; x < image.Width - 1; x++)
+                //Bu döngü, görüntünün genişliği boyunca piksel işlemeye yarar. x değişkeni sütunları temsil eder ve kenar pikselleri hariç tutulur (1den başlayıp image.Width - 1e kadar gider), çünkü kenar piksellerin komşuları eksiktir ve hesaplama yapılamaz.
             {
                 for (int y = 1; y < image.Height - 1; y++)
                 {

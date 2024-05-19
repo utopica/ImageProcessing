@@ -34,6 +34,10 @@
             BtnSave = new FontAwesome.Sharp.IconButton();
             btnAdd = new FontAwesome.Sharp.IconButton();
             btnDel = new FontAwesome.Sharp.IconButton();
+            textBox1 = new TextBox();
+            label1 = new Label();
+            textBox2 = new TextBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)beforePic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).BeginInit();
             SuspendLayout();
@@ -133,12 +137,52 @@
             btnDel.UseVisualStyleBackColor = false;
             btnDel.Click += btnDel_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(330, 594);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(178, 27);
+            textBox1.TabIndex = 33;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(63, 590);
+            label1.Name = "label1";
+            label1.Size = new Size(267, 31);
+            label1.TabIndex = 34;
+            label1.Text = "kernel boyutu(1,3,5...)  :";
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(330, 635);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(178, 27);
+            textBox2.TabIndex = 35;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(63, 631);
+            label2.Name = "label2";
+            label2.Size = new Size(170, 31);
+            label2.TabIndex = 36;
+            label2.Text = "sigma değeri  :";
+            // 
             // Konvolusyon
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1369, 674);
+            Controls.Add(label2);
+            Controls.Add(textBox2);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
             Controls.Add(btnDel);
             Controls.Add(btnAdd);
             Controls.Add(BtnSave);
@@ -150,6 +194,7 @@
             ((System.ComponentModel.ISupportInitialize)beforePic).EndInit();
             ((System.ComponentModel.ISupportInitialize)afterPic).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -160,5 +205,9 @@
         private FontAwesome.Sharp.IconButton BtnSave;
         private FontAwesome.Sharp.IconButton btnAdd;
         private FontAwesome.Sharp.IconButton btnDel;
+        private TextBox textBox1;
+        private Label label1;
+        private TextBox textBox2;
+        private Label label2;
     }
 }

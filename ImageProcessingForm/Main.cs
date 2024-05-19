@@ -73,12 +73,10 @@ namespace ImageProcessingForm
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Sadece resim dosyalarını filtrele
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 beforePic.Image = null;
-                // Seçilen resmi PictureBox kontrolüne yükle
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
@@ -92,7 +90,6 @@ namespace ImageProcessingForm
             {
                 Bitmap grayImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
 
-                // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
                 for (int y = 0; y < beforePic.Image.Height; y++)
                 {
                     for (int x = 0; x < beforePic.Image.Width; x++)
@@ -119,7 +116,6 @@ namespace ImageProcessingForm
             {
                 Bitmap binaryImage = new Bitmap(beforePic.Image.Width, beforePic.Image.Height);
 
-                // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
                 for (int y = 0; y < beforePic.Image.Height; y++)
                 {
                     for (int x = 0; x < beforePic.Image.Width; x++)
@@ -144,7 +140,7 @@ namespace ImageProcessingForm
         {
             if (dondurmeForm == null || dondurmeForm.IsDisposed)
             {
-                dondurmeForm = new Dondurme(); // Yeni bir form oluşturun
+                dondurmeForm = new Dondurme();
                 dondurmeForm.FormClosed += DondurmaForm_FormClosed;
             }
 
@@ -187,28 +183,25 @@ namespace ImageProcessingForm
 
         private void GoruntuYaklastirmaUzaklastirma()
         {
-            // Eğer oran formu daha önce oluşturulmadıysa, oluştur
             if (oranForm == null)
             {
                 oranForm = new Oran();
                 oranForm.FormClosed += OranForm_FormClosed; // Form kapandığında null yapmak için olaya abone ol
             }
 
-            // Oran formunu göster
             oranForm.Show();
 
-            // Ana formu gizle
             this.Hide();
         }
 
         private void OranForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            oranForm = null; // Form kapandığında null yap
-            this.Show(); // Ana formu göster
+            oranForm = null; 
+            this.Show(); 
         }
 
         private void RenkUzayiDonusumleri()
-        { // Eğe esikleme formu daha önce oluşturulmadıysa, oluştur
+        { 
             if (renkUzayıForm == null)
             {
                 renkUzayıForm = new RenkUzayı();
@@ -224,16 +217,15 @@ namespace ImageProcessingForm
 
         private void RenkUzayıForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            renkUzayıForm = null; // Form kapandığında null yap
-            this.Show(); // Ana formu göster
+            renkUzayıForm = null; 
+            this.Show(); 
         }
 
         private void HistogramGenisletme()
         {
-            // Eğer histogram formu daha önce oluşturulmadıysa, oluştur
             if (histogramForm == null)
             {
-                histogramForm = new Histogram(defaultImage); // Varsayılan resmi geçirin
+                histogramForm = new Histogram(defaultImage); 
                 histogramForm.FormClosed += HistogramForm_FormClosed;
             }
 
@@ -273,22 +265,20 @@ namespace ImageProcessingForm
             if (parlaklikForm == null)
             {
                 parlaklikForm = new Parlaklik();
-                parlaklikForm.FormClosed += ParlaklikForm_FormClosed; // Form kapandığında null yapmak için olaya abone ol
+                parlaklikForm.FormClosed += ParlaklikForm_FormClosed; 
             }
 
             parlaklikForm.Show();
 
-            // Ana formu gizle
             this.Hide();
 
-            // Formu göster
 
         }
 
         private void ParlaklikForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            parlaklikForm = null; // Form kapandığında null yap
-            this.Show(); // Ana formu göster
+            parlaklikForm = null; 
+            this.Show(); 
         }
 
         private void KonvolusyonIslemi()
@@ -305,13 +295,12 @@ namespace ImageProcessingForm
         }
         private void KonvolusyonForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            konvolusyonForm = null; // Form kapandığında null yap
-            this.Show(); // Ana formu göster
+            konvolusyonForm = null; 
+            this.Show(); 
         }
 
         private void EsiklemeIslemleri()
         {
-            // Eğe esikleme formu daha önce oluşturulmadıysa, oluştur
             if (esiklemeForm == null)
             {
                 esiklemeForm = new Esikleme();
@@ -327,17 +316,16 @@ namespace ImageProcessingForm
 
         private void EsiklemeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            esiklemeForm = null; // Form kapandığında null yap
-            this.Show(); // Ana formu göster
+            esiklemeForm = null; 
+            this.Show(); 
         }
 
 
         private void KenarBulma()
         {
-            // Eğer histogram formu daha önce oluşturulmadıysa, oluştur
             if (sobelForm == null)
             {
-                sobelForm = new Sobel(defaultImage); // Varsayılan resmi geçirin
+                sobelForm = new Sobel(defaultImage); 
                 sobelForm.FormClosed += SobelForm_FormClosed;
             }
 
@@ -385,7 +373,6 @@ namespace ImageProcessingForm
         }
 
 
-
         private void MorfolojikIslemler()
         {
             if (morfolojikForm == null)
@@ -402,8 +389,6 @@ namespace ImageProcessingForm
             morfolojikForm = null;
             this.Show();
         }
-
-
 
 
         private void beforePic_MouseUp(object sender, MouseEventArgs e)

@@ -170,7 +170,7 @@ namespace ImageProcessingForm
         {
             Bitmap binaryImage = new Bitmap(originalImage.Width, originalImage.Height);
 
-            // Her bir pikselin renk değerlerinin ortalamasını alarak gri tonlamaya dönüştürme
+
             for (int y = 0; y < originalImage.Height; y++)
             {
                 for (int x = 0; x < originalImage.Width; x++)
@@ -197,9 +197,9 @@ namespace ImageProcessingForm
                 binaryPic.Image = null;
 
                 originalImage = new Bitmap(openFileDialog1.FileName);
-                binaryImage = Binary(originalImage); // Yeni resme binary işlemi uygula
-                DisplayImageBefore(originalImage); // İşlem yapılmış resmi beforePic'te göster
-                DisplayImageBinary(binaryImage); // Binary işlemi yapılmış resmi binaryPic'te göster
+                binaryImage = Binary(originalImage); 
+                DisplayImageBefore(originalImage); 
+                DisplayImageBinary(binaryImage); 
             }
         }
 
@@ -254,8 +254,8 @@ namespace ImageProcessingForm
 
             if (processedImage != null)
             {
-                afterImage = processedImage; // Son işlem sonrası oluşan resmi sakla
-                DisplayImage(afterImage); // İşlenmiş resmi göster
+                afterImage = processedImage; 
+                DisplayImage(afterImage); 
             }
         }
     }

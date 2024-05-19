@@ -54,17 +54,17 @@ namespace ImageProcessingForm
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
 
-            for (int x = 1; x < image.Width - 1; x++)
+            for (int x = 1; x < image.Width - 1; x++)//Bu döngü, görüntünün genişliği boyunca piksel işlemeye yarar. x değişkeni sütunları temsil eder ve kenar pikselleri hariç tutulur (1den başlayıp image.Width - 1e kadar gider), çünkü kenar piksellerin komşuları eksiktir ve hesaplama yapılamaz.
             {
                 for (int y = 1; y < image.Height - 1; y++)
                 {
-                    // Sobel operatörleri
-                    int pixelValue = (GetPixelValue(image, x - 1, y - 1) * -1) +//Sol üst komşu piksel değeri -1 ile çarpılır.
-                                     (GetPixelValue(image, x - 1, y) * -2) +//Sol komşu piksel değeri -2 ile çarpılır.
-                                     (GetPixelValue(image, x - 1, y + 1) * -1) +//Sol alt komşu piksel değeri -1 ile çarpılır.
-                                     (GetPixelValue(image, x + 1, y - 1)) +//Sağ üst komşu piksel değeri.
-                                     (GetPixelValue(image, x + 1, y) * 2) +//Sağ komşu piksel değeri 2 ile çarpılır.
-                                     (GetPixelValue(image, x + 1, y + 1));// Sağ alt komşu piksel değeri.
+                    // Sobel yatay matristeki değerlerle çarpılmış halidir
+                    int pixelValue = (GetPixelValue(image, x - 1, y - 1) * -1) +
+                                     (GetPixelValue(image, x - 1, y) * -2) +
+                                     (GetPixelValue(image, x - 1, y + 1) * -1) +
+                                     (GetPixelValue(image, x + 1, y - 1)) +
+                                     (GetPixelValue(image, x + 1, y) * 2) +
+                                     (GetPixelValue(image, x + 1, y + 1));
 
                     if (pixelValue < threshold)//Hesaplanan pixelValue, belirtilen eşik değerinden küçükse siyah (0) olarak ayarlanır.Eşik değerinden büyükse beyaz(255) olarak ayarlanır.
 
@@ -76,7 +76,7 @@ namespace ImageProcessingForm
                         pixelValue = 255;
                     }
 
-                    result.SetPixel(x, y, Color.FromArgb(pixelValue, pixelValue, pixelValue));
+                    result.SetPixel(x, y, Color.FromArgb(pixelValue, pixelValue, pixelValue));//Piksel değeri gri tonlama (grayscale) formunda ayarlanır
                 }
             }
 
@@ -87,11 +87,11 @@ namespace ImageProcessingForm
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
 
-            for (int x = 1; x < image.Width - 1; x++)
+            for (int x = 1; x < image.Width - 1; x++)//Bu döngü, görüntünün genişliği boyunca piksel işlemeye yarar.
             {
                 for (int y = 1; y < image.Height - 1; y++)
                 {
-                    // Sobel operatörleri
+                    // Sobel dikey matrisindeki değerlerle çarpılır.
                     int pixelValue = (GetPixelValue(image, x - 1, y - 1) * -1) +
                                      (GetPixelValue(image, x, y - 1) * -2) +
                                      (GetPixelValue(image, x + 1, y - 1) * -1) +
@@ -126,7 +126,7 @@ namespace ImageProcessingForm
             for (int x = 0; x < image.Width; x++)
             {
                 for (int y = 0; y < image.Height; y++)
-                {
+                {    //Her piksel için, yatay ve dikey Sobel filtrelerinin sonuçlarının kareleri toplanır ve karekökü alınır. Bu işlem, kenarların hem yatay hem de dikey bileşenlerini birleştirir ve genel kenar gücünü hesaplar.
                     int pixelValue = (int)Math.Sqrt(Math.Pow(horizontalResult.GetPixel(x, y).R, 2) + Math.Pow(verticalResult.GetPixel(x, y).R, 2));
 
                     if (pixelValue < threshold)
@@ -202,7 +202,7 @@ namespace ImageProcessingForm
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            // Eşik değeri alınır
+           
             int threshold;
             if (!int.TryParse(textBox1esik.Text, out threshold))
             {
@@ -210,20 +210,20 @@ namespace ImageProcessingForm
                 return;
             }
 
-            // Hangi radyo düğmesinin seçildiğini kontrol edin ve Sobel filtresini uygulayın
+           
             if (radioButton1horizontal.Checked)
             {
-                // Horizontal Sobel filtresini uygulayın
+              
                 afterPic.Image = ApplySobelFilter(defaultImage, "horizontal", threshold);
             }
             else if (radioButton2vertical.Checked)
             {
-                // Vertical Sobel filtresini uygulayın
+                
                 afterPic.Image = ApplySobelFilter(defaultImage, "vertical", threshold);
             }
             else if (radioButton3both.Checked)
             {
-                // Both Sobel filtresini uygulayın
+                
                 afterPic.Image = ApplySobelFilter(defaultImage, "both", threshold);
             }
         }
@@ -238,17 +238,17 @@ namespace ImageProcessingForm
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Kullanıcı tarafından seçilen resmi yükle
+                
                 string imagePath = openFileDialog.FileName;
                 Bitmap selectedImage = new Bitmap(imagePath);
 
-                // Seçilen resmi beforePic'te göster
+               
                 beforePic.Image = selectedImage;
 
-                // Yeni resmi orijinal resim olarak ayarla
+               
                 defaultImage = new Bitmap(selectedImage);
 
-                // İşlenmiş görüntüyü temizleyin
+            
                 afterPic.Image = null;
             }
 
@@ -257,14 +257,14 @@ namespace ImageProcessingForm
         private void btnDel_Click(object sender, EventArgs e)
         {
 
-            // "Delete" butonuna basıldığında burada resmi temizleyebilirsiniz
+         
             afterPic.Image = null;
             beforePic.Image = null;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // "Save" butonuna basıldığında burada resmi kaydedebilirsiniz
+           
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)

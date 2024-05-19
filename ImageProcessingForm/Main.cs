@@ -96,7 +96,7 @@ namespace ImageProcessingForm
                     {
                         Color originalColor = ((Bitmap)beforePic.Image).GetPixel(x, y);
                         int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
-                        Color grayColor = Color.FromArgb(grayValue, grayValue, grayValue);
+                        Color grayColor = Color.FromArgb(grayValue, grayValue, grayValue); //r=g=b olunca gri ton oluyor
                         grayImage.SetPixel(x, y, grayColor);
                     }
                 }

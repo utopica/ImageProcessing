@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-
 using System.IO;
-
-using System.IO; 
-
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,18 +28,13 @@ namespace ImageProcessingForm
             string imagePath = Path.Combine(parentDirectory, "Images", "girl.jpg");
 
 
-
-   
-
-         
-
             defaultImage = new Bitmap(imagePath);
             beforePic.Image = defaultImage;
             afterPic.SizeMode = PictureBoxSizeMode.Zoom;
             beforePic.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-    
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (beforePic.Image != null)

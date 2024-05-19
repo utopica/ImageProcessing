@@ -15,7 +15,7 @@ namespace ImageProcessingForm
     {
         private Bitmap defaultImage;
         
- 
+
 
         public Sobel(Bitmap mainFormImage)
         {

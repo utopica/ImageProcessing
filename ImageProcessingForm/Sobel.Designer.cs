@@ -52,7 +52,6 @@
             beforePic.Size = new Size(588, 561);
             beforePic.TabIndex = 0;
             beforePic.TabStop = false;
-            beforePic.Click += beforePic_Click;
             // 
             // afterPic
             // 
@@ -61,7 +60,6 @@
             afterPic.Size = new Size(588, 561);
             afterPic.TabIndex = 1;
             afterPic.TabStop = false;
-            afterPic.Click += afterPic_Click;
             // 
             // btnAdd
             // 
@@ -198,7 +196,6 @@
             textBox1esik.Name = "textBox1esik";
             textBox1esik.Size = new Size(146, 34);
             textBox1esik.TabIndex = 31;
-            textBox1esik.TextChanged += textBox1esik_TextChanged;
             // 
             // btnStart
             // 

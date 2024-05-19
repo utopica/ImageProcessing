@@ -163,21 +163,6 @@ namespace ImageProcessingForm
             }
         }
 
-        private void textBox1esik_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void beforePic_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void afterPic_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void radioButton3both_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton3both.Checked)

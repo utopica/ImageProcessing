@@ -91,49 +91,47 @@ namespace ImageProcessingForm
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Sadece resim dosyalarını filtrele
+          
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 beforePic.Image = null;
                 afterPic.Image = null;
-                // Seçilen resmi PictureBox kontrolüne yükle
+        
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
 
         private Bitmap ZoomImage(Bitmap originalImage, int zoomFactor)
         {
-            // Yakınlaştırma/uzaklaştırma faktörüne göre yeni boyutları hesapla
+            // Yakınlaştırma/uzaklaştırmaya göre yeni boyutlar hesaplarız
             int newWidth = originalImage.Width + zoomFactor;
             int newHeight = originalImage.Height + zoomFactor;
 
-            // Yeni boyutlara göre bir Bitmap oluştur
             Bitmap zoomedImage = new Bitmap(newWidth, newHeight);
 
-            // Yakınlaştırma/uzaklaştırma işlemini gerçekleştir
+
             using (Graphics g = Graphics.FromImage(zoomedImage))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.DrawImage(originalImage, new Rectangle(0, 0, newWidth, newHeight));
             }
 
-            // Yakınlaştırılmış/uzaklaştırılmış resmi döndür
-            return zoomedImage;
+           
+               return zoomedImage;
         }
 
         private void yakınlastırmaUpDown_ValueChanged(object sender, EventArgs e)
         {
             if (beforePic.Image != null)
             {
-                // Yakınlaştırma faktörünü al
+                
                 int zoomFactor = (int)yakınlastırmaUpDown.Value;
 
-                // Yakınlaştırma işlemi
                 Bitmap originalImage = beforePic.Image as Bitmap;
                 Bitmap zoomedImage = ZoomImage(originalImage, zoomFactor);
 
-                // Yakınlaştırılmış resmi göster
+                
                 afterPic.Image = zoomedImage;
             }
         }
@@ -142,14 +140,14 @@ namespace ImageProcessingForm
         {
             if (beforePic.Image != null)
             {
-                // Uzaklaştırma faktörünü al
+                // Uzaklaştırma faktörünü alırız
                 int zoomFactor = -(int)uzaklastırmaUpDown.Value;
 
-                // Uzaklaştırma işlemi
+          
                 Bitmap originalImage = beforePic.Image as Bitmap;
                 Bitmap zoomedImage = ZoomImage(originalImage, zoomFactor);
 
-                // Uzaklaştırılmış resmi göster
+        
                 afterPic.Image = zoomedImage;
             }
         }

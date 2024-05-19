@@ -111,11 +111,10 @@ namespace ImageProcessingForm
             afterPic.Image = processedImage;
         }
        
-        //cv2.ADAPTIVE_THRESH_MEAN_C işlevine daha yakındır. cv2.ADAPTIVE_THRESH_MEAN_C, pikselin eşik değerini, pikselin konumu etrafındaki pencere içindeki piksellerin gri tonlama değerlerinin ortalamasına göre belirler.
-        
+        //MEAN_C işlevine daha yakındır
         // bir görüntünün piksellerini belirli bir eşik değer kullanarak siyah ve beyaz değerlere dömüştürme işlemidir
         // her piksel için yerel bir eşik değer kullanarak çalışır,klasik eşikleme de tek bir global eşik değeri kullanılırken adaptif eşiklemede her pikselin komşularını dikkate alarak farklı eşik değerleri kullanılır
-        //
+    
         private Bitmap AdaptiveThreshold(Bitmap image, int thresholdValue)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
@@ -126,7 +125,7 @@ namespace ImageProcessingForm
             {
                 for (int y = 0; y < image.Height; y++)
                 {
-                    // Yerel pencere sınırlarını belirle
+                    // Yerel pencere sınırlarını belirledik
                     int minX = Math.Max(0, x - halfWindow);
                     int maxX = Math.Min(image.Width - 1, x + halfWindow);
                     int minY = Math.Max(0, y - halfWindow);
@@ -135,7 +134,7 @@ namespace ImageProcessingForm
                     int sum = 0;
                     int count = 0;
 
-                    // Yerel pencere içindeki pikselleri topla
+                  
                     for (int i = minX; i <= maxX; i++)
                     {
                         for (int j = minY; j <= maxY; j++)
@@ -147,10 +146,10 @@ namespace ImageProcessingForm
                         }
                     }
 
-                    // Yerel eşik değerini hesapla
+                    // Yerel eşik değerini hesapladık
                     int localThreshold = sum / count;
                     //Piksel değeri eşik değerden büyükse beyaz,küçükse siyah olarak ayarlanır.
-                    // Pikseli ikili değerlere dönüştür
+                    // Pikseli ikili değerlere dönüştürüyoruz
                     Color currentPixelColor = image.GetPixel(x, y);
                     int currentGrayScale = (int)(currentPixelColor.R * 0.3 + currentPixelColor.G * 0.59 + currentPixelColor.B * 0.11);
 

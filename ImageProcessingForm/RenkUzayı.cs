@@ -94,7 +94,7 @@ namespace ImageProcessingForm
                 for (int x = 0; x < image.Width; x++)
                 {
                     Color pixelColor = image.GetPixel(x, y);
-
+                    //x y eksenlerindeki piksel değerlerini alır ve r g b ye atar
                     int r = pixelColor.R;
                     int g = pixelColor.G;
                     int b = pixelColor.B;
@@ -132,23 +132,27 @@ namespace ImageProcessingForm
                     float g = pixelColor.G / 255.0f;
                     float b = pixelColor.B / 255.0f;
 
-                    float cmax = Math.Max(r, Math.Max(g, b));
+                    float cmax = Math.Max(r, Math.Max(g, b));//rgb bileşenin en büyük ve en küçük değerini bularak deltaya atar
                     float cmin = Math.Min(r, Math.Min(g, b));
                     float delta = cmax - cmin;
 
-                    float h = 0;
+                    float h = 0; //h 0sa delta  0 
                     if (delta != 0)
                     {
-                        if (cmax == r)
+                        if (cmax == r) //h değeri kırmızıya göre hesaplanır
                             h = 60 * (((g - b) / delta) % 6);
-                        else if (cmax == g)
+                        else if (cmax == g)//yeşile göre hesaplanır
                             h = 60 * (((b - r) / delta) + 2);
-                        else
+                        else//maviye göre hesaplanır
                             h = 60 * (((r - g) / delta) + 4);
                     }
-
+                    //s (doygunluk): En büyük bileşen sıfırsa, doygunluk sıfırdır. Aksi takdirde, delta'nın cmax'a oranıdır.
+                    //v(parlaklık): cmax'ın değeridir.
                     float s = cmax == 0 ? 0 : delta / cmax;
                     float v = cmax;
+
+                    //h'yi pozitif bir değere normalize eder.
+                    //HSV değerlerini 8 - bit aralığına dönüştürür: hh, ss, vv.
 
                     h = (h < 0) ? 360 + h : h;
 
@@ -278,44 +282,6 @@ namespace ImageProcessingForm
             return result;
         }
 
-        private Bitmap ConvertToCIE(Bitmap image)
-        {
-            Bitmap result = new Bitmap(image.Width, image.Height);
-
-            for (int y = 0; y < image.Height; y++)
-            {
-                for (int x = 0; x < image.Width; x++)
-                {
-                    Color pixelColor = image.GetPixel(x, y);
-
-                    // RGB değerlerini al
-                    double R = pixelColor.R / 255.0;
-                    double G = pixelColor.G / 255.0;
-                    double B = pixelColor.B / 255.0;
-
-                    // CIE XYZ dönüşüm formülleri
-                    double X = R * 0.4124 + G * 0.3576 + B * 0.1805;
-                    double Y = R * 0.2126 + G * 0.7152 + B * 0.0722;
-                    double Z = R * 0.0193 + G * 0.1192 + B * 0.9505;
-
-                    // Normalize et ve sınırları kontrol et
-                    X = Math.Min(1, Math.Max(0, X));
-                    Y = Math.Min(1, Math.Max(0, Y));
-                    Z = Math.Min(1, Math.Max(0, Z));
-
-                    // Yeni renk oluştur ve CIE resmine ekle
-                    int xVal = (int)(X * 255);
-                    int yVal = (int)(Y * 255);
-                    int zVal = (int)(Z * 255);
-
-                    Color cieColor = Color.FromArgb(xVal, yVal, zVal);
-                    result.SetPixel(x, y, cieColor);
-                }
-            }
-
-            return result;
-        }
-
         private Bitmap ConvertToCMYK(Bitmap image)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
@@ -357,6 +323,45 @@ namespace ImageProcessingForm
             return result;
         }
 
+        private Bitmap ConvertToCIE(Bitmap image)
+        {
+            Bitmap result = new Bitmap(image.Width, image.Height);
+
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+
+                    // RGB değerlerini al
+                    double R = pixelColor.R / 255.0;
+                    double G = pixelColor.G / 255.0;
+                    double B = pixelColor.B / 255.0;
+
+                    // CIE XYZ dönüşüm formülleri
+                    double X = R * 0.4124 + G * 0.3576 + B * 0.1805;
+                    double Y = R * 0.2126 + G * 0.7152 + B * 0.0722;
+                    double Z = R * 0.0193 + G * 0.1192 + B * 0.9505;
+
+                    // Normalize et ve sınırları kontrol et
+                    X = Math.Min(1, Math.Max(0, X));
+                    Y = Math.Min(1, Math.Max(0, Y));
+                    Z = Math.Min(1, Math.Max(0, Z));
+
+                    // Yeni renk oluştur ve CIE resmine ekle
+                    int xVal = (int)(X * 255);
+                    int yVal = (int)(Y * 255);
+                    int zVal = (int)(Z * 255);
+
+                    Color cieColor = Color.FromArgb(xVal, yVal, zVal);
+                    result.SetPixel(x, y, cieColor);
+                }
+            }
+
+            return result;
+        }
+
+       
      
         private void DownloadImage()
         {

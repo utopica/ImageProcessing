@@ -94,22 +94,22 @@ namespace ImageProcessingForm
                 for (int x = 0; x < image.Width; x++)
                 {
                     Color pixelColor = image.GetPixel(x, y);
-                    //x y eksenlerindeki piksel değerlerini alır ve r g b ye atar
+                   
                     int r = pixelColor.R;
                     int g = pixelColor.G;
                     int b = pixelColor.B;
 
-                    // NTSC formülleri
+                    // NTSC matrisindeki değerler
                     int Y = (int)(0.299 * r + 0.587 * g + 0.114 * b);
                     int I = (int)(0.596 * r - 0.275 * g - 0.321 * b);
                     int Q = (int)(0.212 * r - 0.528 * g + 0.311 * b);
 
-                    // Sınırları kontrol et
+              
                     Y = Math.Min(255, Math.Max(0, Y));
                     I = Math.Min(255, Math.Max(0, I));
                     Q = Math.Min(255, Math.Max(0, Q));
 
-                    // Yeni renk oluştur ve NTSC resmine ekle
+                    // Yeni renk oluşturuyorum  ve NTSC resmine ekleme yapıyorum
                     Color ntscColor = Color.FromArgb(Y, I, Q);
                     result.SetPixel(x, y, ntscColor);
                 }
@@ -132,11 +132,11 @@ namespace ImageProcessingForm
                     float g = pixelColor.G / 255.0f;
                     float b = pixelColor.B / 255.0f;
 
-                    float cmax = Math.Max(r, Math.Max(g, b));//rgb bileşenin en büyük ve en küçük değerini bularak deltaya atar
+                    float cmax = Math.Max(r, Math.Max(g, b));
                     float cmin = Math.Min(r, Math.Min(g, b));
                     float delta = cmax - cmin;
 
-                    float h = 0; //h 0sa delta  0 
+                    float h = 0; 
                     if (delta != 0)
                     {
                         if (cmax == r) //h değeri kırmızıya göre hesaplanır

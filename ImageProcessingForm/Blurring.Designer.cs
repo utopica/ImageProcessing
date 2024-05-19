@@ -49,13 +49,13 @@
             afterPic.IconColor = SystemColors.Control;
             afterPic.IconFont = FontAwesome.Sharp.IconFont.Auto;
             afterPic.IconSize = 561;
-            afterPic.Location = new Point(645, 12);
+            afterPic.Location = new Point(637, 12);
             afterPic.Margin = new Padding(4, 3, 4, 3);
             afterPic.Name = "afterPic";
             afterPic.Size = new Size(588, 561);
             afterPic.TabIndex = 7;
             afterPic.TabStop = false;
-            afterPic.Click += afterPic_Click;
+       
             // 
             // beforePic
             // 
@@ -73,7 +73,7 @@
             beforePic.Size = new Size(588, 561);
             beforePic.TabIndex = 6;
             beforePic.TabStop = false;
-            beforePic.Click += beforePic_Click;
+       
             // 
             // btnAdd
             // 
@@ -132,7 +132,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(179, 37);
             textBox1.TabIndex = 19;
-            textBox1.TextChanged += textBox1_TextChanged;
+          
             // 
             // btnStart
             // 

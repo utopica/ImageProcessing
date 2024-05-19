@@ -32,15 +32,15 @@ namespace ImageProcessingForm
         }
         private Bitmap ApplySobelFilter(Bitmap image, string direction, int threshold)
         {
-            if (direction == "horizontal")
+            if (direction == "horizontal")//Yatay yönde Sobel filtresi uygular.
             {
                 return ApplyHorizontalSobelFilter(image, threshold);
             }
-            else if (direction == "vertical")
+            else if (direction == "vertical")// Dikey yönde Sobel filtresi uygular.
             {
                 return ApplyVerticalSobelFilter(image, threshold);
             }
-            else if (direction == "both")
+            else if (direction == "both")//Hem yatay hem de dikey yönde Sobel filtresi uygular.
             {
                 return ApplyBothSobelFilter(image, threshold);
             }
@@ -59,14 +59,15 @@ namespace ImageProcessingForm
                 for (int y = 1; y < image.Height - 1; y++)
                 {
                     // Sobel operatörleri
-                    int pixelValue = (GetPixelValue(image, x - 1, y - 1) * -1) +
-                                     (GetPixelValue(image, x - 1, y) * -2) +
-                                     (GetPixelValue(image, x - 1, y + 1) * -1) +
-                                     (GetPixelValue(image, x + 1, y - 1)) +
-                                     (GetPixelValue(image, x + 1, y) * 2) +
-                                     (GetPixelValue(image, x + 1, y + 1));
+                    int pixelValue = (GetPixelValue(image, x - 1, y - 1) * -1) +//Sol üst komşu piksel değeri -1 ile çarpılır.
+                                     (GetPixelValue(image, x - 1, y) * -2) +//Sol komşu piksel değeri -2 ile çarpılır.
+                                     (GetPixelValue(image, x - 1, y + 1) * -1) +//Sol alt komşu piksel değeri -1 ile çarpılır.
+                                     (GetPixelValue(image, x + 1, y - 1)) +//Sağ üst komşu piksel değeri.
+                                     (GetPixelValue(image, x + 1, y) * 2) +//Sağ komşu piksel değeri 2 ile çarpılır.
+                                     (GetPixelValue(image, x + 1, y + 1));// Sağ alt komşu piksel değeri.
 
-                    if (pixelValue < threshold)
+                    if (pixelValue < threshold)//Hesaplanan pixelValue, belirtilen eşik değerinden küçükse siyah (0) olarak ayarlanır.Eşik değerinden büyükse beyaz(255) olarak ayarlanır.
+
                     {
                         pixelValue = 0;
                     }

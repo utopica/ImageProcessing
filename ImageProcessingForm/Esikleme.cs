@@ -27,24 +27,23 @@ namespace ImageProcessingForm
             beforePic.SizeMode = PictureBoxSizeMode.StretchImage;
             beforePic.MouseUp += beforePic_MouseUp;
 
-            // afterPic'in zoom yapmamasını sağla
+           
             afterPic.SizeMode = PictureBoxSizeMode.StretchImage;
 
             numericUpDown1.Minimum = 0;
-            numericUpDown1.Maximum = 255; // Eşik değeri için minimum ve maksimum değerleri ayarla
+            numericUpDown1.Maximum = 255; 
         }
 
         private void ResimYukle()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Sadece resim dosyalarını filtrele
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 beforePic.Image = null;
                 afterPic.Image = null;
-                // Seçilen resmi PictureBox kontrolüne yükle
+               
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
@@ -111,11 +110,16 @@ namespace ImageProcessingForm
             processedImage = AdaptiveThreshold((Bitmap)beforePic.Image, thresholdValue);
             afterPic.Image = processedImage;
         }
+       
         //cv2.ADAPTIVE_THRESH_MEAN_C işlevine daha yakındır. cv2.ADAPTIVE_THRESH_MEAN_C, pikselin eşik değerini, pikselin konumu etrafındaki pencere içindeki piksellerin gri tonlama değerlerinin ortalamasına göre belirler.
+        
+        // bir görüntünün piksellerini belirli bir eşik değer kullanarak siyah ve beyaz değerlere dömüştürme işlemidir
+        // her piksel için yerel bir eşik değer kullanarak çalışır,klasik eşikleme de tek bir global eşik değeri kullanılırken adaptif eşiklemede her pikselin komşularını dikkate alarak farklı eşik değerleri kullanılır
+        //
         private Bitmap AdaptiveThreshold(Bitmap image, int thresholdValue)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
-            int windowSize = 15; // Yerel eşikleme için pencere boyutu
+            int windowSize = 15; // Yerel eşikleme için pencere boyutubu 15 olarak belirledik.
             int halfWindow = windowSize / 2;
 
             for (int x = 0; x < image.Width; x++)
@@ -145,7 +149,7 @@ namespace ImageProcessingForm
 
                     // Yerel eşik değerini hesapla
                     int localThreshold = sum / count;
-
+                    //Piksel değeri eşik değerden büyükse beyaz,küçükse siyah olarak ayarlanır.
                     // Pikseli ikili değerlere dönüştür
                     Color currentPixelColor = image.GetPixel(x, y);
                     int currentGrayScale = (int)(currentPixelColor.R * 0.3 + currentPixelColor.G * 0.59 + currentPixelColor.B * 0.11);

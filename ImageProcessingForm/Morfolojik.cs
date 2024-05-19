@@ -11,7 +11,7 @@ namespace ImageProcessingForm
     {
         private Bitmap originalImage;
         private Bitmap binaryImage;
-        private Bitmap afterImage; // Son işlem sonrası oluşan resmi saklamak için değişken
+        private Bitmap afterImage;
 
         public Morfolojik()
         {

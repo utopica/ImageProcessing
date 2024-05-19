@@ -7,14 +7,20 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 
 namespace ImageProcessingForm
 {
     public partial class Dondurme : Form
     {
         private Bitmap defaultImage;
-
+        //Yeni piksel değeri döndürme matrisi yardımı ile elde edilir
+        /* nearest ile çıkış görüntüsündeki her pikselin
+        değeri, giriş görüntüsündeki en yakın pikselin değeri alınarak
+        belirlenir.
+        */
         public Dondurme()
         {
             InitializeComponent();

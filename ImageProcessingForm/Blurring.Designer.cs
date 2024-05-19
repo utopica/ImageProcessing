@@ -55,7 +55,6 @@
             afterPic.Size = new Size(588, 561);
             afterPic.TabIndex = 7;
             afterPic.TabStop = false;
-       
             // 
             // beforePic
             // 
@@ -73,7 +72,6 @@
             beforePic.Size = new Size(588, 561);
             beforePic.TabIndex = 6;
             beforePic.TabStop = false;
-       
             // 
             // btnAdd
             // 
@@ -121,18 +119,17 @@
             label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(51, 628);
             label1.Name = "label1";
-            label1.Size = new Size(200, 31);
+            label1.Size = new Size(285, 31);
             label1.TabIndex = 18;
-            label1.Text = "Bulanıklık Miktarı:";
+            label1.Text = "Bulanıklık boyutu(Radius):";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(266, 628);
+            textBox1.Location = new Point(337, 628);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(179, 37);
             textBox1.TabIndex = 19;
-          
             // 
             // btnStart
             // 

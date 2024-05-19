@@ -24,13 +24,13 @@ namespace ImageProcessingForm
         {
             int blurSize;
 
-            if (int.TryParse(textBox1.Text, out blurSize)) // metni tamsayıya dönüştürüp blurSize'a atar
+            if (int.TryParse(textBox1.Text, out blurSize))
             {
                 try
                 {
                     FiltreUygulama(blurSize);
                 }
-                catch (ArgumentException ex) // kernel size çift sayı ise hata fırlatır
+                catch (ArgumentException ex) 
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -53,13 +53,13 @@ namespace ImageProcessingForm
                 {
                     saveDialog.Filter = "JPEG Image|*.jpg";
                     saveDialog.Title = "Kaydet";
-                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures); // varsayılan olarak resimler klasörünü seçer
-                    saveDialog.RestoreDirectory = true; // kullanıcının önceki kaydetme konumunu hatırlar
+                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures); 
+                    saveDialog.RestoreDirectory = true; 
 
                     if (saveDialog.ShowDialog() == DialogResult.OK)
                     {
-                        string savePath = saveDialog.FileName; // dosya yolunu alır
-                        afterPic.Image.Save(savePath, ImageFormat.Jpeg); // resmi belirtilen yola kaydeder
+                        string savePath = saveDialog.FileName;
+                        afterPic.Image.Save(savePath, ImageFormat.Jpeg);
                         MessageBox.Show("Resim şuraya kaydedildi: " + savePath);
                     }
                 }
@@ -85,56 +85,62 @@ namespace ImageProcessingForm
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*"; // yalnızca resim dosyalarını seçebilmeyi sağlar
+            openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*"; 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                beforePic.Image = null; // mevcut resimleri kaldırır
+                beforePic.Image = null; 
                 afterPic.Image = null;
 
-                beforePic.Image = new Bitmap(openFileDialog1.FileName); // seçilen dosyayı pictureboxa yükler
+                beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
        
         private void FiltreUygulama(int blurSize)
         {
-            Bitmap imageToProcess = beforePic.Image != null ? new Bitmap(beforePic.Image) : defaultImage; // beforePic'te resim varsa onu yoksa varsayılan resmi uygular
+            if (blurSize % 2 == 0)
+            {
+                throw new ArgumentException("Radius tek sayı olmalıdır.");
+            }
+            Bitmap imageToProcess = beforePic.Image != null ? new Bitmap(beforePic.Image) : defaultImage; 
 
-            Bitmap blurredImage = ApplyBlur(imageToProcess, blurSize); // blurringi uygular ve sonucu değişkene atar
+            Bitmap blurredImage = ApplyBlur(imageToProcess, blurSize); 
 
-            afterPic.Image = blurredImage; // yeni resmi afterPic'te gösterir
+            afterPic.Image = blurredImage; 
         }
-
+        //Radius (yarıçap) değerine göre disk şeklinde bir bulanıklaştırma filtresi uygular
         private Bitmap ApplyBlur(Bitmap image, int radius)
         {
-            Bitmap blurredImage = new Bitmap(image.Width, image.Height);   // sonuç görüntüsü için yeni bitmap oluşturur
+            Bitmap blurredImage = new Bitmap(image.Width, image.Height); 
          
-            double[,] diskFilter = CreateDiskFilter(radius);  // Disk filtresini oluşturur
+            double[,] diskFilter = CreateDiskFilter(radius);  
 
            
-            int filterWidth = diskFilter.GetLength(0);          //filtrenin boyutlarnı alır(2 boyutlu matris old)
+            int filterWidth = diskFilter.GetLength(0);      
             int filterHeight = diskFilter.GetLength(1);
-            int filterOffset = filterWidth / 2;                //merkez pikselin koordinatını belirler
+            int filterOffset = filterWidth / 2;               //filtrenin merkezine olan uzaklığını belirler
 
-            for (int y = 0; y < image.Height; y++)       //tüm pikselleri dolaşır
+            for (int y = 0; y < image.Height; y++)     
             {
                 for (int x = 0; x < image.Width; x++)
                 {
-                    double totalR = 0, totalG = 0, totalB = 0;      //değişkeler tanımlandı
+                    double totalR = 0, totalG = 0, totalB = 0; 
                     double totalWeight = 0;
 
-                    for (int filterY = 0; filterY < filterHeight; filterY++)    //filtrenin y koordinatlarını dolaşır
+                    for (int filterY = 0; filterY < filterHeight; filterY++)   
                     {
-                        for (int filterX = 0; filterX < filterWidth; filterX++)    //filtrenin x koordinatlarını dolaşır
+                        for (int filterX = 0; filterX < filterWidth; filterX++)    
                         {
-                            int imageX = x + filterX - filterOffset;    //x=merkezi pikselin x koordinatı ,filterX=filtrenin x eksenindeki pozisyonu ikisini toplayıp filtrenin görüntüdeki yatay yerleşimi hesaplanır 
-                            int imageY = y + filterY - filterOffset;     //filtrenin y koordinatını hesaplar
+                            // Filtrenin resim üzerindeki konumları hesaplanır
+                            int imageX = x + filterX - filterOffset;  
+                            int imageY = y + filterY - filterOffset;   
 
-                            if (imageX >= 0 && imageX < image.Width && imageY >= 0 && imageY < image.Height)  //hesaplanan koordinatlarının görüntü sınırları içinde olup olmadığını kontrol eder
+                            //filtrenin resmin dışına taşmaması için sınırlar kontrol edilir
+                            if (imageX >= 0 && imageX < image.Width && imageY >= 0 && imageY < image.Height)  
                             {
-                                Color pixel = image.GetPixel(imageX, imageY);  //piksellerin renk değerlerini alır
-                                double weight = diskFilter[filterX, filterY];      //filtredeki ağırlık değerini alır
+                                Color pixel = image.GetPixel(imageX, imageY);  
+                                double weight = diskFilter[filterX, filterY];      
 
-                                totalR += pixel.R * weight;  //renk bileşenlerini ağırlıkla çarpar ve toplamlarını alır
+                                totalR += pixel.R * weight; 
                                 totalG += pixel.G * weight;
                                 totalB += pixel.B * weight;
                                 totalWeight += weight;
@@ -142,37 +148,37 @@ namespace ImageProcessingForm
                         }
                     }
 
-                    int avgR = (int)(totalR / totalWeight);      //kırmızı renk bileşenini hesaplar
+                    int avgR = (int)(totalR / totalWeight);     
                     int avgG = (int)(totalG / totalWeight);
                     int avgB = (int)(totalB / totalWeight);
 
-                    blurredImage.SetPixel(x, y, Color.FromArgb(avgR, avgG, avgB));  //hesaplanan değerler ile yeni pikseli ayarlar
+                    blurredImage.SetPixel(x, y, Color.FromArgb(avgR, avgG, avgB));  
                 }
             }
 
             return blurredImage;
         }
 
+        //Belirtilen radius değerine göre disk şeklinde bir filtre oluşturur ve bu filtrenin ağırlıklarını normalleştiri
         private double[,] CreateDiskFilter(int radius)
         {
-            int size = radius * 2 + 1;  //matrisin boyutunu belirler
-            double[,] filter = new double[size, size];   //filtre matrisini oluşturur
+            int size = radius * 2 + 1; 
+            double[,] filter = new double[size, size]; 
             double radiusSquared = radius * radius;
 
             for (int y = -radius; y <= radius; y++)
             {
                 for (int x = -radius; x <= radius; x++)
                 {
-                    if (x * x + y * y <= radiusSquared)  //filtrenin disk şeklinde olmasını sağlar
+                    if (x * x + y * y <= radiusSquared)    //filtrenin disk şeklinde olup olmadığını kontrol eder, belirli bir noktanın filtrenin içinde olup olmadığını belirler
                     {
-                        filter[x + radius, y + radius] = 1;
+                        filter[x + radius, y + radius] = 1;   //içindeyse değer atanır değilse 0 olarak kalır
                     }
                 }
             }
 
-            // Normalize filter  f,ltrenin doğru şekilde çalışmasını sağlar
             double sum = 0;
-            for (int y = 0; y < size; y++)   //filtrenin her elemanını dolaşır ve değerleri toplar
+            for (int y = 0; y < size; y++)   
             {
                 for (int x = 0; x < size; x++)
                 {
@@ -183,7 +189,7 @@ namespace ImageProcessingForm
             {
                 for (int x = 0; x < size; x++)
                 {
-                    filter[x, y] /= sum;  //her elemanı toplam değere böler
+                    filter[x, y] /= sum; 
                 }
             }
 

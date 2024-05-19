@@ -42,7 +42,7 @@ namespace ImageProcessingForm
 
         private void ıconButton2salt_Click(object sender, EventArgs e)
         {
-            Bitmap imageToProcess = beforePic.Image != null ? (Bitmap)beforePic.Image : defaultImage;   //seçilen görüntü varsa onu yoksa varsayılan görüntüyü alır
+            Bitmap imageToProcess = beforePic.Image != null ? (Bitmap)beforePic.Image : defaultImage; 
 
             if (imageToProcess != null)
             {
@@ -56,7 +56,7 @@ namespace ImageProcessingForm
         }
         private Bitmap AddSaltNoise(Bitmap image)
         {
-            Random rand = new Random();   //rastgele sayı üretir, rastgele pikselleri seçmek için
+            Random rand = new Random();   // sayı üretir, rastgele pikselleri seçmek için
             Bitmap saltImage = (Bitmap)image.Clone();
             int noisePercentage = 5;             // Tuz gürültüsünün yüzde oranı
 
@@ -128,7 +128,7 @@ namespace ImageProcessingForm
         {
             Bitmap filteredImage = new Bitmap(image.Width, image.Height);
 
-            for (int y = 1; y < image.Height - 1; y++)             //tüm pikselleri dolaşır
+            for (int y = 1; y < image.Height - 1; y++)          //kenarların bozulmaması için hariç tutttuk
             {
                 for (int x = 1; x < image.Width - 1; x++)
                 {
@@ -151,7 +151,7 @@ namespace ImageProcessingForm
                     int avgG = totalG / 9;
                     int avgB = totalB / 9;
 
-                    Color newColor = Color.FromArgb(avgR, avgG, avgB);   //görüntüye uygulanır
+                    Color newColor = Color.FromArgb(avgR, avgG, avgB);   
                     filteredImage.SetPixel(x, y, newColor);
                 }
             }
@@ -181,11 +181,12 @@ namespace ImageProcessingForm
         {
             Bitmap filteredImage = new Bitmap(image.Width, image.Height);
 
-            for (int y = 1; y < image.Height - 1; y++)            //tüm pikselleir dolaşır
+            for (int y = 1; y < image.Height - 1; y++)          
             {
                 for (int x = 1; x < image.Width - 1; x++)
                 {
-                    List<int> redValues = new List<int>();              //RGB değerleri için listeler oluşturuldu
+                    //RGB değerleri için listeler oluşturuldu
+                    List<int> redValues = new List<int>();             
                     List<int> greenValues = new List<int>();
                     List<int> blueValues = new List<int>();
 

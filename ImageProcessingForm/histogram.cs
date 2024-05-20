@@ -67,13 +67,12 @@ namespace ImageProcessingForm
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Sadece resim dosyalarını filtrele
             openFileDialog1.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Tüm Dosyalar|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 beforePic.Image = null;
                 afterPic.Image = null;
-                // Seçilen resmi PictureBox kontrolüne yükle
+
                 beforePic.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
@@ -84,10 +83,8 @@ namespace ImageProcessingForm
             {
                 Bitmap originalImage = new Bitmap(beforePic.Image);
 
-                // Histogram germe işlevini uygula
                 Bitmap stretchedImage = StretchHistogram(originalImage);
 
-                // Gerilmiş görüntüyü göster
                 afterPic.Image = stretchedImage;
             }
             else
@@ -102,10 +99,8 @@ namespace ImageProcessingForm
             {
                 Bitmap originalImage = new Bitmap(beforePic.Image);
 
-                // Histogram genişletme işlevini uygula
                 Bitmap expandedImage = ExpandHistogram(originalImage);
 
-                // Genişletilmiş görüntüyü göster
                 afterPic.Image = expandedImage;
             }
             else
@@ -124,13 +119,11 @@ namespace ImageProcessingForm
                 {
                     Color pixelColor = originalImage.GetPixel(x, y);
 
-                    // Histogram germe işlemleri burada gerçekleştirilir
-
-                    int r = pixelColor.R * 2; // Örnek bir germe işlemi (örnektir, ihtiyacınıza göre değiştirin)
+                    int r = pixelColor.R * 2; 
                     int g = pixelColor.G * 2;
                     int b = pixelColor.B * 2;
 
-                    r = Math.Min(r, 255); // Renk değerlerini 0-255 aralığında tutar
+                    r = Math.Min(r, 255); 
                     g = Math.Min(g, 255);
                     b = Math.Min(b, 255);
 
@@ -152,9 +145,7 @@ namespace ImageProcessingForm
                 {
                     Color pixelColor = originalImage.GetPixel(x, y);
 
-                    // Histogram genişletme işlemleri burada gerçekleştirilir
-
-                    int r = pixelColor.R / 2; // Örnek bir genişletme işlemi (örnektir, ihtiyacınıza göre değiştirin)
+                    int r = pixelColor.R / 2; 
                     int g = pixelColor.G / 2;
                     int b = pixelColor.B / 2;
 

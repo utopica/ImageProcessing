@@ -65,26 +65,31 @@ namespace ImageProcessingForm
 
         private Bitmap RotateImageWithNearestNeighbor(Bitmap image, int angle)
         {
-            double radianAngle = angle * Math.PI / 180.0; //formül
+            double radianAngle = angle * Math.PI / 180.0;
             int width = image.Width;
             int height = image.Height;
-            Bitmap rotatedImage = new Bitmap(width, height);
+
+            int newWidth = (int)(Math.Abs(width * Math.Cos(radianAngle)) + Math.Abs(height * Math.Sin(radianAngle)));
+            int newHeight = (int)(Math.Abs(width * Math.Sin(radianAngle)) + Math.Abs(height * Math.Cos(radianAngle)));
+
+
+            Bitmap rotatedImage = new Bitmap(newWidth, newHeight);
 
             int centerX = width / 2;
             int centerY = height / 2;
+            int newCenterX = newWidth / 2;
+            int newCenterY = newHeight / 2;
 
-            for (int x = 0; x < width; x++)
-            {//orijinal görüntünün merkez koordinatlarını hesaplıyoruz.İç içe döngülerde, her bir pikselin yeni konumunu hesaplamak için nearest uyguluyoruz.
-
-
-                for (int y = 0; y < height; y++)
+            for (int x = 0; x < newWidth; x++)
+            {
+                for (int y = 0; y < newHeight; y++)
                 {
-                    int newX = (int)(((double)(x - centerX)) * Math.Cos(radianAngle) - ((double)(y - centerY)) * Math.Sin(radianAngle)) + centerX;
-                    int newY = (int)(((double)(x - centerX)) * Math.Sin(radianAngle) + ((double)(y - centerY)) * Math.Cos(radianAngle)) + centerY;
+                    int originalX = (int)(((x - newCenterX) * Math.Cos(-radianAngle)) - ((y - newCenterY) * Math.Sin(-radianAngle)) + centerX);
+                    int originalY = (int)(((x - newCenterX) * Math.Sin(-radianAngle)) + ((y - newCenterY) * Math.Cos(-radianAngle)) + centerY);
 
-                    if (newX >= 0 && newX < width && newY >= 0 && newY < height)// newx ve newy nin 0 dan ve resmin boyutundan büyük olmamasını sağlama
+                    if (originalX >= 0 && originalX < width && originalY >= 0 && originalY < height)
                     {
-                        Color nearestColor = image.GetPixel(newX, newY);
+                        Color nearestColor = image.GetPixel(originalX, originalY);
                         rotatedImage.SetPixel(x, y, nearestColor);
                     }
                 }
